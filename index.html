@@ -1,0 +1,61 @@
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/handlebars/handlebars.js"></script>
+<script src="/bower_components/underscore/underscore.js"></script>
+<script src="/bower_components/backbone/backbone.js"></script>
+
+<script type="text/x-handlebars-template" id="game-template">
+  {{AwayTeamName}}: {{AwayTeamScore}}
+  {{HomeTeamName}}: {{HomeTeamScore}}
+</script>
+
+<script>
+var Score = Backbone.Model.extend({});
+
+var url = 'http://teamplayer.statesman.com/web/gateway.php?site=default&tpl=TickerJSON&Sport=1&StartDate=2014-09-19&EndDate=2014-09-19';
+
+var Scores = Backbone.Collection.extend({
+	model: Score,
+  url: url
+});
+
+var Gameboard = Backbone.View.extend({
+  initialize: function() {
+    var src = $('#game-template').html();
+    this.template = Handlebars.compile(src);
+  },
+  render: function() {
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  }
+});
+
+var Scoreboard = Backbone.View.extend({
+  renderSingle: function(game) {
+    var gameboard = new Gameboard({model: game});
+    this.$el.append(gameboard.render().el);
+  },
+  render: function() {
+    this.collection.forEach(this.renderSingle, this);
+    return this;
+  }
+});
+
+$(function() {
+
+	// Fetch data, then render the scores
+	scores = new Scores();
+	scores.fetch({
+		success: function() {
+      console.log(scores.toJSON());
+			scoreboard = new Scoreboard({collection: scores, el: '#scoreboard'});
+      scoreboard.render();
+		}
+	});
+
+});
+
+</script>
+
+<h1>High school football scores</h1>
+
+<div id="scoreboard"></div>
