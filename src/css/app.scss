@@ -1,0 +1,25 @@
+// Import Foundation's settings and functions files, along with Bourbon, so we
+// have access to them here
+@import 'foundation/functions';
+@import 'foundation/settings';
+@import '../../bower_components/bourbon/dist/bourbon';
+@import 'settings';
+
+.scoreboard {
+  width: 100%;
+  #scores {
+    td.winner {
+      background: $secondary-color;
+    }
+  }
+}
+
+/*
+ * Page footer
+ */
+#footer {
+  margin-top: 50px;
+  hr {
+    margin-bottom: 10px;
+  }
+}
