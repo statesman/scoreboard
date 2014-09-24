@@ -5,6 +5,9 @@
 @import '../../bower_components/bourbon/dist/bourbon';
 @import 'settings';
 
+/*
+ * Scores
+ */
 .scoreboard {
   width: 100%;
   #scores {
@@ -15,11 +18,21 @@
 }
 
 /*
+ * News
+ */
+@media #{$small-only} {
+  [class*="block-grid-"] > li {
+    padding-bottom: 0.25em;
+  }
+}
+
+/*
  * Page footer
  */
+.advertising {
+  margin-bottom: 20px;
+}
+
 #footer {
-  margin-top: 50px;
-  hr {
-    margin-bottom: 10px;
-  }
+  margin-top: 20px;
 }
