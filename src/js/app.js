@@ -72,7 +72,7 @@ $(function() {
 
   // Fetch high school sports stories from Medley
 
-  $.getJSON('/list.php?count=8', function(data) {
+  $.getJSON('list.php?count=8', function(data) {
     var html = JST.stories(data);
     $('#stories').html(html);
   });
