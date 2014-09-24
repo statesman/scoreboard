@@ -19,7 +19,7 @@
 
   <title>Texas High School Football Scores</title>
 
-  <link href="/dist/styles.css" rel="stylesheet" />
+  <link href="dist/styles.css" rel="stylesheet" />
 
   <?php include "../../common/metrics-head.js";?>
 
@@ -148,7 +148,11 @@
 
   <?php include "../../common/metrics.js"; ?>
 
-  <script src="/dist/scripts.js" ></script>
+  <script src="dist/scripts.js" ></script>
+
+  <?php if($_SERVER['SERVER_NAME'] === 'localhost'): ?>
+    <script src="//localhost:35729/livereload.js"></script>
+  <?php endif; ?>
 
 </body>
 </html>

@@ -79,7 +79,7 @@ module.exports = function(grunt) {
         livereload: 35729,
       },
       markup: {
-        files: ['index.html']
+        files: ['index.php']
       },
       scripts: {
         files: ['src/js/**.js', 'src/templates/**/*.hbs'],
