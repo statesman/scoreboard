@@ -4,19 +4,35 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>High school football scores</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Prep Scores">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="//projects.statesman.com/common/appicon_aas.jpg">
+
+  <link rel="icon" type="image/png" href="//projects.statesman.com/common/favicon.ico">
+
+  <meta name="description" content="">
+  <meta property="og:title" content="Texas High School Football Scores"/>
+  <meta property="og:description" content=""/>
+  <meta property="og:image" content="http://projects.statesman.com/common/appicon_aas.jpg"/>
+  <meta property="og:url" content="http://projects.statesman.com/databases/prep-football-scores/"/>
+
+  <title>Texas High School Football Scores</title>
 
   <link href="/dist/styles.css" rel="stylesheet" />
 </head>
 <body>
 
   <div class="row small-11 medium-8 large-6 centered">
+
     <h1>High school football scores</h1>
+
     <noscript>
       <div data-alert class="alert-box alert radius">
         This app requires JavaScript. To view scores, enable JavaScript in your Web browser and reload this page.
       </div>
     </noscript>
+
     <form class="hide">
       <select id="week">
         <option value="2014-08-29">Week 1</option>
@@ -25,6 +41,7 @@
         <option selected value="2014-09-19">Week 4</option>
       </select>
     </form>
+
     <table class="scoreboard hide">
       <thead>
         <tr>
@@ -35,6 +52,9 @@
       </thead>
       <tbody id="scores"></tbody>
     </table>
+
+    <div id="stories"></div>
+    
   </div>
 
   <script src="/dist/scripts.js" ></script>

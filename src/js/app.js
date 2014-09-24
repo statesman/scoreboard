@@ -40,6 +40,8 @@ var Scoreboard = Backbone.View.extend({
 
 $(function() {
 
+  // Fetch scores from TeamPlayer
+
   var week = $('#week');
   var scores = new Scores();
 
@@ -64,6 +66,13 @@ $(function() {
   fetch(week.val());
   week.on('change', function() {
     fetch(week.val());
+  });
+
+  // Fetch high school sports stories from Medley
+
+  $.getJSON('/list.php?count=8', function(data) {
+    var html = JST.stories(data);
+    $('#stories').html(html);
   });
 
 });
