@@ -58,6 +58,7 @@ $(function() {
       scores.set(data);
       scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
+      $('.hide').removeClass('hide');
     });
   };
 

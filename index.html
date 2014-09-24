@@ -12,7 +12,12 @@
 
   <div class="row small-11 medium-8 large-6 centered">
     <h1>High school football scores</h1>
-    <form>
+    <noscript>
+      <div data-alert class="alert-box alert radius">
+        This app requires JavaScript. To view scores, enable JavaScript in your Web browser and reload this page.
+      </div>
+    </noscript>
+    <form class="hide">
       <select id="week">
         <option value="2014-08-29">Week 1</option>
         <option value="2014-09-05">Week 2</option>
@@ -20,7 +25,7 @@
         <option selected value="2014-09-19">Week 4</option>
       </select>
     </form>
-    <table class="scoreboard">
+    <table class="scoreboard hide">
       <thead>
         <tr>
           <th>Date</th>
