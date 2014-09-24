@@ -11,8 +11,7 @@ var Score = Backbone.Model.extend({
 });
 
 var Scores = Backbone.Collection.extend({
-  model: Score,
-  url: '/'
+  model: Score
 });
 
 var Gameboard = Backbone.View.extend({
@@ -54,7 +53,7 @@ $(function() {
     var endDate = dateBase + (date + 1);
     var url = urlBase + startDate + '&EndDate=' + endDate;
     $.getJSON(url, function(data) {
-      console.log(data);
+      //console.log(data);
       scores.set(data);
       scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
