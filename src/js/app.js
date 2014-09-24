@@ -1,11 +1,13 @@
 var Score = Backbone.Model.extend({
   initialize: function() {
     // Set a boolean for the winner that can be used during templating
-    if(this.get('AwayTeamScore') > this.get('HomeTeamScore')) {
-      this.set('AwayTeamWon', true);
-    }
-    else {
-      this.set('HomeTeamWon', true);
+    if(this.get('GameScoreIsFinal') == "1") {
+      if(this.get('AwayTeamScore') > this.get('HomeTeamScore')) {
+        this.set('AwayTeamWon', true);
+      }
+      else {
+        this.set('HomeTeamWon', true);
+      }
     }
   }
 });
@@ -55,7 +57,7 @@ $(function() {
     var endDate = dateBase + (date + 1);
     var url = urlBase + startDate + '&EndDate=' + endDate;
     $.getJSON(url, function(data) {
-      //console.log(data);
+      console.log(data);
       scores.set(data);
       scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
