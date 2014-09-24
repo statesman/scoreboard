@@ -69,12 +69,37 @@
       </div>
     </noscript>
 
+    <?php
+      /*
+       * Generate an array with a list of all Fridays in the season
+       */
+      $week_count = 11;
+      $first_friday = strtotime('8/29/2014');
+      $today = time();
+
+      $all_fridays = array();
+      $i = 0;
+      $marked = FALSE;
+      while($i < $week_count) {
+        $stamp = $first_friday + (604800 * $i); // 604800 = 1 week
+        $all_fridays[$i + 1] = array(
+          'date' => date('Y-m-d', $stamp)
+        );
+        // Mark the current week with a boolean
+        // Switch to the next week on Thursday
+        if($today < ($stamp + (86400 * 6)) && !$marked) {
+          $all_fridays[$i + 1]['current'] = TRUE;
+          $marked = TRUE;
+        }
+        $i++;
+      }
+    ?>
+
     <form class="hide">
       <select id="week">
-        <option value="2014-08-29">Week 1</option>
-        <option value="2014-09-05">Week 2</option>
-        <option value="2014-09-12">Week 3</option>
-        <option selected value="2014-09-19">Week 4</option>
+        <?php foreach($all_fridays as $week => $friday): ?>
+          <option value="<?php print $friday['date']; ?>"<?php if($friday['current']) print " selected"; ?>>Week <?php print $week; ?></option>
+        <?php endforeach; ?>
       </select>
     </form>
 
