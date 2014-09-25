@@ -96,11 +96,18 @@
     ?>
 
     <form class="hide">
-      <select id="week">
-        <?php foreach($all_fridays as $week => $friday): ?>
-          <option value="<?php print $friday['date']; ?>"<?php if($friday['current']) print " selected"; ?>>Week <?php print $week; ?></option>
-        <?php endforeach; ?>
-      </select>
+      <div class="row">
+        <div class="medium-6 columns">
+          <select id="week">
+            <?php foreach($all_fridays as $week => $friday): ?>
+              <option value="<?php print $friday['date']; ?>"<?php if($friday['current']) print " selected"; ?>>Week <?php print $week; ?></option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+        <div class="medium-6 columns">
+          <input id="team-search" type="text" placeholder="Team" />
+        </div>
+      </div>
     </form>
 
     <table class="scoreboard hide">
