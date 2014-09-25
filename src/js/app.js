@@ -50,14 +50,11 @@ $(function() {
   var urlBase = 'http://teamplayer.statesman.com/web/gateway.php?site=default&tpl=TickerJSON&Sport=1&StartDate=';
 
   var fetch = function(friday) {
-    var dateParts = friday.split('-');
-    var dateBase = dateParts[0] + '-' + dateParts[1] + '-';
-    var date = parseInt(dateParts[2], 10);
-    var startDate = dateBase + (date - 1);
-    var endDate = dateBase + (date + 1);
-    var url = urlBase + startDate + '&EndDate=' + endDate;
+    var dateObj = moment(friday, "YYYY-MM-DD"),
+        startDate = dateObj.subtract(1, 'days').format('YYYY-MM-DD'),
+        endDate = dateObj.add(2, 'days').format('YYYY-MM-DD'),
+        url = urlBase + startDate + '&EndDate=' + endDate;
     $.getJSON(url, function(data) {
-      console.log(data);
       scores.set(data);
       scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
