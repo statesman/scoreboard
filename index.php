@@ -15,7 +15,7 @@
   <meta property="og:title" content="Texas High School Football Scores"/>
   <meta property="og:description" content=""/>
   <meta property="og:image" content="http://projects.statesman.com/common/appicon_aas.jpg"/>
-  <meta property="og:url" content="http://projects.statesman.com/databases/prep-football-scores/"/>
+  <meta property="og:url" content="http://projects.statesman.com/sports/scores/"/>
 
   <title>Texas High School Football Scores</title>
 
