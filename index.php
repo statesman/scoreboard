@@ -11,11 +11,19 @@
 
   <link rel="icon" type="image/png" href="//projects.statesman.com/common/favicon.ico">
 
-  <meta name="description" content="">
+  <meta name="description" content="Scores for high school football games from around Central Texas.">
+
   <meta property="og:title" content="Texas High School Football Scores"/>
-  <meta property="og:description" content=""/>
+  <meta property="og:description" content="Scores for high school football games from around Central Texas."/>
   <meta property="og:image" content="http://projects.statesman.com/common/appicon_aas.jpg"/>
   <meta property="og:url" content="http://projects.statesman.com/sports/scores/"/>
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@statesman" />
+  <meta name="twitter:title" content="Texas High School Football Scores" />
+  <meta name="twitter:description" content="Scores for high school football games from around Central Texas." />
+  <meta name="twitter:image" content="http://projects.statesman.com/common/appicon_aas.jpg" />
+  <meta name="twitter:url" content="http://projects.statesman.com/sports/scores/" />
 
   <title>Texas High School Football Scores</title>
 
