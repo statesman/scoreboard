@@ -24,8 +24,14 @@
   margin-top: 40px;
 }
 @media #{$small-only} {
-  [class*="block-grid-"] > li {
-    padding-bottom: 0.25em;
+  [class*="block-grid-"] {
+    margin: 0 0 0 1.25rem;
+    > li {
+      padding-bottom: 0.25em;
+      list-style: square;
+      display: list-item;
+      padding-left: 0;
+    }
   }
 }
 
