@@ -78,6 +78,7 @@ $(function() {
   // Fetch scores from TeamPlayer
 
   var week = $('#week'),
+      searchBox = $('#team-search'),
       scores = new Scores(),
       scoreboard;
 
@@ -108,6 +109,7 @@ $(function() {
   fetch(week.val());
   week.on('change', function() {
     fetch(week.val());
+    searchBox.val('');
   });
 
   // Fetch high school sports stories from Medley
@@ -118,8 +120,8 @@ $(function() {
 
   // Trigger a search on the scores collection when someone
   // enters text into the team search box
-  $('#team-search').on('keyup', function() {
-    scores.search($(this).val());
+  searchBox.on('keyup', function() {
+    scores.search(searchBox.val());
   });
 
 });
