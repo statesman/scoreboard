@@ -61,7 +61,9 @@ module.exports = function(grunt) {
       js: {
         files: {
           "dist/scripts.js": [
+            'bower_components/moment/moment.js',
             'bower_components/handlebars/handlebars.runtime.js',
+            'src/templates/helpers/**.js',
             'build/templates.js',
             'bower_components/jquery/dist/jquery.js',
             'bower_components/underscore/underscore.js',
