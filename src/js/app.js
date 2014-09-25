@@ -81,16 +81,24 @@ $(function() {
       scores = new Scores(),
       scoreboard;
 
-  var urlBase = 'http://teamplayer.statesman.com/web/gateway.php?site=default&tpl=TickerJSON&Sport=1&StartDate=';
+  var settings = {
+    dataType: "jsonp",
+    url: "http://teamplayer.statesman.com/web/gateway.php",
+    cache: true,
+    data: {
+      site: "default",
+      tpl: "TickerJSON",
+      Sport: 1
+    },
+  };
 
   var fetch = function(friday) {
-    var dateObj = moment(friday, "YYYY-MM-DD"),
-        startDate = dateObj.subtract(1, 'days').format('YYYY-MM-DD'),
-        endDate = dateObj.add(2, 'days').format('YYYY-MM-DD'),
-        url = urlBase + startDate + '&EndDate=' + endDate;
-    $.getJSON(url, function(data) {
+    var dateObj = moment(friday, "YYYY-MM-DD");
+    settings.data.StartDate = dateObj.subtract(1, 'days').format('YYYY-MM-DD');
+    settings.data.EndDate = dateObj.add(2, 'days').format('YYYY-MM-DD');
+    $.ajax(settings)
+    .done(function(data) {
       scores.set(data);
-      console.log(scores.toJSON());
       scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
       $('.hide').removeClass('hide');
