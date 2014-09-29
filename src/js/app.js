@@ -1,5 +1,9 @@
 var Score = Backbone.Model.extend({
   initialize: function() {
+    // Add a boolean for district games
+    if(this.get('AwayDistrictID') === this.get('HomeDistrictID')) {
+      this.set('DistrictGame', true);
+    }
     // Make GameScoreIsFinal a boolean for easier templating
     if(this.get('GameScoreIsFinal') === "1") {
       this.set('GameScoreIsFinal', true);

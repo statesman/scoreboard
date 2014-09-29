@@ -59,15 +59,13 @@
 </head>
 <body>
 
-  <?php /*
 	<nav class="top-bar">
 		<ul class="title-area">
 			<li class="name"><h1>
 				<a href="http://www.statesman.com/" target="_blank"><img src="//projects.statesman.com/common/white-logo-small.png"></a>
 			</h1></li>
 		</ul>
-	</nav> */
-  ?>
+	</nav>
 
   <div class="row small-12 medium-12 large-12 centered">
 

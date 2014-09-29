@@ -5,15 +5,15 @@
 @import '../../bower_components/bourbon/dist/bourbon';
 @import 'settings';
 
-body {
-  @media #{$medium-up} {
-    padding: 15px;
-  }
-}
-
 h1, form {
   @media #{$small-only} {
     padding: 0 12px;
+  }
+}
+
+body > .row {
+  @media #{$medium-up} {
+    padding: 20px;
   }
 }
 
@@ -27,12 +27,22 @@ h1, form {
   > li {
     padding: 6px;
     .inner {
+      @media #{$medium-up} {
+        border-radius: 3px;
+      }
       font-size: 12px;
       text-transform: uppercase;
       border: 1px solid #ccc;
       padding: 5px 8px;
       background: #fcfcfc;
       box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      .team {
+        line-height: 13px;
+      }
+      .away-team {
+        margin-top: 2px;
+        margin-bottom: 3px;
+      }
       .game-meta {
         font-size: 0.85em;
       }
