@@ -1,3 +1,5 @@
-<td>{{date GameDate}}</td>
-<td{{#if AwayTeamWon}} class="winner"{{/if}}>{{AwayTeamName}} <span class="right">{{AwayTeamScore}}</span></td>
-<td{{#if HomeTeamWon}} class="winner"{{/if}}>{{HomeTeamName}} <span class="right">{{HomeTeamScore}}</span></td>
+<div class="inner">
+  <div{{#if AwayTeamWon}} class="winner"{{/if}}>{{AwayTeamName}} <span class="right"><strong>{{AwayTeamScore}}</strong></span></div>
+  <div{{#if HomeTeamWon}} class="winner"{{/if}}>{{HomeTeamName}} <span class="right"><strong>{{HomeTeamScore}}</strong></span></div>
+  <div><small>{{date GameDate}}</small></div>
+</div>

@@ -59,15 +59,17 @@
 </head>
 <body>
 
+  <?php /*
 	<nav class="top-bar">
 		<ul class="title-area">
 			<li class="name"><h1>
 				<a href="http://www.statesman.com/" target="_blank"><img src="//projects.statesman.com/common/white-logo-small.png"></a>
 			</h1></li>
 		</ul>
-	</nav>
+	</nav> */
+  ?>
 
-  <div class="row small-11 medium-8 large-6 centered">
+  <div class="row small-12 medium-12 large-12 centered">
 
     <h1>High school football scores</h1>
 
@@ -118,18 +120,7 @@
       </div>
     </form>
 
-    <table class="scoreboard hide">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Away</th>
-          <th>Home</th>
-        </tr>
-      </thead>
-      <tbody id="scores"></tbody>
-    </table>
-
-    <div id="stories"></div>
+    <ul id="scores" class="large-block-grid-5"></ul>
 
     <hr />
 

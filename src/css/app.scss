@@ -5,14 +5,21 @@
 @import '../../bower_components/bourbon/dist/bourbon';
 @import 'settings';
 
+body {
+  background: url('http://subtlepatterns.com/patterns/micro_carbon.png');
+}
+
 /*
  * Scores
  */
-.scoreboard {
-  width: 100%;
-  #scores {
-    td.winner {
-      background: $secondary-color;
+#scores {
+  color: #fff;
+  > li {
+    padding: 6px;
+    .inner {
+      border-radius: 1px;
+      padding: 5px 8px;
+      background: #222;
     }
   }
 }
@@ -20,6 +27,7 @@
 /*
  * News
  */
+ /*
 #stories {
   margin-top: 40px;
 }
@@ -33,7 +41,7 @@
       padding-left: 0;
     }
   }
-}
+} */
 
 /*
  * Page footer

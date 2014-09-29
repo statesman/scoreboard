@@ -45,7 +45,7 @@ var Scores = Backbone.Collection.extend({
 
 var Gameboard = Backbone.View.extend({
   template: JST.game,
-  tagName: 'tr',
+  tagName: 'li',
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     return this;
