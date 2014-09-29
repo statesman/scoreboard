@@ -83,12 +83,12 @@ $(function() {
       scoreboard;
 
   var settings = {
-    dataType: "jsonp",
+    dataType: "json",
     url: "http://teamplayer.statesman.com/web/gateway.php",
     cache: true,
     data: {
       site: "default",
-      tpl: "TickerJSON",
+      tpl: "TickerJSON_clone",
       Sport: 1
     },
   };
@@ -100,6 +100,7 @@ $(function() {
     $.ajax(settings)
     .done(function(data) {
       scores.set(data);
+      console.log(data);
       scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
       $('.hide').removeClass('hide');

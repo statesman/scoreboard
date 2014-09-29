@@ -23,6 +23,21 @@ module.exports = function(grunt) {
       }
     },
 
+    // Copy Font-Awesome and FontCustom fonts
+    copy: {
+      fonts: {
+        files: [{
+          expand: true,
+          src: [
+            'bower_components/font-awesome/fonts/*',
+            'src/fontcustom/fonts/*'
+          ],
+          dest: 'fonts/',
+          flatten: true
+        }]
+      }
+    },
+
     // Pre-render Handlebars templates
     handlebars: {
       options: {
@@ -97,12 +112,13 @@ module.exports = function(grunt) {
 
   // Load the task plugins
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('build', ['clean', 'sass', 'handlebars', 'jshint', 'uglify']);
+  grunt.registerTask('build', ['copy', 'clean', 'sass', 'handlebars', 'jshint', 'uglify']);
 
 };

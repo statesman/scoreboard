@@ -1,5 +1,9 @@
 <div class="inner">
-  <div{{#if AwayTeamWon}} class="winner"{{/if}}>{{AwayTeamName}} <span class="right"><strong>{{AwayTeamScore}}</strong></span></div>
-  <div{{#if HomeTeamWon}} class="winner"{{/if}}>{{HomeTeamName}} <span class="right"><strong>{{HomeTeamScore}}</strong></span></div>
-  <div><small>{{date GameDate}}</small></div>
+  <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
+    {{AwayTeamName}} <span class="mascot">{{AwayTeamNickname}}</span><span class="right"><i class="fa fa-chevron-right"></i>{{AwayTeamScore}}</span>
+  </div>
+  <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
+    {{HomeTeamName}} <span class="mascot">{{HomeTeamNickname}}</span><span class="right"><i class="fa fa-chevron-right"></i>{{HomeTeamScore}}</span>
+  </div>
+  <div class="game-meta">{{date GameDate}} {{#if GameScoreIsFinal}}<span class="right">Final</span>{{/if}}</div>
 </div>

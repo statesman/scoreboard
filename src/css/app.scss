@@ -6,20 +6,40 @@
 @import 'settings';
 
 body {
-  background: url('http://subtlepatterns.com/patterns/micro_carbon.png');
+  margin-top: 25px;
 }
 
 /*
  * Scores
  */
 #scores {
-  color: #fff;
   > li {
     padding: 6px;
     .inner {
-      border-radius: 1px;
+      font-size: 12px;
+      text-transform: uppercase;
+      border: 1px solid #ccc;
       padding: 5px 8px;
-      background: #222;
+      background: #fcfcfc;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      .game-meta {
+        font-size: 0.85em;
+      }
+      .fa-chevron-right {
+        display: none;
+      }
+      .mascot {
+        font-size: 0.9em;
+        color: #555;
+        text-transform: none;
+      }
+      .winner {
+        font-weight: 700;
+        .fa-chevron-right {
+          display: inline-block;
+          margin-right: 4px;
+        }
+      }
     }
   }
 }
