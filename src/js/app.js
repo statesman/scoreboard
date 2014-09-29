@@ -1,7 +1,14 @@
 var Score = Backbone.Model.extend({
   initialize: function() {
+    // Make GameScoreIsFinal a boolean for easier templating
+    if(this.get('GameScoreIsFinal') === "1") {
+      this.set('GameScoreIsFinal', true);
+    }
+    else {
+      this.set('GameScoreIsFinal', false);
+    }
     // Set a boolean for the winner that can be used during templating
-    if(this.get('GameScoreIsFinal') == "1") {
+    if(this.get('GameScoreIsFinal')) {
       if(this.get('AwayTeamScore') > this.get('HomeTeamScore')) {
         this.set('AwayTeamWon', true);
       }
