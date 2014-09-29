@@ -6,13 +6,24 @@
 @import 'settings';
 
 body {
-  padding: 15px;
+  @media #{$medium-up} {
+    padding: 15px;
+  }
+}
+
+h1, form {
+  @media #{$small-only} {
+    padding: 0 12px;
+  }
 }
 
 /*
  * Scores
  */
 #scores {
+  @media #{$small-only} {
+    border-top: 1px solid #ccc;
+  }
   > li {
     padding: 6px;
     .inner {
@@ -39,6 +50,15 @@ body {
           display: inline-block;
           margin-right: 4px;
         }
+      }
+    }
+    @media #{$small-only} {
+      padding: 0 12px;
+      .inner {
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        box-shadow: none;
       }
     }
   }
