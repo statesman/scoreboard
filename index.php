@@ -120,7 +120,7 @@
       </div>
     </form>
 
-    <ul id="scores" class="small-block-grid-1 medium-block-grid-3 large-block-grid-4"></ul>
+    <ul id="scores" class="small-block-grid-1 medium-block-grid-3 large-block-grid-5"></ul>
 
     <hr />
 
