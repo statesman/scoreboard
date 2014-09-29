@@ -38,6 +38,17 @@ body > .row {
       box-shadow: 0 0 8px rgba(0,0,0,0.05);
       .team {
         line-height: 13px;
+        .fav-home, .fav-away {
+          margin-right: 2px;
+          opacity: .35;
+          &:hover {
+            opacity: 1;
+          }
+          &.faved {
+            opacity: 1;
+            color: #FFDD4D;
+          }
+        }
       }
       .away-team {
         margin-top: 2px;

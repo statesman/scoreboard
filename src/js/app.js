@@ -1,3 +1,5 @@
+
+
 var Score = Backbone.Model.extend({
   initialize: function() {
     // Add a boolean for district games
@@ -23,6 +25,27 @@ var Score = Backbone.Model.extend({
     // Store a lowercase version of each team name for searching
     var searchable = [this.get('HomeTeamName').toLowerCase(), this.get('AwayTeamName').toLowerCase()];
     this.set('Searchable', searchable.join(' '));
+  },
+  fav: function(team) {
+    if(team === 'home') {
+      if(this.get('HomeTeamFav')) {
+        this.set('HomeTeamFav', false);
+      }
+      else {
+        this.set('HomeTeamFav', true);
+      }
+      // store HomeTeamID as a fav
+    }
+    else if(team === 'away') {
+      if(this.get('AwayTeamFav')) {
+        this.set('AwayTeamFav', false);
+      }
+      else {
+        this.set('AwayTeamFav', true);
+      }
+      // store AwayTeamID as a fav
+    }
+    this.trigger('change'); // Manually trigger the change event
   }
 });
 
@@ -55,11 +78,26 @@ var Scores = Backbone.Collection.extend({
 });
 
 var Gameboard = Backbone.View.extend({
+  events: {
+    "click .fav-home": "favHome",
+    "click .fav-away": "favAway"
+  },
+  initialize: function() {
+    this.model.on('change', this.render, this);
+  },
   template: JST.game,
   tagName: 'li',
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     return this;
+  },
+  favHome: function(e) {
+    e.preventDefault();
+    this.model.fav('home', this.model.get('home'));
+  },
+  favAway: function(e) {
+    e.preventDefault();
+    this.model.fav('away', this.model.get('away'));
   }
 });
 
