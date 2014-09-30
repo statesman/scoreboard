@@ -1,4 +1,4 @@
-define(['store'], function(store) {
+define(['store', 'underscore'], function(store, _) {
 
   var Favs = function() {};
 

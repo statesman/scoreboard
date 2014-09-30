@@ -3,10 +3,10 @@ require.config({
     'add-to-home-screen': {
       exports: 'addToHomescreen'
     },
-    'handlebars': {
+    handlebars: {
       exports: 'Handlebars'
     },
-    'store': {
+    store: {
       exports: 'store'
     }
   },
