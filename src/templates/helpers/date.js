@@ -1,9 +1,9 @@
 /* Usage: {{date dateString}} turns 2014-01-02 into 1/2 */
 
-Handlebars.registerHelper('date', function(dateString) {
-  dateString = Handlebars.Utils.escapeExpression(dateString);
+Handlebars.registerHelper('date', function(timeStamp) {
+  timeStamp = Handlebars.Utils.escapeExpression(timeStamp);
 
-  var dateObj = moment(dateString, "YYYY-MM-DD");
+  var dateObj = moment.unix(timeStamp);
 
   return new Handlebars.SafeString(dateObj.format("M/D"));
 });
