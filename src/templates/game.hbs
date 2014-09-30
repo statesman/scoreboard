@@ -1,13 +1,29 @@
-<div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
-  <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
-    {{favAway AwayTeamFav}}
-    {{AwayTeamName}} <span class="mascot">{{AwayTeamNickname}}</span>
-    <span class="right"><i class="fa fa-chevron-right"></i>{{AwayTeamScore}}</span>
+{{#if GameScoreIsFinal}}
+  <div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
+    <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
+      {{favAway AwayTeamFav}}
+      <span class="team-name">{{AwayTeamName}}</span> <span class="mascot">{{AwayTeamNickname}}</span>
+      <span class="right"><i class="fa fa-chevron-right"></i>{{AwayTeamScore}}</span>
+    </div>
+    <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
+      {{favHome HomeTeamFav}}
+      <span class="team-name">{{HomeTeamName}}</span> <span class="mascot">{{HomeTeamNickname}}</span>
+      <span class="right"><i class="fa fa-chevron-right"></i>{{HomeTeamScore}}</span>
+    </div>
+    <div class="game-meta">{{date GameDate}} <span class="right">Final</span></div>
   </div>
-  <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
-    {{favHome HomeTeamFav}}
-    {{HomeTeamName}} <span class="mascot">{{HomeTeamNickname}}</span>
-    <span class="right"><i class="fa fa-chevron-right"></i>{{HomeTeamScore}}</span>
+{{else}}
+  <div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
+    <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
+      {{favAway AwayTeamFav}}
+      <span class="team-name">{{AwayTeamName}}</span> <span class="mascot">{{AwayTeamNickname}}</span>
+      <span class="right"><i class="fa fa-chevron-right"></i>{{AwayTeamScore}}</span>
+    </div>
+    <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
+      {{favHome HomeTeamFav}}
+      <span class="team-name">{{HomeTeamName}}</span> <span class="mascot">{{HomeTeamNickname}}</span>
+      <span class="right"><i class="fa fa-chevron-right"></i>{{HomeTeamScore}}</span>
+    </div>
+    <div class="game-meta"><span class="game-time">{{dateTime GameTimestamp}}:</span> <span class="venue">{{venueName}}</span></div>
   </div>
-  <div class="game-meta">{{date GameDate}} {{#if GameScoreIsFinal}}<span class="right">Final</span>{{/if}}</div>
-</div>
+{{/if}}

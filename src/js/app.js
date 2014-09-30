@@ -1,11 +1,11 @@
-
-
 var Score = Backbone.Model.extend({
   initialize: function() {
+
     // Add a boolean for district games
     if(this.get('AwayDistrictID') === this.get('HomeDistrictID')) {
       this.set('DistrictGame', true);
     }
+
     // Make GameScoreIsFinal a boolean for easier templating
     if(this.get('GameScoreIsFinal') === "1") {
       this.set('GameScoreIsFinal', true);
@@ -13,6 +13,7 @@ var Score = Backbone.Model.extend({
     else {
       this.set('GameScoreIsFinal', false);
     }
+
     // Set a boolean for the winner that can be used during templating
     if(this.get('GameScoreIsFinal')) {
       if(this.get('AwayTeamScore') > this.get('HomeTeamScore')) {
@@ -22,6 +23,7 @@ var Score = Backbone.Model.extend({
         this.set('HomeTeamWon', true);
       }
     }
+
     // Check localstorage to see if teams are favs and store a boolean
     // on their model if they are
     if(favs.isFav(this.get('HomeTeamID'))) {
@@ -30,10 +32,16 @@ var Score = Backbone.Model.extend({
     if(favs.isFav(this.get('AwayTeamID'))) {
       this.set('AwayTeamFav', true);
     }
+
+    // Store a Moment object with the game start time
+    var time = moment(this.get('GameDate') + this.get('GameTime'), "YYYY-MM-DDHH:mm:ss");
+    this.set('GameTimestamp', time.unix());
+
     // Store a lowercase version of each team name for searching
     var searchable = [this.get('HomeTeamName').toLowerCase(), this.get('AwayTeamName').toLowerCase()];
     this.set('Searchable', searchable.join(' '));
   },
+
   // Method that handles faving functionality by storing
   // fav status as a model attribute and storing it in
   // local storage
@@ -78,13 +86,11 @@ var Scores = Backbone.Collection.extend({
   // Rewrite the comparator to sort first by fav status,
   // then by timestamp, then by home team
   comparator: function(model) {
-    var c,
-        gametime = moment(model.get('GameDate') + model.get('GameTime'), "YYYY-MM-DDHH:mm:ss");
     if(model.get('HomeTeamFav') === true || model.get('AwayTeamFav') === true) {
-      c = "0" + gametime.unix() + model.get('HomeTeamName');
+      c = "0" + model.get('GameTimestamp') + model.get('HomeTeamName');
     }
     else {
-      c = "1" + gametime.unix() + model.get('HomeTeamName');
+      c = "1" + model.get('GameTimestamp') + model.get('HomeTeamName');
     }
     return c;
   },
@@ -121,15 +127,19 @@ var Gameboard = Backbone.View.extend({
     "click .fav-home": "favHome",
     "click .fav-away": "favAway"
   },
+
   initialize: function() {
     this.model.on('change', this.render, this);
   },
+
   template: JST.game,
   tagName: 'li',
+
   render: function() {
     this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
+
   // Faving event handlers, which fire corresponding
   // model methods
   favHome: function(e) {
@@ -156,12 +166,14 @@ var Scoreboard = Backbone.View.extend({
       this.render();
     }, this);
   },
+
   renderSingle: function(game) {
     if(game.get('hidden') !== true) { // Only render items that aren't hidden
       var gameboard = new Gameboard({model: game});
       this.$el.append(gameboard.render().el);
     }
   },
+
   render: function() {
     this.$el.html('');
     this.collection.forEach(this.renderSingle, this);

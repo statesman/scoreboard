@@ -7,3 +7,14 @@ Handlebars.registerHelper('date', function(dateString) {
 
   return new Handlebars.SafeString(dateObj.format("M/D"));
 });
+
+
+/* Usage: {{dateTime dateString}} turns a UNIX timestamp into h:mm ddd */
+
+Handlebars.registerHelper('dateTime', function(timeStamp) {
+  timeStamp = Handlebars.Utils.escapeExpression(timeStamp);
+
+  var dateObj = moment.unix(timeStamp);
+
+  return new Handlebars.SafeString(dateObj.format("h:mma ddd"));
+});

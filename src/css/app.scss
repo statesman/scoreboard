@@ -38,7 +38,6 @@ body {
         border-width: 2px;
       }
       font-size: 12px;
-      text-transform: uppercase;
       border: 1px solid #ccc;
       padding: 5px 8px;
       background: #fcfcfc;
@@ -57,12 +56,29 @@ body {
           }
         }
       }
+      .team-name {
+        text-transform: uppercase;
+        font-weight: 600;
+      }
       .away-team {
         margin-top: 2px;
         margin-bottom: 3px;
       }
       .game-meta {
         font-size: 0.85em;
+        @media #{$medium-up} {
+          border-top: 1px solid #efefef;
+          padding-top: 1px;
+          margin-top: 6px;
+        }
+        .game-time {
+          font-weight: 600;
+        }
+      }
+      &.faved .game-meta {
+        @media #{$medium-up} {
+          border-top-color: #ccc;
+        }
       }
       .fa-chevron-right {
         display: none;
@@ -70,11 +86,14 @@ body {
       .mascot {
         font-size: 0.9em;
         color: #555;
-        text-transform: none;
       }
       .winner {
         font-weight: 700;
+        .mascot {
+          font-weight: normal;
+        }
         .fa-chevron-right {
+          color: $primary-color;
           display: inline-block;
           margin-right: 4px;
         }
