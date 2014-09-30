@@ -1,19 +1,11 @@
 <div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
   <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
-    {{#if AwayTeamFav}}
-      <a class="fav-away faved" href="#"><i class="fa fa-star"></i></a>
-    {{else}}
-      <a class="fav-away" href="#"><i class="fa fa-star-o"></i></a>
-    {{/if}}
+    {{favAway AwayTeamFav}}
     {{AwayTeamName}} <span class="mascot">{{AwayTeamNickname}}</span>
     <span class="right"><i class="fa fa-chevron-right"></i>{{AwayTeamScore}}</span>
   </div>
   <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
-    {{#if HomeTeamFav}}
-      <a class="fav-home faved" href="#"><i class="fa fa-star"></i></a>
-    {{else}}
-      <a class="fav-home" href="#"><i class="fa fa-star-o"></i></a>
-    {{/if}}
+    {{favHome HomeTeamFav}}
     {{HomeTeamName}} <span class="mascot">{{HomeTeamNickname}}</span>
     <span class="right"><i class="fa fa-chevron-right"></i>{{HomeTeamScore}}</span>
   </div>

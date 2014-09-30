@@ -3,7 +3,7 @@ this["JST"] = this["JST"] || {};
 this["JST"]["game"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+  var buffer = "", stack1, helper, options, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
 
 function program1(depth0,data) {
   
@@ -28,30 +28,6 @@ function program5(depth0,data) {
 function program7(depth0,data) {
   
   
-  return "\r\n      <a class=\"fav-away faved\" href=\"#\"><i class=\"fa fa-star\"></i></a>\r\n    ";
-  }
-
-function program9(depth0,data) {
-  
-  
-  return "\r\n      <a class=\"fav-away\" href=\"#\"><i class=\"fa fa-star-o\"></i></a>\r\n    ";
-  }
-
-function program11(depth0,data) {
-  
-  
-  return "\r\n      <a class=\"fav-home faved\" href=\"#\"><i class=\"fa fa-star\"></i></a>\r\n    ";
-  }
-
-function program13(depth0,data) {
-  
-  
-  return "\r\n      <a class=\"fav-home\" href=\"#\"><i class=\"fa fa-star-o\"></i></a>\r\n    ";
-  }
-
-function program15(depth0,data) {
-  
-  
   return "<span class=\"right\">Final</span>";
   }
 
@@ -61,10 +37,9 @@ function program15(depth0,data) {
   buffer += "\">\r\n  <div class=\"team away-team";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.AwayTeamWon), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">\r\n    ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.AwayTeamFav), {hash:{},inverse:self.program(9, program9, data),fn:self.program(7, program7, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    ";
+  buffer += "\">\r\n    "
+    + escapeExpression((helper = helpers.favAway || (depth0 && depth0.favAway),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.AwayTeamFav), options) : helperMissing.call(depth0, "favAway", (depth0 && depth0.AwayTeamFav), options)))
+    + "\r\n    ";
   if (helper = helpers.AwayTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.AwayTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -79,10 +54,9 @@ function program15(depth0,data) {
     + "</span>\r\n  </div>\r\n  <div class=\"team home-team";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.HomeTeamWon), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\">\r\n    ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.HomeTeamFav), {hash:{},inverse:self.program(13, program13, data),fn:self.program(11, program11, data),data:data});
-  if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\r\n    ";
+  buffer += "\">\r\n    "
+    + escapeExpression((helper = helpers.favHome || (depth0 && depth0.favHome),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.HomeTeamFav), options) : helperMissing.call(depth0, "favHome", (depth0 && depth0.HomeTeamFav), options)))
+    + "\r\n    ";
   if (helper = helpers.HomeTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.HomeTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
@@ -97,7 +71,7 @@ function program15(depth0,data) {
     + "</span>\r\n  </div>\r\n  <div class=\"game-meta\">"
     + escapeExpression((helper = helpers.date || (depth0 && depth0.date),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.GameDate), options) : helperMissing.call(depth0, "date", (depth0 && depth0.GameDate), options)))
     + " ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.noop,fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "</div>\r\n</div>\r\n";
   return buffer;

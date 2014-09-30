@@ -76,6 +76,7 @@ module.exports = function(grunt) {
       js: {
         files: {
           "dist/scripts.js": [
+            'bower_components/store/store.js',
             'bower_components/moment/moment.js',
             'bower_components/handlebars/handlebars.runtime.js',
             'src/templates/helpers/**.js',
@@ -99,7 +100,7 @@ module.exports = function(grunt) {
         files: ['index.php']
       },
       scripts: {
-        files: ['src/js/**.js', 'src/templates/**/*.hbs'],
+        files: ['src/js/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers/*.js'],
         tasks: ['jshint', 'clean:js', 'handlebars', 'uglify']
       },
       styles: {
