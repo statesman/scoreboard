@@ -1,3 +1,6 @@
+// Trigger Add to Homescreen prompt
+addToHomescreen();
+
 var Score = Backbone.Model.extend({
   initialize: function() {
 
