@@ -11,9 +11,12 @@ h1, form {
   }
 }
 
-body > .row {
-  @media #{$medium-up} {
-    padding: 20px;
+body {
+  background: #f7f7f7;
+  > .row {
+    @media #{$medium-up} {
+      padding: 20px;
+    }
   }
 }
 

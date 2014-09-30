@@ -22,6 +22,14 @@ var Score = Backbone.Model.extend({
         this.set('HomeTeamWon', true);
       }
     }
+    // Check localstorage to see if teams are favs and store a boolean
+    // on their model if they are
+    if(favs.isFav(this.get('HomeTeamID'))) {
+      this.set('HomeTeamFav', true);
+    }
+    if(favs.isFav(this.get('AwayTeamID'))) {
+      this.set('AwayTeamFav', true);
+    }
     // Store a lowercase version of each team name for searching
     var searchable = [this.get('HomeTeamName').toLowerCase(), this.get('AwayTeamName').toLowerCase()];
     this.set('Searchable', searchable.join(' '));
@@ -29,24 +37,26 @@ var Score = Backbone.Model.extend({
   // Method that handles faving functionality by storing
   // fav status as a model attribute and storing it in
   // local storage
-  fav: function(team) {
+  fav: function(team, id) {
     if(team === 'home') {
       if(this.get('HomeTeamFav') === true) {
         this.set('HomeTeamFav', false);
+        favs.unFav(id);
       }
       else {
         this.set('HomeTeamFav', true);
+        favs.fav(id);
       }
-      // store HomeTeamID as a fav
     }
     else if(team === 'away') {
       if(this.get('AwayTeamFav') === true) {
         this.set('AwayTeamFav', false);
+        favs.unFav(id);
       }
       else {
         this.set('AwayTeamFav', true);
+        favs.fav(id);
       }
-      // store AwayTeamID as a fav
     }
   }
 });
@@ -124,11 +134,11 @@ var Gameboard = Backbone.View.extend({
   // model methods
   favHome: function(e) {
     e.preventDefault();
-    this.model.fav('home', this.model.get('home'));
+    this.model.fav('home', this.model.get('HomeTeamID'));
   },
   favAway: function(e) {
     e.preventDefault();
-    this.model.fav('away', this.model.get('away'));
+    this.model.fav('away', this.model.get('AwayTeamID'));
   }
 });
 
@@ -158,12 +168,47 @@ var Scoreboard = Backbone.View.extend({
     return this;
   }
 });
-var scoreboard;
-var scores;
+
+// Get faves from local storage
+var Favs = function() {};
+
+Favs.prototype.key = 'faves';
+
+Favs.prototype.get = function() {
+  var favesList = store.get(this.key);
+  if(typeof favesList === "undefined") {
+    return [];
+  }
+  else {
+    return favesList;
+  }
+};
+
+Favs.prototype.set = function(faves) {
+  store.set(this.key, faves);
+};
+
+Favs.prototype.fav = function(teamId) {
+  var favs = this.get();
+  favs.push(teamId);
+  this.set(_.uniq(favs));
+};
+
+Favs.prototype.unFav = function(teamId) {
+  var favs = this.get();
+  this.set(_.without(favs, teamId));
+};
+
+Favs.prototype.isFav = function(teamId) {
+  var favs = this.get();
+  return _.indexOf(favs, teamId) !== -1;
+};
+
+var favs = new Favs();
+
 $(function() {
 
   // Fetch scores from TeamPlayer
-
   var week = $('#week'),
       searchBox = $('#team-search');
       scores = new Scores();
@@ -187,7 +232,7 @@ $(function() {
     .done(function(data) {
       scores.set(data);
       console.log(data);
-      scoreboard = new Scoreboard({collection: scores, el: '#scores'});
+      var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
       $('.hide').removeClass('hide');
     });
