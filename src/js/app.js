@@ -1,3 +1,5 @@
+require(['add-to-home-screen', 'underscore', 'backbone', 'Templates', 'moment', 'store'], function(addToHomeScreen, _, Backbone, JST, moment, store) {
+
 // Trigger Add to Homescreen prompt
 addToHomescreen();
 
@@ -270,5 +272,7 @@ $(function() {
   searchBox.on('keyup', function() {
     scores.search(searchBox.val());
   });
+
+});
 
 });

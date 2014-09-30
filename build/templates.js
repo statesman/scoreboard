@@ -1,6 +1,8 @@
-this["JST"] = this["JST"] || {};
+define(['handlebars', 'helpers'], function(Handlebars) {
 
-this["JST"]["game"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Templates"] = this["Templates"] || {};
+
+this["Templates"]["game"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, self=this, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, functionType="function";
@@ -126,7 +128,7 @@ function program8(depth0,data) {
   return buffer;
   });
 
-this["JST"]["stories"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Templates"]["stories"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, functionType="function", escapeExpression=this.escapeExpression, self=this;
@@ -154,3 +156,7 @@ function program1(depth0,data) {
   buffer += "\r\n</ul>\r\n";
   return buffer;
   });
+
+return this["Templates"];
+
+});

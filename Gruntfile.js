@@ -41,6 +41,8 @@ module.exports = function(grunt) {
     // Pre-render Handlebars templates
     handlebars: {
       options: {
+        namespace: "Templates",
+        amd: ['handlebars', 'helpers'],
         // Returns the filename, with its parent directory if
         // it's in a subdirectory of the src/templates folder
         processName: function(filePath) {
@@ -68,25 +70,20 @@ module.exports = function(grunt) {
       }
     },
 
-    // Uglify/minify concatenated scripts
-    uglify: {
-      options: {
-        sourceMap: true
-      },
-      js: {
-        files: {
-          "dist/scripts.js": [
-            'bower_components/store/store.js',
-            'bower_components/moment/moment.js',
-            'bower_components/handlebars/handlebars.runtime.js',
-            'src/templates/helpers/**.js',
-            'build/templates.js',
-            'bower_components/jquery/dist/jquery.js',
-            'bower_components/underscore/underscore.js',
-            'bower_components/backbone/backbone.js',
-            'bower_components/add-to-homescreen/src/addtohomescreen.js',
-            'src/js/app.js'
-          ]
+    // Runs the r.js optimizer
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'src',
+          mainConfigFile: 'src/js/main.js',
+          out: 'dist/scripts.js',
+          optimize: 'uglify2',
+          include: [
+            'js/app'
+          ],
+          name: '../bower_components/almond/almond',
+          generateSourceMaps: true,
+          preserveLicenseComments: false
         }
       }
     },
@@ -101,8 +98,8 @@ module.exports = function(grunt) {
         files: ['index.php']
       },
       scripts: {
-        files: ['src/js/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers/*.js'],
-        tasks: ['jshint', 'clean:js', 'handlebars', 'uglify']
+        files: ['src/js/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers.js'],
+        tasks: ['jshint', 'clean:js', 'handlebars', 'requirejs']
       },
       styles: {
         files: ['src/css/**.scss'],
@@ -118,9 +115,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('build', ['copy', 'clean', 'sass', 'handlebars', 'jshint', 'uglify']);
+  grunt.registerTask('build', ['copy', 'clean', 'sass', 'handlebars', 'jshint', 'requirejs']);
 
 };
