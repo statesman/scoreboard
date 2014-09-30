@@ -1,4 +1,4 @@
-<div class="inner">
+<div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
   <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
     {{#if AwayTeamFav}}
       <a class="fav-away faved" href="#"><i class="fa fa-star"></i></a>

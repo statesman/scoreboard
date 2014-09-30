@@ -26,9 +26,12 @@ var Score = Backbone.Model.extend({
     var searchable = [this.get('HomeTeamName').toLowerCase(), this.get('AwayTeamName').toLowerCase()];
     this.set('Searchable', searchable.join(' '));
   },
+  // Method that handles faving functionality by storing
+  // fav status as a model attribute and storing it in
+  // local storage
   fav: function(team) {
     if(team === 'home') {
-      if(this.get('HomeTeamFav')) {
+      if(this.get('HomeTeamFav') === true) {
         this.set('HomeTeamFav', false);
       }
       else {
@@ -37,7 +40,7 @@ var Score = Backbone.Model.extend({
       // store HomeTeamID as a fav
     }
     else if(team === 'away') {
-      if(this.get('AwayTeamFav')) {
+      if(this.get('AwayTeamFav') === true) {
         this.set('AwayTeamFav', false);
       }
       else {
@@ -45,12 +48,36 @@ var Score = Backbone.Model.extend({
       }
       // store AwayTeamID as a fav
     }
-    this.trigger('change'); // Manually trigger the change event
   }
 });
 
 var Scores = Backbone.Collection.extend({
   model: Score,
+
+  initialize: function() {
+    // When something is faved, trigger a sort, which
+    // will trigger a re-render
+    this.on('change:HomeTeamFav', function() {
+      this.sort();
+    });
+    this.on('change:AwayTeamFav', function() {
+      this.sort();
+    });
+  },
+
+  // Rewrite the comparator to sort first by fav status,
+  // then by timestamp, then by home team
+  comparator: function(model) {
+    var c,
+        gametime = moment(model.get('GameDate') + model.get('GameTime'), "YYYY-MM-DDHH:mm:ss");
+    if(model.get('HomeTeamFav') === true || model.get('AwayTeamFav') === true) {
+      c = "0" + gametime.unix() + model.get('HomeTeamName');
+    }
+    else {
+      c = "1" + gametime.unix() + model.get('HomeTeamName');
+    }
+    return c;
+  },
 
   // Method that, when passed a string, adds a hidden attribute
   // to all models in the collection that don't contain the passed
@@ -78,6 +105,8 @@ var Scores = Backbone.Collection.extend({
 });
 
 var Gameboard = Backbone.View.extend({
+  // Listen for the fav stars to be clicked, then fire
+  // faving events
   events: {
     "click .fav-home": "favHome",
     "click .fav-away": "favAway"
@@ -91,6 +120,8 @@ var Gameboard = Backbone.View.extend({
     this.$el.html(this.template(this.model.toJSON()));
     return this;
   },
+  // Faving event handlers, which fire corresponding
+  // model methods
   favHome: function(e) {
     e.preventDefault();
     this.model.fav('home', this.model.get('home'));
@@ -108,6 +139,12 @@ var Scoreboard = Backbone.View.extend({
     this.collection.on('filtered', function() {
       this.render();
     }, this);
+
+    // Listen for the sort event, which is fired after a favorite
+    // is added, and rerender the view
+    this.collection.on('sort', function() {
+      this.render();
+    }, this);
   },
   renderSingle: function(game) {
     if(game.get('hidden') !== true) { // Only render items that aren't hidden
@@ -121,15 +158,15 @@ var Scoreboard = Backbone.View.extend({
     return this;
   }
 });
-
+var scoreboard;
+var scores;
 $(function() {
 
   // Fetch scores from TeamPlayer
 
   var week = $('#week'),
-      searchBox = $('#team-search'),
-      scores = new Scores(),
-      scoreboard;
+      searchBox = $('#team-search');
+      scores = new Scores();
 
   var settings = {
     dataType: "json",

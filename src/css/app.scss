@@ -30,6 +30,10 @@ body > .row {
       @media #{$medium-up} {
         border-radius: 3px;
       }
+      &.faved {
+        background: #efefef;
+        border-width: 2px;
+      }
       font-size: 12px;
       text-transform: uppercase;
       border: 1px solid #ccc;
