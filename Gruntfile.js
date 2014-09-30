@@ -74,14 +74,14 @@ module.exports = function(grunt) {
     requirejs: {
       compile: {
         options: {
-          baseUrl: 'src',
+          baseUrl: 'src/js',
           mainConfigFile: 'src/js/main.js',
           out: 'dist/scripts.js',
           optimize: 'uglify2',
           include: [
-            'js/app'
+            'app'
           ],
-          name: '../bower_components/almond/almond',
+          name: '../../bower_components/almond/almond',
           generateSourceMaps: true,
           preserveLicenseComments: false
         }
