@@ -20,6 +20,22 @@ body {
   }
 }
 
+.text-alert .fa-mobile{
+  font-size: 25px;
+  top: 4px;
+  position: relative;
+  line-height: 12px;
+  margin-right: 4px;
+  @media (max-width: 450px) {
+    top: 0;
+    font-size: 40px;
+    position: relative;
+    line-height: 40px;
+    margin-right: 8px;
+    float: left;
+  }
+}
+
 /*
  * Scores
  */
