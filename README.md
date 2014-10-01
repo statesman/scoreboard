@@ -36,7 +36,15 @@ The production version of the app draws from the Web template `TickerJSON` and t
 <VAR $scoreField = $scoreFields[$sportName]>
 <QUERY name=TickerClone SPORTID=$form_Sport SPORTNAME=$sqlSportName SCOREFIELD=$scoreField STARTDATE=$form_StartDate ENDDATE=$form_EndDate MARKET=$market>
 <?php header('Content-Type: application/json'); ?>
-<?php echo json_encode($TickerClone_rows); ?>
+
+<?php
+$json = json_encode($TickerClone_rows);
+if(array_key_exists('callback', $_GET)){
+    $callback = $_GET['callback'];
+    $json = $callback . '(' . $json . ');';
+}
+echo $json;
+?>
 ```
 
 #### Query template
