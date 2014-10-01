@@ -1,61 +1,47 @@
-require(['add-to-home-screen', 'Templates', 'moment', 'collections/scores', 'views/scoreboard'], function(addToHomeScreen, JST, moment, Scores, Scoreboard) {
+require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scoreboard'], function(addToHomeScreen, JST, Scores, Scoreboard) {
 
-// Trigger Add to Homescreen prompt
-addToHomescreen({
-  skipFirstVisit: true,
-  maxDisplayCount: 1
-});
+  // Trigger Add to Homescreen prompt
+  addToHomescreen({
+    skipFirstVisit: true,
+    maxDisplay: 1
+  });
 
-$(function() {
+  $(function() {
 
-  // Fetch scores from TeamPlayer
-  var week = $('#week'),
-      searchBox = $('#team-search');
-      scores = new Scores();
+    // Grab the week selector and team search box
+    var week = $('#week'),
+        searchBox = $('#team-search');
 
-  var settings = {
-    dataType: "jsonp",
-    url: "http://teamplayer.statesman.com/web/gateway.php",
-    cache: true,
-    data: {
-      site: "default",
-      tpl: "TickerJSON_clone",
-      Sport: 1
-    },
-  };
+    // Setup instances of our Backbone collection and view
+    var scores = new Scores({date: week.val()});
+    var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
 
-  var fetch = function(friday) {
-    var dateObj = moment(friday, "YYYY-MM-DD");
-    settings.data.StartDate = dateObj.subtract(1, 'days').format('YYYY-MM-DD');
-    settings.data.EndDate = dateObj.add(2, 'days').format('YYYY-MM-DD');
-    $.ajax(settings)
-    .done(function(data) {
-      console.log(data);
-      scores.set(data);
-      var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
-      scoreboard.render();
-      $('.hide').removeClass('hide');
+    // Fetch the data from TeamPlayer and unhide the interface when done
+    scores.fetch({
+      success: function() {
+        $('.hide').removeClass('hide');
+      }
     });
-  };
 
-  fetch(week.val());
-  week.on('change', function() {
-    fetch(week.val());
-    searchBox.val('');
+    // Re-fetch every time the week selector is toggled
+    week.on('change', function() {
+      scores.setDate(week.val());
+      scores.fetch();
+      searchBox.val('');
+    });
+
+    // Trigger a search on the scores collection when someone
+    // enters text into the team search box
+    searchBox.on('keyup', function() {
+      scores.search(searchBox.val());
+    });
+
+    // Fetch high school sports stories from Medley
+    $.getJSON('list.php?count=8', function(data) {
+      var html = JST.stories(data);
+      $('#stories').html(html);
+    });
+
   });
-
-  // Fetch high school sports stories from Medley
-  $.getJSON('list.php?count=8', function(data) {
-    var html = JST.stories(data);
-    $('#stories').html(html);
-  });
-
-  // Trigger a search on the scores collection when someone
-  // enters text into the team search box
-  searchBox.on('keyup', function() {
-    scores.search(searchBox.val());
-  });
-
-});
 
 });

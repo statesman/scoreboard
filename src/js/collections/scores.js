@@ -1,9 +1,12 @@
-define(['backbone', 'models/score'], function(Backbone, Score) {
+define(['backbone', 'models/score', 'moment'], function(Backbone, Score, moment) {
 
-    var Scores = Backbone.Collection.extend({
+  var Scores = Backbone.Collection.extend({
     model: Score,
 
-    initialize: function() {
+    initialize: function(options) {
+      // Set the inital date, so we can build a URL
+      this.setDate(options.date);
+
       // When something is faved, trigger a sort, which
       // will trigger a re-render
       this.on('change:HomeTeamFav', function() {
@@ -12,6 +15,21 @@ define(['backbone', 'models/score'], function(Backbone, Score) {
       this.on('change:AwayTeamFav', function() {
         this.sort();
       });
+    },
+
+    // A method to set the date for the TeamPlayer query
+    setDate: function(date) {
+      this.date = moment(date, "YYYY-MM-DD");
+    },
+
+    // Returns the URL for a TeamPlayer query that will return
+    // three days of score results, centered on our stored date property
+    url: function() {
+      var urlBase = "http://teamplayer.statesman.com/web/gateway.php?site=default&tpl=TickerJSON_clone&Sport=1",
+          StartDate = this.date.subtract(1, 'days').format('YYYY-MM-DD'),
+          EndDate = this.date.add(2, 'days').format('YYYY-MM-DD');
+
+      return urlBase + '&StartDate=' + StartDate + '&EndDate=' + EndDate;
     },
 
     // Rewrite the comparator to sort first by fav status,
