@@ -150,9 +150,13 @@ body {
       margin-top: 25px;
     }
   }
+  [class*="block-grid-"] {
+    font-size: 14px;
+  }
   @media #{$small-only} {
     padding: 15px;
     [class*="block-grid-"] {
+      font-size: 13px;
       margin: 0 0 0 1.25rem;
       > li {
         padding-bottom: 0.25em;
