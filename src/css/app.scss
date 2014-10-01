@@ -57,13 +57,13 @@ body {
         background: #efefef;
         border-width: 2px;
       }
-      font-size: 12px;
+      font-size: 13px;
       border: 1px solid #ccc;
       padding: 8px 10px;
       background: #fcfcfc;
       box-shadow: 0 0 8px rgba(0,0,0,0.05);
       .team {
-        line-height: 13px;
+        line-height: 15px;
         .fav-home, .fav-away {
           margin-left: 3px;
           opacity: .35;
@@ -74,6 +74,11 @@ body {
             opacity: 1;
             color: #FFDD4D;
           }
+        }
+      }
+      &.played .team {
+        @media #{$large-up} {
+          min-height: 30px;
         }
       }
       .team-name {

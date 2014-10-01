@@ -1,18 +1,18 @@
-<div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
+<div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}{{#if GameScoreIsFinal}} played{{/if}}">
   {{#if GameScoreIsFinal}}
     <div class="row team away-team{{#if AwayTeamWon}} winner{{/if}}">
-      <div class="small-9 columns">
+      <div class="small-9 medium-8 columns">
         <span class="team-name">{{AwayTeamName}}</span> <div class="inline-block"><span class="mascot">{{AwayTeamNickname}}</span>{{favAway AwayTeamFav}}</div>
       </div>
-      <div class="small-3 columns text-right">
+      <div class="small-3 medium-4 columns text-right">
         <i class="fa fa-chevron-right"></i>{{AwayTeamScore}}
       </div>
     </div>
     <div class="row team home-team{{#if HomeTeamWon}} winner{{/if}}">
-      <div class="small-9 columns">
+      <div class="small-9 medium-8 columns">
         <span class="team-name">{{HomeTeamName}}</span> <div class="inline-block"><span class="mascot">{{HomeTeamNickname}}</span>{{favHome HomeTeamFav}}</div>
       </div>
-      <div class="small-3 columns text-right">
+      <div class="small-3 medium-4 columns text-right">
         <i class="fa fa-chevron-right"></i>{{HomeTeamScore}}
       </div>
     </div>
