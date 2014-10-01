@@ -1,7 +1,10 @@
 require(['add-to-home-screen', 'Templates', 'moment', 'collections/scores', 'views/scoreboard'], function(addToHomeScreen, JST, moment, Scores, Scoreboard) {
 
 // Trigger Add to Homescreen prompt
-addToHomescreen();
+addToHomescreen({
+  skipFirstVisit: true,
+  maxDisplayCount: 1
+});
 
 $(function() {
 

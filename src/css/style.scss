@@ -6,7 +6,10 @@
 @import 'settings';
 
 // Import icon font
-@import '../../bower_components/font-awesome/scss/font-awesome.scss';
+@import '../../bower_components/font-awesome/scss/font-awesome';
+
+// Import add2homescreen styles
+@import '../../bower_components/add-to-homescreen/style/addtohomescreen.css';
 
 @import url('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700');
 
