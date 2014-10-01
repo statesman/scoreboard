@@ -31,7 +31,6 @@ $(function() {
     $.ajax(settings)
     .done(function(data) {
       scores.set(data);
-      console.log(data);
       var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();
       $('.hide').removeClass('hide');
