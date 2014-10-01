@@ -67,8 +67,10 @@ body {
         .fav-home, .fav-away {
           margin-left: 3px;
           opacity: .35;
-          &:hover {
-            opacity: 1;
+          @media #{$medium-up} {
+            &:hover {
+              opacity: 1;
+            }
           }
           &.faved {
             opacity: 1;
