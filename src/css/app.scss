@@ -20,6 +20,10 @@ body {
   }
 }
 
+.inline-block {
+  display: inline-block;
+}
+
 .text-alert .fa-mobile{
   font-size: 25px;
   top: 4px;
@@ -55,13 +59,13 @@ body {
       }
       font-size: 12px;
       border: 1px solid #ccc;
-      padding: 5px 8px;
+      padding: 8px 10px;
       background: #fcfcfc;
       box-shadow: 0 0 8px rgba(0,0,0,0.05);
       .team {
         line-height: 13px;
         .fav-home, .fav-away {
-          margin-right: 2px;
+          margin-left: 3px;
           opacity: .35;
           &:hover {
             opacity: 1;
@@ -77,23 +81,24 @@ body {
         font-weight: 600;
       }
       .away-team {
-        margin-top: 2px;
-        margin-bottom: 3px;
+        margin-bottom: 4px;
       }
       .game-meta {
         font-size: 0.85em;
-        @media #{$medium-up} {
-          border-top: 1px solid #efefef;
-          padding-top: 1px;
-          margin-top: 6px;
-        }
-        .game-time {
-          font-weight: 600;
+        margin-top: 3px;
+        hr {
+          border-color: #efefef;
+          margin: 3px 0;
         }
       }
+      .game-time {
+        font-weight: 600;
+        line-height: 14px;
+        font-size: 11px;
+      }
       &.faved .game-meta {
-        @media #{$medium-up} {
-          border-top-color: #ccc;
+        hr {
+          border-color: #ccc;
         }
       }
       .fa-chevron-right {

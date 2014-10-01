@@ -18,7 +18,18 @@ Handlebars.registerHelper('dateTime', function(timeStamp) {
 
   var dateObj = moment.unix(timeStamp);
 
-  return new Handlebars.SafeString(dateObj.format("h:mma ddd"));
+  // AP style times (omit minutes if we're on the hour)
+  var timeFormat;
+  if(dateObj.minutes() === 0) {
+    timeFormat = "ha";
+  }
+  else {
+    timeFormat = "h:mma";
+  }
+
+  var timeString = dateObj.format(timeFormat) + '<br />' + dateObj.format("ddd");
+
+  return new Handlebars.SafeString(timeString);
 });
 
 

@@ -1,29 +1,46 @@
-{{#if GameScoreIsFinal}}
-  <div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
-    <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
-      {{favAway AwayTeamFav}}
-      <span class="team-name">{{AwayTeamName}}</span> <span class="mascot">{{AwayTeamNickname}}</span>
-      <span class="right"><i class="fa fa-chevron-right"></i>{{AwayTeamScore}}</span>
+<div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
+  {{#if GameScoreIsFinal}}
+    <div class="row team away-team{{#if AwayTeamWon}} winner{{/if}}">
+      <div class="small-9 columns">
+        <span class="team-name">{{AwayTeamName}}</span> <div class="inline-block"><span class="mascot">{{AwayTeamNickname}}</span>{{favAway AwayTeamFav}}</div>
+      </div>
+      <div class="small-3 columns text-right">
+        <i class="fa fa-chevron-right"></i>{{AwayTeamScore}}
+      </div>
     </div>
-    <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
-      {{favHome HomeTeamFav}}
-      <span class="team-name">{{HomeTeamName}}</span> <span class="mascot">{{HomeTeamNickname}}</span>
-      <span class="right"><i class="fa fa-chevron-right"></i>{{HomeTeamScore}}</span>
+    <div class="row team home-team{{#if HomeTeamWon}} winner{{/if}}">
+      <div class="small-9 columns">
+        <span class="team-name">{{HomeTeamName}}</span> <div class="inline-block"><span class="mascot">{{HomeTeamNickname}}</span>{{favHome HomeTeamFav}}</div>
+      </div>
+      <div class="small-3 columns text-right">
+        <i class="fa fa-chevron-right"></i>{{HomeTeamScore}}
+      </div>
     </div>
-    <div class="game-meta">{{date GameTimestamp}} <span class="right">Final</span></div>
-  </div>
-{{else}}
-  <div class="inner{{#if HomeTeamFav}} faved{{else}}{{#if AwayTeamFav}} faved{{/if}}{{/if}}">
-    <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
-      {{favAway AwayTeamFav}}
-      <span class="team-name">{{AwayTeamName}}</span> <span class="mascot">{{AwayTeamNickname}}</span>
-      <span class="right"><i class="fa fa-chevron-right"></i>{{AwayTeamScore}}</span>
+    <div class="row">
+      <div class="small-12 columns game-meta">
+        <hr class="show-for-medium-up" />
+        {{date GameTimestamp}} <span class="right">Final</span>
+      </div>
     </div>
-    <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
-      {{favHome HomeTeamFav}}
-      <span class="team-name">{{HomeTeamName}}</span> <span class="mascot">{{HomeTeamNickname}}</span>
-      <span class="right"><i class="fa fa-chevron-right"></i>{{HomeTeamScore}}</span>
+  {{else}}
+    <div class="row">
+      <div class="small-8 columns">
+        <div class="team away-team{{#if AwayTeamWon}} winner{{/if}}">
+          <span class="team-name">{{AwayTeamName}}</span> <div class="inline-block"><span class="mascot">{{AwayTeamNickname}}</span>{{favAway AwayTeamFav}}</div>
+        </div>
+        <div class="team home-team{{#if HomeTeamWon}} winner{{/if}}">
+          <span class="team-name">{{HomeTeamName}}</span> <div class="inline-block"><span class="mascot">{{HomeTeamNickname}}</span>{{favHome HomeTeamFav}}</div>
+        </div>
+      </div>
+      <div class="small-4 columns text-right game-time">{{dateTime GameTimestamp}}</div>
     </div>
-    <div class="game-meta"><span class="game-time">{{dateTime GameTimestamp}}:</span> <span class="venue">{{venueName}}</span></div>
-  </div>
-{{/if}}
+    {{#if venueName}}
+      <div class="row">
+        <div class="small-12 columns game-meta">
+          <hr class="show-for-medium-up" />
+          <span class="venue">{{venueName}}</span>
+        </div>
+      </div>
+    {{/if}}
+  {{/if}}
+</div>
