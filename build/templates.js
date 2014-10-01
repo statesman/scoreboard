@@ -115,7 +115,7 @@ function program10(depth0,data) {
 function program11(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\r\n      <div class=\"row\">\r\n        <div class=\"small-12 columns game-meta\">\r\n          <hr class=\"show-for-medium-up\" />\r\n          <span class=\"venue\">";
+  buffer += "\r\n      <div class=\"row\">\r\n        <div class=\"small-12 columns game-meta\">\r\n          <hr class=\"show-for-medium-up\" />\r\n          <i class=\"fa fa-map-marker\"></i> <span class=\"venue\">";
   if (helper = helpers.VenueName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.VenueName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)

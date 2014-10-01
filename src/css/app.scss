@@ -78,11 +78,6 @@ body {
           }
         }
       }
-      &.played .team {
-        @media #{$large-up} {
-          min-height: 30px;
-        }
-      }
       .team-name {
         text-transform: uppercase;
         font-weight: 600;
@@ -96,6 +91,10 @@ body {
         hr {
           border-color: #efefef;
           margin: 3px 0;
+        }
+        .fa {
+          margin-right: 2px;
+          color: #ccc;
         }
       }
       .game-time {
