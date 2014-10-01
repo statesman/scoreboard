@@ -118,7 +118,7 @@
       </div>
     </form>
 
-    <div data-alert class="alert-box secondary text-alert">
+    <div data-alert class="alert-box secondary text-alert show-for-large-up">
       <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.mogreet.com/clients/229/v2/cmg-subscriptions.rb?property=statesman.com">Sign up at statesman.com</a>.
     </div>
 
