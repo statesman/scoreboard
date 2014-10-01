@@ -30,6 +30,7 @@ $(function() {
     settings.data.EndDate = dateObj.add(2, 'days').format('YYYY-MM-DD');
     $.ajax(settings)
     .done(function(data) {
+      console.log(data);
       scores.set(data);
       var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
       scoreboard.render();

@@ -107,7 +107,7 @@ function program10(depth0,data) {
     + "</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"small-4 columns text-right game-time\">"
     + escapeExpression((helper = helpers.dateTime || (depth0 && depth0.dateTime),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.GameTimestamp), options) : helperMissing.call(depth0, "dateTime", (depth0 && depth0.GameTimestamp), options)))
     + "</div>\r\n    </div>\r\n    ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.venueName), {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.VenueName), {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n  ";
   return buffer;
@@ -116,8 +116,8 @@ function program11(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\r\n      <div class=\"row\">\r\n        <div class=\"small-12 columns game-meta\">\r\n          <hr class=\"show-for-medium-up\" />\r\n          <span class=\"venue\">";
-  if (helper = helpers.venueName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.venueName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  if (helper = helpers.VenueName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.VenueName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "</span>\r\n        </div>\r\n      </div>\r\n    ";
   return buffer;
