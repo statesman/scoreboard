@@ -42,6 +42,13 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
       $('#stories').html(html);
     });
 
+    // Setup share buttons
+    $('#share-buttons').on('click', 'a', function(e) {
+      var url = $(this).attr('href');
+      window.open(url, 'share', 'height=400,width=600');
+      e.preventDefault();
+    });
+
   });
 
 });

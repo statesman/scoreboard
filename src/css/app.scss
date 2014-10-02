@@ -13,6 +13,7 @@ h1, form {
 
 body {
   background: #f7f7f7;
+  overflow-x: hidden;
   > .row {
     @media #{$medium-up} {
       padding: 20px;
@@ -37,6 +38,25 @@ body {
     line-height: 40px;
     margin-right: 8px;
     float: left;
+  }
+}
+
+#share-buttons {
+  margin-top: 10px;
+  text-align: right;
+  @media #{$small-only} {
+    margin-right: 12px;
+  }
+  .button.tiny {
+    margin: 0 0 5px 2px;
+    padding: 5px 0;
+    min-width: 29px;
+    &.facebook {
+      background-color: #3b5998;
+    }
+    &.twitter {
+      background-color: #55acee;
+    }
   }
 }
 
