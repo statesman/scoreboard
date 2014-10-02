@@ -117,8 +117,7 @@
       }
     ?>
 
-    <form>
-      <div class="row">
+      <div class="form row">
         <div class="medium-6 columns">
           <select id="week">
             <?php foreach($all_fridays as $week => $friday): ?>
@@ -128,12 +127,11 @@
         </div>
         <div id="team-search" class="medium-6 columns">
           <input type="text" placeholder="Team" />
-          <div class="clear">
+          <a href="#" class="clear">
             <i class="fa fa-times-circle"></i>
-          </div>
+          </a>
         </div>
       </div>
-    </form>
 
     <div data-alert class="alert-box secondary text-alert show-for-large-up">
       <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.mogreet.com/clients/229/v2/cmg-subscriptions.rb?property=statesman.com">Sign up at statesman.com</a>.

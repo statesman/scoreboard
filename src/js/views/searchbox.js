@@ -36,7 +36,8 @@ define(['backbone'], function(Backbone) {
     },
 
     // Method to reset the collection search
-    clearSearch: function() {
+    clearSearch: function(e) {
+      e.preventDefault();
       this.setSearch('');
       this.doSearch();
     }
