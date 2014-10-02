@@ -5,14 +5,185 @@
 @import '../../bower_components/bourbon/dist/bourbon';
 @import 'settings';
 
+h1, .form {
+  @media #{$small-only} {
+    padding: 0 12px;
+  }
+}
+
+body {
+  background: #f7f7f7;
+  > .row {
+    @media #{$medium-up} {
+      padding: 20px;
+    }
+  }
+}
+
+.row.form {
+  margin-top: 10px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.text-alert .fa-mobile{
+  font-size: 25px;
+  top: 4px;
+  position: relative;
+  line-height: 12px;
+  margin-right: 4px;
+  @media (max-width: 450px) {
+    top: 0;
+    font-size: 40px;
+    position: relative;
+    line-height: 40px;
+    margin-right: 8px;
+    float: left;
+  }
+}
+
+#share-buttons {
+  position: absolute;
+  right: 11px;
+  top: 11px;
+  .button.tiny {
+    margin-right: 1px;
+    padding: 3px 0 1px 0;
+    min-width: 23px;
+    background-color: #f7f7f7;
+    &.facebook {
+      color: #3b5998;
+    }
+    &.twitter {
+      color: #55acee;
+    }
+  }
+  .fa {
+    font-size: 15px;
+    line-height: 19px;
+  }
+}
+
+@media #{$small-only} {
+  .top-bar .name h1 a {
+    padding: 0;
+  }
+}
+
+.no-results {
+  margin: -1px 8px 12px 8px;
+  border: 1px solid #ccc;
+  padding: 18px 20px 6px 20px;
+  background: #fcfcfc;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
 /*
  * Scores
  */
-.scoreboard {
-  width: 100%;
-  #scores {
-    td.winner {
-      background: $secondary-color;
+#scores {
+  @media #{$small-only} {
+    border-top: 1px solid #ccc;
+    margin-left: -12px;
+    margin-right: -12px;
+  }
+  > li {
+    padding: 6px;
+    .inner {
+      .columns {
+        &.medium-8 {
+          width: 71%;
+        }
+        &.medium-4 {
+          width: 29%;
+        }
+      }
+      @media #{$medium-up} {
+        border-radius: 3px;
+      }
+      &.faved {
+        background: #efefef;
+        border-width: 2px;
+      }
+      font-size: 13px;
+      border: 1px solid #ccc;
+      padding: 8px 10px;
+      background: #fcfcfc;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      .team {
+        line-height: 15px;
+        .fav-home, .fav-away {
+          margin-left: 3px;
+          opacity: .35;
+          @media #{$medium-up} {
+            &:hover {
+              opacity: 1;
+            }
+          }
+          &.faved {
+            opacity: 1;
+            color: #FFDD4D;
+          }
+        }
+      }
+      .team-name {
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+      .away-team {
+        margin-bottom: 4px;
+      }
+      .game-meta {
+        font-size: 0.85em;
+        margin-top: 3px;
+        hr {
+          border-color: #efefef;
+          margin: 3px 0;
+        }
+        .fa {
+          margin-right: 2px;
+          color: #ccc;
+        }
+      }
+      .game-time {
+        font-weight: 600;
+        line-height: 14px;
+        font-size: 11px;
+      }
+      &.faved .game-meta {
+        hr {
+          border-color: #ccc;
+        }
+      }
+      .fa-chevron-right {
+        display: none;
+      }
+      .mascot {
+        font-size: 0.9em;
+        color: #555;
+      }
+      .winner {
+        font-weight: 700;
+        .mascot {
+          font-weight: normal;
+        }
+        .fa-chevron-right {
+          color: $primary-color;
+          display: inline-block;
+          margin-right: 4px;
+        }
+      }
+    }
+    @media #{$small-only} {
+      padding: 0 12px;
+      .inner {
+        border-left: none;
+        border-right: none;
+        border-top: none;
+        box-shadow: none;
+      }
     }
   }
 }
@@ -21,16 +192,35 @@
  * News
  */
 #stories {
-  margin-top: 40px;
-}
-@media #{$small-only} {
+  h3 {
+    line-height: 1.4rem;
+    margin-bottom: 10px;
+    @media #{$medium-up} {
+      margin-top: 25px;
+    }
+  }
   [class*="block-grid-"] {
-    margin: 0 0 0 1.25rem;
-    > li {
-      padding-bottom: 0.25em;
-      list-style: square;
-      display: list-item;
-      padding-left: 0;
+    font-size: 14px;
+  }
+  @media #{$small-only} {
+    padding: 15px;
+    [class*="block-grid-"] {
+      font-size: 13px;
+      margin: 0 0 0 1.25rem;
+      > li {
+        padding-bottom: 0.25em;
+        list-style: square;
+        display: list-item;
+        padding-left: 0;
+      }
+    }
+  }
+  @media #{$large-up} {
+    [class*="block-grid-"] > li {
+      &:nth-child(7),
+      &:nth-child(8) {
+        display: none;
+      }
     }
   }
 }
@@ -43,5 +233,5 @@
 }
 
 #footer {
-  margin-top: 20px;
+  margin-top: 10px;
 }

@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
     // Empty directories before build process
     clean: {
-      css: ["dist/*.css", "dist/*.css.map"],
+      css: ["dist/*.css", "dist/*.css.map", "build/*.scss"],
       js: ["build/*.js", "dist/*.js", "dist/*.js.map"]
     },
 
@@ -23,9 +23,42 @@ module.exports = function(grunt) {
       }
     },
 
+    // Copy Font-Awesome and FontCustom fonts
+    copy: {
+      fonts: {
+        files: [{
+          expand: true,
+          src: [
+            'bower_components/font-awesome/fonts/*',
+            'src/fontcustom/fonts/*'
+          ],
+          dest: 'fonts/',
+          flatten: true
+        }]
+      },
+      aths: {
+        files: [{
+          src: [
+            'bower_components/add-to-homescreen/style/addtohomescreen.css'
+          ],
+          dest: 'build/aths.scss'
+        }]
+      },
+      iosoverlay: {
+        files: [{
+          src: [
+            'bower_components/iOS-Overlay/css/iosOverlay.css'
+          ],
+          dest: 'build/iosoverlay.scss'
+        }]
+      }
+    },
+
     // Pre-render Handlebars templates
     handlebars: {
       options: {
+        namespace: "Templates",
+        amd: ['handlebars', 'helpers'],
         // Returns the filename, with its parent directory if
         // it's in a subdirectory of the src/templates folder
         processName: function(filePath) {
@@ -53,23 +86,20 @@ module.exports = function(grunt) {
       }
     },
 
-    // Uglify/minify concatenated scripts
-    uglify: {
-      options: {
-        sourceMap: true
-      },
-      js: {
-        files: {
-          "dist/scripts.js": [
-            'bower_components/moment/moment.js',
-            'bower_components/handlebars/handlebars.runtime.js',
-            'src/templates/helpers/**.js',
-            'build/templates.js',
-            'bower_components/jquery/dist/jquery.js',
-            'bower_components/underscore/underscore.js',
-            'bower_components/backbone/backbone.js',
-            'src/js/app.js'
-          ]
+    // Runs the r.js optimizer
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'src/js',
+          mainConfigFile: 'src/js/main.js',
+          out: 'dist/scripts.js',
+          optimize: 'uglify2',
+          include: [
+            'app'
+          ],
+          name: '../../bower_components/almond/almond',
+          generateSourceMaps: true,
+          preserveLicenseComments: false
         }
       }
     },
@@ -84,12 +114,12 @@ module.exports = function(grunt) {
         files: ['index.php']
       },
       scripts: {
-        files: ['src/js/**.js', 'src/templates/**/*.hbs'],
-        tasks: ['jshint', 'clean:js', 'handlebars', 'uglify']
+        files: ['src/js/**.js', 'src/js/**/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers.js'],
+        tasks: ['jshint', 'clean:js', 'handlebars', 'requirejs']
       },
       styles: {
         files: ['src/css/**.scss'],
-        tasks: ['clean:css', 'sass']
+        tasks: ['clean:css', 'copy:iosoverlay', 'copy:aths', 'sass']
       }
     }
 
@@ -97,12 +127,13 @@ module.exports = function(grunt) {
 
   // Load the task plugins
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('build', ['clean', 'sass', 'handlebars', 'jshint', 'uglify']);
+  grunt.registerTask('build', ['clean', 'copy', 'sass', 'handlebars', 'jshint', 'requirejs']);
 
 };

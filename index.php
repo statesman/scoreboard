@@ -59,6 +59,15 @@
 </head>
 <body>
 
+  <div style="overflow-x:hidden;">
+
+  <?php
+    /* Generate sharing URLs */
+    $url = urlencode("http://projects.statesman.com/sports/scores/");
+    $fb_url = "https://www.facebook.com/sharer.php?u=" . $url;
+    $tw_url = "https://twitter.com/intent/tweet?url=" . $url . "&related=statesman";
+  ?>
+
 	<nav class="top-bar">
 		<ul class="title-area">
 			<li class="name"><h1>
@@ -67,7 +76,14 @@
 		</ul>
 	</nav>
 
-  <div class="row small-11 medium-8 large-6 centered">
+  <div id="share-buttons">
+    <ul class="right">
+      <a href="<?php print $fb_url; ?>" target="_blank" class="button round tiny facebook"><i class="fa fa-facebook"></i></a>
+      <a href="<?php print $tw_url; ?>" target="_blank" class="button round tiny twitter"><i class="fa fa-twitter"></i></a>
+    </ul>
+  </div>
+
+  <div class="row small-12 medium-12 large-12 centered">
 
     <h1>High school football scores</h1>
 
@@ -103,31 +119,33 @@
       }
     ?>
 
-    <form class="hide">
-      <div class="row">
-        <div class="medium-6 columns">
-          <select id="week">
-            <?php foreach($all_fridays as $week => $friday): ?>
-              <option value="<?php print $friday['date']; ?>"<?php if($friday['current']) print " selected"; ?>>Week <?php print $week; ?></option>
-            <?php endforeach; ?>
-          </select>
-        </div>
-        <div class="medium-6 columns">
-          <input id="team-search" type="text" placeholder="Team" />
+    <div class="form row">
+      <div class="medium-6 columns">
+        <select id="week">
+          <?php foreach($all_fridays as $week => $friday): ?>
+            <option value="<?php print $friday['date']; ?>"<?php if($friday['current']) print " selected"; ?>>Week <?php print $week; ?></option>
+          <?php endforeach; ?>
+        </select>
+      </div>
+      <div id="team-search" class="medium-6 columns">
+        <div class="row collapse postfix-radius">
+          <div class="small-11 columns">
+            <input type="text" placeholder="Team" />
+          </div>
+          <div class="small-1 columns">
+            <a href="#" class="clear">
+              <span class="postfix"><i class="fa fa-times"></i></span>
+            </a>
+          </div>
         </div>
       </div>
-    </form>
+    </div>
 
-    <table class="scoreboard hide">
-      <thead>
-        <tr>
-          <th>Date</th>
-          <th>Away</th>
-          <th>Home</th>
-        </tr>
-      </thead>
-      <tbody id="scores"></tbody>
-    </table>
+    <div data-alert class="alert-box secondary text-alert show-for-large-up">
+      <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.mogreet.com/clients/229/v2/cmg-subscriptions.rb?property=statesman.com">Sign up at statesman.com</a>.
+    </div>
+
+    <ul id="scores" class="small-block-grid-1 medium-block-grid-3 large-block-grid-5"></ul>
 
     <div id="stories"></div>
 
@@ -168,6 +186,8 @@
   <?php if($_SERVER['SERVER_NAME'] === 'localhost'): ?>
     <script src="//localhost:35729/livereload.js"></script>
   <?php endif; ?>
+
+  </div>
 
 </body>
 </html>
