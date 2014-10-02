@@ -81,7 +81,7 @@
     </ul>
   </div>
 
-  <div class="hide row small-12 medium-12 large-12 centered">
+  <div class="row small-12 medium-12 large-12 centered">
 
     <h1>High school football scores</h1>
 

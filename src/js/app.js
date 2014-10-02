@@ -14,12 +14,8 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
     var searchbox = new Searchbox({collection: scores, el: '#team-search'});
     var weekselect = new Weekselect({collection: scores, el: '#week'});
 
-    // Fetch the data from TeamPlayer and unhide the interface when done
-    scores.fetch({
-      success: function() {
-        $('.hide').removeClass('hide');
-      }
-    });
+    // Fetch the data from TeamPlayer
+    scores.fetch();
 
     // Fetch high school sports stories from Medley
     $.getJSON('list.php?count=8', function(data) {
