@@ -59,6 +59,8 @@
 </head>
 <body>
 
+  <div style="overflow-x:hidden;">
+
   <?php
     /* Generate sharing URLs */
     $url = urlencode("http://projects.statesman.com/sports/scores/");
@@ -184,6 +186,8 @@
   <?php if($_SERVER['SERVER_NAME'] === 'localhost'): ?>
     <script src="//localhost:35729/livereload.js"></script>
   <?php endif; ?>
+
+  </div>
 
 </body>
 </html>
