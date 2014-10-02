@@ -67,26 +67,6 @@ body {
   }
 }
 
-#team-search {
-  input {
-    padding-right: 30px;
-    &:focus {
-      + .clear {
-        display: block;
-      }
-    }
-    + .clear {
-      display: none;
-      color: #ccc;
-      position: absolute;
-      right: 15px;
-      top: 0px;
-      font-size: 18px;
-      padding: 4px 8px;
-    }
-  }
-}
-
 @media #{$small-only} {
   .top-bar .name h1 a {
     padding: 0;
