@@ -16,9 +16,15 @@ define(['backbone', 'modules/favs'], function(Backbone, Favs) {
         }
       }
 
-      // Store a lowercase version of each team name for searching
+      // Store a lowercase version of each team name and mascot for searching
       if(this.has('HomeTeamName') && this.has('AwayTeamName')) {
         var searchable = [this.get('HomeTeamName').toLowerCase(), this.get('AwayTeamName').toLowerCase()];
+        if(this.has('HomeTeamNickname')) {
+          searchable.push(this.get('HomeTeamNickname').toLowerCase());
+        }
+        if(this.has('AwayTeamNickname')) {
+          searchable.push(this.get('AwayTeamNickname').toLowerCase());
+        }
         this.set('Searchable', searchable.join(' '));
       };
 
