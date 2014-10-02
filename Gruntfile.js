@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
     // Empty directories before build process
     clean: {
-      css: ["dist/*.css", "dist/*.css.map"],
+      css: ["dist/*.css", "dist/*.css.map", "build/aths.scss"],
       js: ["build/*.js", "dist/*.js", "dist/*.js.map"]
     },
 
@@ -34,6 +34,14 @@ module.exports = function(grunt) {
           ],
           dest: 'fonts/',
           flatten: true
+        }]
+      },
+      aths: {
+        files: [{
+          src: [
+            'bower_components/add-to-homescreen/style/addtohomescreen.css'
+          ],
+          dest: 'build/aths.scss'
         }]
       }
     },
@@ -103,7 +111,7 @@ module.exports = function(grunt) {
       },
       styles: {
         files: ['src/css/**.scss'],
-        tasks: ['clean:css', 'sass']
+        tasks: ['clean:css', 'copy:aths', 'sass']
       }
     }
 
@@ -118,6 +126,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
 
-  grunt.registerTask('build', ['copy', 'clean', 'sass', 'handlebars', 'jshint', 'requirejs']);
+  grunt.registerTask('build', ['clean', 'copy', 'sass', 'handlebars', 'jshint', 'requirejs']);
 
 };
