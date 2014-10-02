@@ -59,6 +59,22 @@ body {
     }
   }
 }
+#team-search {
+  &:focus {
+    + #search-clear {
+      display: block;
+    }
+  }
+  + #search-clear {
+    display: none;
+    color: #ccc;
+    cursor: pointer;
+    position: absolute;
+    right: 22px;
+    top: 9px;
+    font-size: 18px;
+  }
+}
 
 /*
  * Scores

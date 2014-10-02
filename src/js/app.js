@@ -49,6 +49,11 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
       e.preventDefault();
     });
 
+    $('#search-clear').on('click', function() {
+      searchBox.val('');
+      scores.search('');
+    });
+
   });
 
 });
