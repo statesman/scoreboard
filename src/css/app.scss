@@ -42,23 +42,27 @@ body {
 }
 
 #share-buttons {
-  margin-top: 10px;
-  text-align: right;
-  @media #{$small-only} {
-    margin-right: 12px;
-  }
+  position: absolute;
+  right: 11px;
+  top: 11px;
   .button.tiny {
-    margin: 0 0 5px 2px;
-    padding: 5px 0;
-    min-width: 29px;
+    margin-right: 1px;
+    padding: 3px 0 1px 0;
+    min-width: 23px;
+    background-color: #f7f7f7;
     &.facebook {
-      background-color: #3b5998;
+      color: #3b5998;
     }
     &.twitter {
-      background-color: #55acee;
+      color: #55acee;
     }
   }
+  .fa {
+    font-size: 15px;
+    line-height: 19px;
+  }
 }
+
 #team-search {
   input {
     &:focus {
@@ -75,6 +79,12 @@ body {
       top: 9px;
       font-size: 18px;
     }
+  }
+}
+
+@media #{$small-only} {
+  .top-bar .name h1 a {
+    padding: 0;
   }
 }
 

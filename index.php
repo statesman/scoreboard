@@ -59,6 +59,13 @@
 </head>
 <body>
 
+  <?php
+    /* Generate sharing URLs */
+    $url = urlencode("http://projects.statesman.com/sports/scores/");
+    $fb_url = "https://www.facebook.com/sharer.php?u=" . $url;
+    $tw_url = "https://twitter.com/intent/tweet?url=" . $url . "&related=statesman";
+  ?>
+
 	<nav class="top-bar">
 		<ul class="title-area">
 			<li class="name"><h1>
@@ -67,26 +74,16 @@
 		</ul>
 	</nav>
 
-  <?php
-    /* Generate sharing URLs */
-    $url = urlencode("http://projects.statesman.com/sports/scores/");
-    $fb_url = "https://www.facebook.com/sharer.php?u=" . $url;
-    $tw_url = "https://twitter.com/intent/tweet?url=" . $url . "&related=statesman";
-  ?>
+  <div id="share-buttons">
+    <ul class="right">
+      <a href="<?php print $fb_url; ?>" target="_blank" class="button round tiny facebook"><i class="fa fa-facebook"></i></a>
+      <a href="<?php print $tw_url; ?>" target="_blank" class="button round tiny twitter"><i class="fa fa-twitter"></i></a>
+    </ul>
+  </div>
 
-  <div class="row small-12 medium-12 large-12 centered">
+  <div class="hide row small-12 medium-12 large-12 centered">
 
-    <div class="row">
-      <div class="columns small-9 medium-10">
-        <h1>High school football scores</h1>
-      </div>
-      <div class="columns small-3 medium-2">
-        <div id="share-buttons">
-          <a href="<?php print $fb_url; ?>" target="_blank" class="button round tiny facebook"><i class="fa fa-facebook"></i></a>
-          <a href="<?php print $tw_url; ?>" target="_blank" class="button round tiny twitter"><i class="fa fa-twitter"></i></a>
-        </div>
-      </div>
-    </div>
+    <h1>High school football scores</h1>
 
     <noscript>
       <div data-alert class="alert-box alert radius">
@@ -120,7 +117,7 @@
       }
     ?>
 
-    <form class="hide">
+    <form>
       <div class="row">
         <div class="medium-6 columns">
           <select id="week">
