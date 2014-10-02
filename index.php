@@ -71,7 +71,7 @@
 	<nav class="top-bar">
 		<ul class="title-area">
 			<li class="name"><h1>
-				<a href="http://www.statesman.com/" target="_blank"><img src="//projects.statesman.com/common/white-logo-small.png"></a>
+				<a href="http://www.statesman.com/" target="_blank"><img width="546" height="52" src="assets/logo.png"></a>
 			</h1></li>
 		</ul>
 	</nav>

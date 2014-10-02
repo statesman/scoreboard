@@ -141,11 +141,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
 
 
-  buffer += "<div class=\"no-results\">\n  <h4>No results</h4>\n  <p>Your search for <em>";
+  buffer += "<div class=\"no-results\">\r\n  <h4>No results</h4>\r\n  <p>Your search for <em>";
   if (helper = helpers.search) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.search); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</em> didn't turn up any results.</p>\n</div>\n";
+    + "</em> didn't turn up any results.</p>\r\n</div>\r\n";
   return buffer;
   });
 
