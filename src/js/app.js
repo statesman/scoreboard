@@ -28,10 +28,9 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
     });
 
     // Setup share buttons
-    $('#share-buttons').on('click', 'a', function(e) {
-      var url = $(this).attr('href');
-      window.open(url, 'share', 'height=400,width=600');
-      e.preventDefault();
+    $('#share-buttons a').click(function() {
+      window.open(this.href, '', 'height=400,width=600');
+      return false;
     });
 
   });
