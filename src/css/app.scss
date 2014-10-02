@@ -104,6 +104,8 @@ body {
 #scores {
   @media #{$small-only} {
     border-top: 1px solid #ccc;
+    margin-left: -12px;
+    margin-right: -12px;
   }
   > li {
     padding: 6px;
