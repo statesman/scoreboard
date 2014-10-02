@@ -82,8 +82,8 @@
       </div>
       <div class="columns small-3 medium-2">
         <div id="share-buttons">
-          <a href="<?php print $fb_url; ?>" class="button round tiny facebook"><i class="fa fa-facebook"></i></a>
-          <a href="<?php print $tw_url; ?>" class="button round tiny twitter"><i class="fa fa-twitter"></i></a>
+          <a href="<?php print $fb_url; ?>" target="_blank" class="button round tiny facebook"><i class="fa fa-facebook"></i></a>
+          <a href="<?php print $tw_url; ?>" target="_blank" class="button round tiny twitter"><i class="fa fa-twitter"></i></a>
         </div>
       </div>
     </div>
