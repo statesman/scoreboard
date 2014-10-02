@@ -1,0 +1,14 @@
+{
+  "name": "iOS-Overlay",
+  "homepage": "https://github.com/taitems/iOS-Overlay",
+  "_release": "4331b084c1",
+  "_resolution": {
+    "type": "branch",
+    "branch": "gh-pages",
+    "commit": "4331b084c17e1c6ad4feeab2030ab77d88259639"
+  },
+  "_source": "git://github.com/taitems/iOS-Overlay.git",
+  "_target": "gh-pages",
+  "_originalSource": "taitems/iOS-Overlay",
+  "_direct": true
+}

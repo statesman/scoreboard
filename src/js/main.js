@@ -8,6 +8,9 @@ require.config({
     },
     store: {
       exports: 'store'
+    },
+    iosOverlay: {
+      exports: 'iosOverlay'
     }
   },
   paths: {
@@ -19,7 +22,9 @@ require.config({
     helpers: '../templates/helpers',
     Templates: '../../build/templates',
     store: '../../bower_components/store/store',
-    'add-to-home-screen': '../../bower_components/add-to-homescreen/src/addtohomescreen'
+    'add-to-home-screen': '../../bower_components/add-to-homescreen/src/addtohomescreen',
+    Spinner: '../../bower_components/spin.js/spin',
+    iosOverlay: '../../bower_components/iOS-Overlay/js/iosOverlay'
   },
   config: {
     moment: {

@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
     // Empty directories before build process
     clean: {
-      css: ["dist/*.css", "dist/*.css.map", "build/aths.scss"],
+      css: ["dist/*.css", "dist/*.css.map", "build/*.scss"],
       js: ["build/*.js", "dist/*.js", "dist/*.js.map"]
     },
 
@@ -42,6 +42,14 @@ module.exports = function(grunt) {
             'bower_components/add-to-homescreen/style/addtohomescreen.css'
           ],
           dest: 'build/aths.scss'
+        }]
+      },
+      iosoverlay: {
+        files: [{
+          src: [
+            'bower_components/iOS-Overlay/css/iosOverlay.css'
+          ],
+          dest: 'build/iosoverlay.scss'
         }]
       }
     },
@@ -111,7 +119,7 @@ module.exports = function(grunt) {
       },
       styles: {
         files: ['src/css/**.scss'],
-        tasks: ['clean:css', 'copy:aths', 'sass']
+        tasks: ['clean:css', 'copy:iosoverlay', 'copy:aths', 'sass']
       }
     }
 
