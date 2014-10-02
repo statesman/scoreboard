@@ -1,4 +1,4 @@
-require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scoreboard', 'views/searchbox'], function(addToHomeScreen, JST, Scores, Scoreboard, Searchbox) {
+require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect'], function(addToHomeScreen, JST, Scores, Scoreboard, Searchbox, Weekselect) {
 
   // Trigger Add to Homescreen prompt
   addToHomescreen({
@@ -8,25 +8,17 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
 
   $(function() {
 
-    // Grab the week selector and team search box
-    var week = $('#week');
-
     // Setup instances of our Backbone collection and views
-    var scores = new Scores({date: week.val()});
+    var scores = new Scores({date: $('#week').val()});
     var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
     var searchbox = new Searchbox({collection: scores, el: '#team-search'});
+    var weekselect = new Weekselect({collection: scores, el: '#week'});
 
     // Fetch the data from TeamPlayer and unhide the interface when done
     scores.fetch({
       success: function() {
         $('.hide').removeClass('hide');
       }
-    });
-
-    // Re-fetch every time the week selector is toggled
-    week.on('change', function() {
-      scores.setDate(week.val());
-      scores.fetch();
     });
 
     // Fetch high school sports stories from Medley
