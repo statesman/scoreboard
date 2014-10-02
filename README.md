@@ -49,7 +49,7 @@ The production version of the app draws from the Web template `TickerJSON` and t
 
     // Set a boolean for the winner that can be used during templating
     if($TickerClone_rows[$key]['GameScoreIsFinal']) {
-      if($row['AwayTeamScore'] > $row['HomeTeamScore']) {
+      if(intval($row['AwayTeamScore']) > intval($row['HomeTeamScore'])) {
         $TickerClone_rows[$key]['AwayTeamWon'] = TRUE;
       }
       else {
@@ -58,7 +58,7 @@ The production version of the app draws from the Web template `TickerJSON` and t
     }
 
     // Return the gametime as a UNIX timestamp for easier client-side parsing
-    $timeStamp = strtotime($row['GameTime'] . ' ' . $row['GameDate']);
+    $timeStamp = strtotime($row['GameTime'] . ' ' . $row['GameDate']) + 3600;
     $TickerClone_rows[$key]['GameTimestamp'] = $timeStamp;
     unset($TickerClone_rows[$key]['GameTime']);
     unset($TickerClone_rows[$key]['GameDate']);
