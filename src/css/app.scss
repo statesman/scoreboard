@@ -65,6 +65,7 @@ body {
 
 #team-search {
   input {
+    padding-right: 30px;
     &:focus {
       + .clear {
         display: block;
@@ -75,9 +76,10 @@ body {
       color: #ccc;
       cursor: pointer;
       position: absolute;
-      right: 22px;
-      top: 9px;
+      right: 15px;
+      top: 0px;
       font-size: 18px;
+      padding: 4px 8px;
     }
   }
 }

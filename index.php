@@ -128,7 +128,9 @@
         </div>
         <div id="team-search" class="medium-6 columns">
           <input type="text" placeholder="Team" />
-          <i class="fa fa-times-circle clear"></i>
+          <div class="clear">
+            <i class="fa fa-times-circle"></i>
+          </div>
         </div>
       </div>
     </form>
