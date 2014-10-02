@@ -98,7 +98,7 @@ module.exports = function(grunt) {
         files: ['index.php']
       },
       scripts: {
-        files: ['src/js/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers.js'],
+        files: ['src/js/**.js', 'src/js/**/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers.js'],
         tasks: ['jshint', 'clean:js', 'handlebars', 'requirejs']
       },
       styles: {

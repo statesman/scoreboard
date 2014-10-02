@@ -49,15 +49,23 @@ define(['backbone', 'models/score', 'moment'], function(Backbone, Score, moment)
     // string
     search: function(needle) {
       needle = needle.toLowerCase();
+      var resultCount = 0;
       this.each(function(game) {
         if(game.get('Searchable').indexOf(needle) === -1) {
           game.set('hidden', true);
         }
         else {
           game.unset('hidden');
+          resultCount++;
         }
       });
       this.trigger('filtered');
+
+      // Send an empty event if there are no results found, which will
+      // allow us to show the user a no results box
+      if(resultCount === 0) {
+        this.trigger('noResults', needle);
+      }
     },
 
     // Undoes the search method by removing the hidden attribute

@@ -129,9 +129,9 @@
             <?php endforeach; ?>
           </select>
         </div>
-        <div class="medium-6 columns">
-          <input id="team-search" type="text" placeholder="Team" />
-          <i id="search-clear" class="fa fa-times-circle"></i>
+        <div id="team-search" class="medium-6 columns">
+          <input type="text" placeholder="Team" />
+          <i class="fa fa-times-circle clear"></i>
         </div>
       </div>
     </form>

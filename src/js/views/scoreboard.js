@@ -1,4 +1,4 @@
-define(['backbone', 'views/gameboard'], function(Backbone, Gameboard) {
+define(['backbone', 'views/gameboard', 'Templates'], function(Backbone, Gameboard, JST) {
 
   var Scoreboard = Backbone.View.extend({
     initialize: function() {
@@ -6,6 +6,12 @@ define(['backbone', 'views/gameboard'], function(Backbone, Gameboard) {
       // completed or been cleared, then rerender the view
       this.collection.on('filtered', function() {
         this.render();
+      }, this);
+
+      // If a search turns up no results, say so
+      this.collection.on('noResults', function(search) {
+        console.log(search);
+        this.$el.html(JST.noresults({search: search}));
       }, this);
 
       // Listen for the sort event, which is fired after a favorite

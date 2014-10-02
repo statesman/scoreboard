@@ -1,4 +1,4 @@
-require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scoreboard'], function(addToHomeScreen, JST, Scores, Scoreboard) {
+require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scoreboard', 'views/searchbox'], function(addToHomeScreen, JST, Scores, Scoreboard, Searchbox) {
 
   // Trigger Add to Homescreen prompt
   addToHomescreen({
@@ -9,12 +9,12 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
   $(function() {
 
     // Grab the week selector and team search box
-    var week = $('#week'),
-        searchBox = $('#team-search');
+    var week = $('#week');
 
-    // Setup instances of our Backbone collection and view
+    // Setup instances of our Backbone collection and views
     var scores = new Scores({date: week.val()});
     var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
+    var searchbox = new Searchbox({collection: scores, el: '#team-search'});
 
     // Fetch the data from TeamPlayer and unhide the interface when done
     scores.fetch({
@@ -27,13 +27,6 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
     week.on('change', function() {
       scores.setDate(week.val());
       scores.fetch();
-      searchBox.val('');
-    });
-
-    // Trigger a search on the scores collection when someone
-    // enters text into the team search box
-    searchBox.on('keyup', function() {
-      scores.search(searchBox.val());
     });
 
     // Fetch high school sports stories from Medley
@@ -47,11 +40,6 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
       var url = $(this).attr('href');
       window.open(url, 'share', 'height=400,width=600');
       e.preventDefault();
-    });
-
-    $('#search-clear').on('click', function() {
-      searchBox.val('');
-      scores.search('');
     });
 
   });
