@@ -1,4 +1,4 @@
-require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect'], function(addToHomeScreen, JST, Scores, Scoreboard, Searchbox, Weekselect) {
+require(['add-to-home-screen', 'Templates', 'modules/router'], function(addToHomeScreen, JST, App) {
 
   // Trigger Add to Homescreen prompt
   addToHomescreen({
@@ -8,14 +8,8 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
 
   $(function() {
 
-    // Setup instances of our Backbone collection and views
-    var scores = new Scores({date: $('#week').val()});
-    var scoreboard = new Scoreboard({collection: scores, el: '#scores'});
-    var searchbox = new Searchbox({collection: scores, el: '#team-search'});
-    var weekselect = new Weekselect({collection: scores, el: '#week'});
-
-    // Fetch the data from TeamPlayer
-    scores.fetch();
+    // Fire up the Backbone app
+    var app = new App();
 
     // Fetch high school sports stories from Medley
     $.getJSON('list.php?count=8', function(data) {
@@ -23,9 +17,11 @@ require(['add-to-home-screen', 'Templates', 'collections/scores', 'views/scorebo
       $('#stories').html(html);
     });
 
-    // Setup share buttons
+    // Make share buttons open in a new window
     $('#share-buttons a').click(function(e) {
       if(window.open(this.href, '', 'height=400,width=600')) {
+        // Only deter the browser's default behavior (following
+        // the <a> we're bound to) if the window actually opens
         e.preventDefault();
       }
     });
