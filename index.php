@@ -20,12 +20,12 @@
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@statesman" />
-  <meta name="twitter:title" content="Texas High School Football Scores" />
+  <meta name="twitter:title" content="Central Texas High School Football Scores" />
   <meta name="twitter:description" content="Scores for high school football games from around Central Texas." />
   <meta name="twitter:image" content="http://projects.statesman.com/common/appicon_aas.jpg" />
   <meta name="twitter:url" content="http://projects.statesman.com/sports/scores/" />
 
-  <title>Texas High School Football Scores</title>
+  <title>Central Texas High School Football Scores | Statesman.com</title>
 
   <link href="dist/styles.css" rel="stylesheet" />
 
@@ -85,7 +85,7 @@
 
   <div class="row small-12 medium-12 large-12 centered">
 
-    <h1>High school football scores</h1>
+    <h1>High school scoreboard</h1>
 
     <noscript>
       <div data-alert class="alert-box alert radius">
