@@ -54,6 +54,8 @@ define(['backbone', 'modules/favs'], function(Backbone, Favs) {
           favs.fav(id);
         }
       }
+      // Fire a custom fav event, which will trigger a resort/render
+      this.collection.trigger('fav');
     }
   });
 

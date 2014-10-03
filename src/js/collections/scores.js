@@ -22,28 +22,30 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner'], function
 
       // When something is faved, trigger a sort, which
       // will trigger a re-render
-      this.on('change:HomeTeamFav', function() {
-        this.sort();
-      });
-      this.on('change:AwayTeamFav', function() {
+      this.on('fav', function() {
         this.sort();
       });
 
-      this.on('sync', function() {
-        this.overlay.hide();
-      });
-
+			// When a request starts, throw up a loading spinner
       this.on('request', function() {
         this.overlay = iosOverlay({
           text: "Loading",
           spinner: spinner
         });
       });
+
+			// When the API request finishes, get rid of the spinner
+      this.on('sync', function() {
+				if(typeof this.overlay !== "undefined") {
+	        this.overlay.hide();
+				}
+      });
     },
 
     // A method to set the date for the TeamPlayer query
     setDate: function(date) {
       this.date = moment(date, "YYYY-MM-DD");
+			this.fetch();
     },
 
     // Returns the URL for a TeamPlayer query that will return

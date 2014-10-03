@@ -10,13 +10,12 @@ define(['backbone', 'views/gameboard', 'Templates'], function(Backbone, Gameboar
 
       // If a search turns up no results, say so
       this.collection.on('noResults', function(search) {
-        console.log(search);
         this.$el.html(JST.noresults({search: search}));
       }, this);
 
-      // Listen for the sort event, which is fired after a favorite
+      // Listen for the fav event, which is fired after a favorite
       // is added, and rerender the view
-      this.collection.on('sort', function() {
+      this.collection.on('fav', function() {
         this.render();
       }, this);
     },

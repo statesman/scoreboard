@@ -1,4 +1,4 @@
-define(['collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect'], function(Scores, Scoreboard, Searchbox, Weekselect) {
+define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect'], function(Backbone, Scores, Scoreboard, Searchbox, Weekselect) {
 
   var App = Backbone.Router.extend({
 
@@ -8,9 +8,6 @@ define(['collections/scores', 'views/scoreboard', 'views/searchbox', 'views/week
       this.scoreboard = new Scoreboard({collection: this.scores, el: '#scores'});
       this.searchbox = new Searchbox({collection: this.scores, el: '#team-search'});
       this.weekselect = new Weekselect({collection: this.scores, el: '#week'});
-
-      // Fetch the data from Teamplayer
-      this.scores.fetch();
     }
 
   });

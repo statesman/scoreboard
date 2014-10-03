@@ -8,7 +8,6 @@ define(['backbone'], function(Backbone) {
 
     dateChange: function() {
       this.collection.setDate(this.$el.val());
-      this.collection.fetch();
     }
 
   });
