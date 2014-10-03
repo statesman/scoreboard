@@ -142,7 +142,7 @@
     </div>
 
     <div data-alert class="alert-box secondary text-alert show-for-large-up">
-      <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.mogreet.com/clients/229/v2/cmg-subscriptions.rb?property=statesman.com">Sign up at statesman.com</a>.
+      <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.statesman.com/sports/high-school-sports-score-alerts/">Sign up at statesman.com</a>.
     </div>
 
     <ul id="scores" class="small-block-grid-1 medium-block-grid-3 large-block-grid-5"></ul>
