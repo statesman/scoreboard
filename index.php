@@ -121,11 +121,25 @@
 
     <div class="form row">
       <div class="medium-6 columns">
-        <select id="week">
-          <?php foreach($all_fridays as $week => $friday): ?>
-            <option value="<?php print $friday['date']; ?>"<?php if($friday['current']) print " selected"; ?>>Week <?php print $week; ?></option>
-          <?php endforeach; ?>
-        </select>
+        <div id="week" class="row collapse postfix-radius">
+          <div class="small-1 columns">
+            <a href="#" class="prev">
+              <span class="prefix"><i class="fa fa-caret-left"></i></span>
+            </a>
+          </div>
+          <div class="small-10 columns">
+            <select>
+              <?php foreach($all_fridays as $week => $friday): ?>
+                <option value="<?php print $friday['date']; ?>"<?php if($friday['current']) print " selected"; ?>>Week <?php print $week; ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="small-1 columns">
+            <a href="#" class="next">
+              <span class="postfix"><i class="fa fa-caret-right"></i></span>
+            </a>
+          </div>
+        </div>
       </div>
       <div id="team-search" class="medium-6 columns">
         <div class="row collapse postfix-radius">

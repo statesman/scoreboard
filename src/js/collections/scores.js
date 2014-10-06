@@ -20,8 +20,7 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner'], function
       // Set the inital date, so we can build a URL
       this.setDate(options.date);
 
-      // When something is faved, trigger a sort, which
-      // will trigger a re-render
+      // When something is faved, trigger a sort
       this.on('fav', function() {
         this.sort();
       });

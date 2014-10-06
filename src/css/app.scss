@@ -66,6 +66,17 @@ body {
   }
 }
 
+#week {
+  .next, .prev {
+    &.disabled {
+      cursor: default;
+      .fa {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
 .top-bar .name h1 a {
   @media #{$small-only} {
     padding: 0 0 0 4px;
