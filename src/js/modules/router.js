@@ -1,10 +1,11 @@
-define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect', 'config'], function(Backbone, Scores, Scoreboard, Searchbox, Weekselect, config) {
+define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect', 'models/game', 'config'], function(Backbone, Scores, Scoreboard, Searchbox, Weekselect, Game, config) {
 
   var App = Backbone.Router.extend({
 
     routes: {
       "": "default",
-      "week/:week": "weekScores"
+      "week/:week": "weekScores",
+      "game/:id": "gameDetail"
     },
 
     // Default route to call when someone hits the app's root
@@ -25,6 +26,11 @@ define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox',
       else {
         this.scores.setWeek(week);
       }
+    },
+
+    // Controller for the route that shows individual game details
+    gameDetail: function(id) {
+      this.game = new Game({id: parseInt(id, 10)});
     }
 
   });

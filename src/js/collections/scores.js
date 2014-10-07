@@ -36,6 +36,7 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
 			// When the API request finishes, get rid of the spinner
       this.on('sync', function() {
 				this.overlayOff();
+				console.log(this.toJSON());
       });
     },
 
