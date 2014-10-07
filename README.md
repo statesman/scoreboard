@@ -1,3 +1,12 @@
+### Configuration
+
+All configuration settings are stored in [`src/js/config.js`](src/js/config.js). Setting up the regular season is as simple as setting the two variables at the top of that file, one for the number of weeks in the regular season and another for the first Friday of the regular season, which is what all of the other weeks will be calculated from.
+
+```javascript
+var numWeeks = 11;
+var firstFriday = moment('2014-08-29', 'YYYY-MM-DD');
+```
+
 ### Teamplayer integration
 
 This app relies on two TeamPlayer templates, one Web template, and one query template. Both are included below so changes to Teamplayer templates can be tracked along with changes to the app's code.

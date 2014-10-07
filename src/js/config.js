@@ -1,53 +1,43 @@
-define(function() {
+define(['moment'], function(moment) {
 
-  return {
-    currentWeek: 6,
-    weeks: [
-      {
-        title: 'Week 1',
-        date: '2014-08-29'
-      },
-      {
-        title: 'Week 2',
-        date: '2014-09-05'
-      },
-      {
-        title: 'Week 3',
-        date: '2014-09-12'
-      },
-      {
-        title: 'Week 4',
-        date: '2014-09-19'
-      },
-      {
-        title: 'Week 5',
-        date: '2014-09-26'
-      },
-      {
-        title: 'Week 6',
-        date: '2014-10-03'
-      },
-      {
-        title: 'Week 7',
-        date: '2014-10-10'
-      },
-      {
-        title: 'Week 8',
-        date: '2014-10-17'
-      },
-      {
-        title: 'Week 9',
-        date: '2014-10-24'
-      },
-      {
-        title: 'Week 10',
-        date: '2014-10-31'
-      },
-      {
-        title: 'Week 11',
-        date: '2014-11-06'
+  var numWeeks = 11;
+  var firstFriday = moment('2014-08-29', 'YYYY-MM-DD');
+
+  /* ~ STOP EDITING HERE ~ */
+
+
+  // Generate array with weeks and labels
+  var weeks = [{
+    title: 'Week 1',
+    date: firstFriday.format('YYYY-MM-DD')
+  }];
+  var today = moment();
+  var currentWeek;
+  for(var i = 2; i <= numWeeks; i++) {
+    weeks.push({
+      title: 'Week ' + i,
+      date: firstFriday.add(1, 'weeks').format('YYYY-MM-DD')
+    });
+
+    // Figure out if it's Thursday of the given week yet; if
+    // it is, set the currentWeek variable accordingly
+    var friday = firstFriday.clone();
+    if(typeof currentWeek === "undefined") {
+      if(friday.subtract(1, 'days') > today) {
+        currentWeek = (i - 1);
       }
-    ]
+    }
+  }
+  // If we didn't get a hit above, set the currentWeek to the
+  // last week available
+  if(typeof currentWeek === "undefined") {
+    currentWeek = weeks.length;
+  }
+
+  // Return the calculated config
+  return {
+    currentWeek: currentWeek,
+    weeks: weeks
   };
 
 });

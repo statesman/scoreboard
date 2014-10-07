@@ -9,7 +9,7 @@ define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox',
 
     // Default route to call when someone hits the app's root
     default: function() {
-      this.navigate("week/" + config.currentWeek, {trigger: true, replace: true});
+      this.weekScores(config.currentWeek);
     },
 
     // Controller for the route that shows week-by-week scores

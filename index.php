@@ -93,32 +93,6 @@
       </div>
     </noscript>
 
-    <?php
-      /*
-       * Generate an array with a list of all Fridays in the season
-       */
-      $week_count = 11;
-      $first_friday = strtotime('8/29/2014');
-      $today = time();
-
-      $all_fridays = array();
-      $i = 0;
-      $marked = FALSE;
-      while($i < $week_count) {
-        $stamp = $first_friday + (604800 * $i); // 604800 = 1 week
-        $all_fridays[$i + 1] = array(
-          'date' => date('Y-m-d', $stamp)
-        );
-        // Mark the current week with a boolean
-        // Switch to the next week on Thursday
-        if($today < ($stamp + (86400 * 6)) && !$marked) {
-          $all_fridays[$i + 1]['current'] = TRUE;
-          $marked = TRUE;
-        }
-        $i++;
-      }
-    ?>
-
     <div class="form row">
       <div id="week" class="medium-6 columns"></div>
       <div id="team-search" class="medium-6 columns">
