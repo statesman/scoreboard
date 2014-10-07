@@ -58,7 +58,9 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
     setWeek: function(week) {
 			this.week = parseInt(week, 10);
       this.date = moment(config.weeks[week - 1].date, "YYYY-MM-DD");
-			this.fetch();
+			this.fetch({
+				dataType: 'jsonp'
+			});
     },
 
 		getWeek: function(week) {
