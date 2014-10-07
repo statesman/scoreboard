@@ -178,6 +178,35 @@ function program1(depth0,data) {
   return buffer;
   });
 
+this["Templates"]["weekselect"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+
+function program1(depth0,data,depth1) {
+  
+  var buffer = "", stack1, helper, options;
+  buffer += "\r\n        <option value=\""
+    + escapeExpression(((stack1 = (data == null || data === false ? data : data.index)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "\" "
+    + escapeExpression((helper = helpers.selected || (depth1 && depth1.selected),options={hash:{},data:data},helper ? helper.call(depth0, (data == null || data === false ? data : data.index), (depth1 && depth1.currentWeek), options) : helperMissing.call(depth0, "selected", (data == null || data === false ? data : data.index), (depth1 && depth1.currentWeek), options)))
+    + ">"
+    + escapeExpression(((stack1 = (depth0 && depth0.title)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "</option>\r\n      ";
+  return buffer;
+  }
+
+  buffer += "<div class=\"row collapse postfix-radius\">\r\n  <div class=\"small-1 columns\">\r\n    <a href=\"#\" class=\"prev"
+    + escapeExpression((helper = helpers.prevDisabled || (depth0 && depth0.prevDisabled),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.currentWeek), options) : helperMissing.call(depth0, "prevDisabled", (depth0 && depth0.currentWeek), options)))
+    + "\">\r\n      <span class=\"prefix\"><i class=\"fa fa-caret-left\"></i></span>\r\n    </a>\r\n  </div>\r\n  <div class=\"small-10 columns\">\r\n    <select>\r\n      ";
+  stack1 = helpers.each.call(depth0, (depth0 && depth0.weeks), {hash:{},inverse:self.noop,fn:self.programWithDepth(1, program1, data, depth0),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\r\n    </select>\r\n  </div>\r\n  <div class=\"small-1 columns\">\r\n    <a href=\"#\" class=\"next"
+    + escapeExpression((helper = helpers.nextDisabled || (depth0 && depth0.nextDisabled),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.currentWeek), (depth0 && depth0.numWeeks), options) : helperMissing.call(depth0, "nextDisabled", (depth0 && depth0.currentWeek), (depth0 && depth0.numWeeks), options)))
+    + "\">\r\n      <span class=\"postfix\"><i class=\"fa fa-caret-right\"></i></span>\r\n    </a>\r\n  </div>\r\n</div>\r\n";
+  return buffer;
+  });
+
 return this["Templates"];
 
 });

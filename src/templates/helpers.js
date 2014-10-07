@@ -64,3 +64,30 @@ Handlebars.registerHelper('favAway', function(faved) {
 return Handlebars;
 
 });
+
+
+/* Usage: {{selected index currentWeek}} will return "selected" if the two are equal */
+
+Handlebars.registerHelper('selected', function(index, currentWeek) {
+  if((parseInt(index, 10) + 1) === parseInt(currentWeek, 10)) {
+    return new Handlebars.SafeString('selected');
+  }
+});
+
+
+/* Usage: {{prevDisabled currentWeek}} */
+
+Handlebars.registerHelper('prevDisabled', function(currentWeek) {
+  if(parseInt(currentWeek, 10) === 1) {
+    return new Handlebars.SafeString(' disabled');
+  }
+});
+
+
+/* Usage: {{nextDisabled currentWeek weekCount}} */
+
+Handlebars.registerHelper('nextDisabled', function(currentWeek, weekCount) {
+  if(parseInt(currentWeek, 10) === parseInt(weekCount, 10)) {
+    return new Handlebars.SafeString(' disabled');
+  }
+});

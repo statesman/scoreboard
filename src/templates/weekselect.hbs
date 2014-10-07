@@ -1,0 +1,19 @@
+<div class="row collapse postfix-radius">
+  <div class="small-1 columns">
+    <a href="#" class="prev{{prevDisabled currentWeek}}">
+      <span class="prefix"><i class="fa fa-caret-left"></i></span>
+    </a>
+  </div>
+  <div class="small-10 columns">
+    <select>
+      {{#each weeks}}
+        <option value="{{@index}}" {{selected @index ../currentWeek}}>{{this.title}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="small-1 columns">
+    <a href="#" class="next{{nextDisabled currentWeek numWeeks}}">
+      <span class="postfix"><i class="fa fa-caret-right"></i></span>
+    </a>
+  </div>
+</div>

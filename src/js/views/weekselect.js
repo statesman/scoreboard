@@ -1,4 +1,4 @@
-define(['backbone', 'jquery'], function(Backbone, $) {
+define(['backbone', 'jquery', 'Templates', 'config'], function(Backbone, $, JST, config) {
 
   var Weekselect = Backbone.View.extend({
 
@@ -6,11 +6,9 @@ define(['backbone', 'jquery'], function(Backbone, $) {
     // previous button and the current selection along with a
     // count of the total number of options
     initialize: function() {
-      this.$select = this.$el.find('select');
-      this.$next = this.$el.find('.next');
-      this.$prev = this.$el.find('.prev');
-      this.$current = this.$select.find('option:selected');
-      this.count = this.$select.children().length;
+      this.collection.on('sync', function() {
+        this.render();
+      }, this);
     },
 
     // Bind selector changes and setup the previous/next week
@@ -21,57 +19,39 @@ define(['backbone', 'jquery'], function(Backbone, $) {
       'click .next': 'weekNext'
     },
 
+    template: JST.weekselect,
+
+    render: function() {
+      var data = {
+        weeks: config.weeks,
+        currentWeek: this.collection.getWeek(),
+        numWeeks: config.weeks.length
+      };
+      this.$el.html(this.template(data));
+      return this;
+    },
+
     // Event handler for changes to the week select box
     dateChange: function() {
-      this.collection.setDate(this.$select.val());
-      this.$current = this.$select.find('option:selected');
-      this._buttonClasses();
+      var index = this.$el.find('select option:selected').val();
+      index = parseInt(index, 10) + 1;
+      Backbone.history.navigate("week/" + index, true);
     },
 
     // Event handler to the previous week button
     weekPrev: function(e) {
-      var i = this.$current[0].index;
-      if(i !== 0) {
-        this.$current.removeAttr('selected');
-        this.$current.prev().attr('selected', true);
-        this.$select.change();
-        this._buttonClasses();
+      if(!this.$el.find('.prev').hasClass('disabled')) {
+        this.collection.prevWeek();
       }
       e.preventDefault();
     },
 
     // Event handler for the next week button
     weekNext: function(e) {
-      var i = this.$current[0].index;
-      if(i !== (this.count - 1)) {
-        this.$current.removeAttr('selected');
-        this.$current.next().attr('selected', true);
-        this.$select.change();
-        this._buttonClasses();
+      if(!this.$el.find('.next').hasClass('disabled')) {
+        this.collection.nextWeek();
       }
       e.preventDefault();
-    },
-
-    // A helper to reevaluate the disabled classes on the
-    // next previous buttons each time the week is changed
-    _buttonClasses: function() {
-      var i = this.$current[0].index;
-
-      // Evaluate classes for the previous button
-      if(i === 0) {
-        this.$prev.addClass('disabled');
-      }
-      else if(this.$prev.hasClass('disabled')) {
-        this.$prev.removeClass('disabled');
-      }
-
-      // Evaluate classes for the next button
-      if(i === (this.count - 1)) {
-        this.$next.addClass('disabled');
-      }
-      else if(this.$next.hasClass('disabled')) {
-        this.$next.removeClass('disabled');
-      }
     }
 
   });

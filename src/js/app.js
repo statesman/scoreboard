@@ -10,6 +10,7 @@ require(['add-to-home-screen', 'Templates', 'modules/router'], function(addToHom
 
     // Fire up the Backbone app
     var app = new App();
+    Backbone.history.start();
 
     // Fetch high school sports stories from Medley
     $.getJSON('list.php?count=8', function(data) {

@@ -1,4 +1,4 @@
-define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner'], function(Backbone, Score, moment, iosOverlay, Spinner) {
+define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'underscore', 'config'], function(Backbone, Score, moment, iosOverlay, Spinner, _, config) {
 
   // Setup a spin.js spinner to use on the overlay
 	var opts = {
@@ -18,34 +18,67 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner'], function
 
     initialize: function(options) {
       // Set the inital date, so we can build a URL
-      this.setDate(options.date);
+      this.setWeek(options.week);
 
       // When something is faved, trigger a sort
       this.on('fav', function() {
         this.sort();
       });
 
+			// Starts the overlay on first run of the app
+			this.overlayOn();
+
 			// When a request starts, throw up a loading spinner
       this.on('request', function() {
-        this.overlay = iosOverlay({
-          text: "Loading",
-          spinner: spinner
-        });
+				this.overlayOn();
       });
 
 			// When the API request finishes, get rid of the spinner
       this.on('sync', function() {
-				if(typeof this.overlay !== "undefined") {
-	        this.overlay.hide();
-				}
+				this.overlayOff();
       });
     },
 
+		// Turn on the overlay
+		overlayOn: function() {
+			this.overlay = iosOverlay({
+				text: "Loading",
+				spinner: spinner
+			});
+		},
+
+		// Turn off the overlay
+		overlayOff: function() {
+			if(typeof this.overlay !== "undefined") {
+				this.overlay.hide();
+			}
+		},
+
     // A method to set the date for the TeamPlayer query
-    setDate: function(date) {
-      this.date = moment(date, "YYYY-MM-DD");
+    setWeek: function(week) {
+			this.week = parseInt(week, 10);
+      this.date = moment(config.weeks[week - 1].date, "YYYY-MM-DD");
 			this.fetch();
     },
+
+		getWeek: function(week) {
+			if(typeof this.week === "undefined") {
+				return config.currentWeek;
+			}
+			else {
+				return this.week;
+			}
+		},
+
+		prevWeek: function() {
+			var current = this.getWeek();
+			Backbone.history.navigate("week/" + (current - 1), true);
+		},
+
+		nextWeek: function() {
+			var current = this.getWeek();
+			Backbone.history.navigate("week/" + (current + 1), true);
+		},
 
     // Returns the URL for a TeamPlayer query that will return
     // three days of score results, centered on our stored date property
