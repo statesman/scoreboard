@@ -1,4 +1,4 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'config'], function(Backbone, config) {
 
   var Game = Backbone.Model.extend({
 
@@ -16,7 +16,7 @@ define(['backbone'], function(Backbone) {
     },
 
     url: function() {
-      return 'http://teamplayer.statesman.com/web/gateway.php?site=default&tpl=GameJSON&Sport=1&id=' + this.id;
+      return config.urlBase + '/web/gateway.php?site=default&tpl=GameJSON&Sport=' + config.sportId + '&id=' + this.id;
     }
 
   });

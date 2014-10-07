@@ -1,10 +1,16 @@
 ### Configuration
 
-All configuration settings are stored in [`src/js/config.js`](src/js/config.js). Setting up the regular season is as simple as setting the two variables at the top of that file, one for the number of weeks in the regular season and another for the first Friday of the regular season, which is what all of the other weeks will be calculated from.
+All configuration settings are stored in [`src/js/config.js`](src/js/config.js).
+
+Setting up the regular season is as simple as setting the two variables at the top of that file, one for the number of weeks in the regular season and another for the first Friday of the regular season, which is what all of the other weeks will be calculated from.
+
+You'll also need to include the base URL for your teamplayer gateway and the sport ID for football.
 
 ```javascript
 var numWeeks = 11;
 var firstFriday = moment('2014-08-29', 'YYYY-MM-DD');
+var urlBase = 'http://teamplayer.statesman.com';
+var sportId = '1';
 ```
 
 ### Teamplayer integration

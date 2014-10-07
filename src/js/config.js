@@ -2,6 +2,8 @@ define(['moment'], function(moment) {
 
   var numWeeks = 11;
   var firstFriday = moment('2014-08-29', 'YYYY-MM-DD');
+  var urlBase = 'http://teamplayer.statesman.com';
+  var sportId = '1';
 
   /* ~ STOP EDITING HERE ~ */
 
@@ -37,7 +39,9 @@ define(['moment'], function(moment) {
   // Return the calculated config
   return {
     currentWeek: currentWeek,
-    weeks: weeks
+    weeks: weeks,
+    urlBase: urlBase,
+    sportId: sportId
   };
 
 });

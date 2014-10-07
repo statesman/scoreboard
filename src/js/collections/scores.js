@@ -86,7 +86,7 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
     // Returns the URL for a TeamPlayer query that will return
     // three days of score results, centered on our stored date property
     url: function() {
-      var urlBase = "http://teamplayer.statesman.com/web/gateway.php?site=default&tpl=TickerJSON_clone&Sport=1",
+      var urlBase = config.urlBase + "/web/gateway.php?site=default&tpl=TickerJSON_clone&Sport=" + config.sportId,
           StartDate = this.date.subtract(1, 'days').format('YYYY-MM-DD'),
           EndDate = this.date.add(2, 'days').format('YYYY-MM-DD');
 
