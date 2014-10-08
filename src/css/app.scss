@@ -240,6 +240,32 @@ body {
   }
 }
 
+.game-detail {
+  .row {
+    padding: 15px;
+    .inner {
+      border: 1px solid #ccc;
+      background: #fcfcfc;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      .score {
+        font-size: 65px;
+      }
+      .game-meta {
+        background: $primary-color;
+        color: white;
+        padding: 10px 8px;
+        .meta-item {
+          display: inline-block;
+          padding: 0 10px;
+          .fa {
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
 /*
  * Page footer
  */

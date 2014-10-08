@@ -2,7 +2,7 @@ define(['handlebars', 'helpers'], function(Handlebars) {
 
 this["Templates"] = this["Templates"] || {};
 
-this["Templates"]["game"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+this["Templates"]["gameboard"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, self=this, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
@@ -66,7 +66,11 @@ function program7(depth0,data) {
   buffer += escapeExpression(stack1)
     + "\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"small-12 columns game-meta\">\r\n        <hr class=\"show-for-medium-up\" />\r\n        "
     + escapeExpression((helper = helpers.date || (depth0 && depth0.date),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.GameTimestamp), options) : helperMissing.call(depth0, "date", (depth0 && depth0.GameTimestamp), options)))
-    + " <span class=\"right\">Final</span>\r\n      </div>\r\n    </div>\r\n  ";
+    + " <span class=\"right\"><a href=\"#/game/";
+  if (helper = helpers.GameID) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.GameID); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">Final</a></span>\r\n      </div>\r\n    </div>\r\n  ";
   return buffer;
   }
 function program8(depth0,data) {
@@ -132,6 +136,260 @@ function program11(depth0,data) {
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.program(10, program10, data),fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n</div>\r\n";
+  return buffer;
+  });
+
+this["Templates"]["gamedetail"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+
+
+  buffer += "<div class=\"game-detail\">\n  <div class=\"columns medium-8\">\n    <div class=\"row\">\n      <div class=\"inner clearfix\">\n        <div class=\"columns small-6 text-right\">\n          <h3><i class=\"fa fa-star-o\"></i> ";
+  if (helper = helpers.AwayTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " ";
+  if (helper = helpers.AwayTeamNickname) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamNickname); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "<br /><small>";
+  if (helper = helpers.AwayOverallWins) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayOverallWins); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " - ";
+  if (helper = helpers.AwayOverallLosses) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayOverallLosses); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</small></h3>\n          <h1 class=\"score\">";
+  if (helper = helpers.AwayTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n          <p>Total yards: ";
+  if (helper = helpers.AwayTotalYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTotalYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>First downs: ";
+  if (helper = helpers.AwayFirstDowns) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFirstDowns); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-6\">\n          <h3>";
+  if (helper = helpers.HomeTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " ";
+  if (helper = helpers.HomeTeamNickname) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamNickname); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " <i class=\"fa fa-star-o\"></i><br /><small>";
+  if (helper = helpers.HomeOverallWins) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeOverallWins); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + " - ";
+  if (helper = helpers.HomeOverallLosses) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeOverallLosses); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</small></h3>\n          <h1 class=\"score\">";
+  if (helper = helpers.HomeTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n          <p>Total yards: ";
+  if (helper = helpers.HomeTotalYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTotalYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>First downs: ";
+  if (helper = helpers.HomeFirstDowns) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFirstDowns); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-12 game-meta text-center\">\n          <div class=\"meta-item\">\n            <i class=\"fa fa-map-marker\"></i> ";
+  if (helper = helpers.VenueName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.VenueName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n          </div>\n          <div class=\"meta-item\">\n            <i class=\"fa fa-calendar-o\"></i> ";
+  if (helper = helpers.GameDate) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.GameDate); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n          </div>\n          <div class=\"meta-item\">\n            <i class=\"fa fa-clock-o\"></i> ";
+  if (helper = helpers.GameTime) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.GameTime); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\n          </div>\n        </div>\n        <hr />\n        <div class=\"columns small-12 text-center\">\n          <h5>Rushing</h5>\n        </div>\n        <div class=\"columns small-6 text-right\">\n          <p>Rush attempts: ";
+  if (helper = helpers.AwayRushingAttempts) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayRushingAttempts); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Rush yards: ";
+  if (helper = helpers.AwayRushingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayRushingYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Rush yards per attempt: ";
+  if (helper = helpers.AwayRushingYardsPerAttempt) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayRushingYardsPerAttempt); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-6\">\n          <p>Rush attempts: ";
+  if (helper = helpers.HomeRushingAttempts) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeRushingAttempts); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Rush yards: ";
+  if (helper = helpers.HomeRushingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeRushingYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Rush yards per attempt: ";
+  if (helper = helpers.HomeRushingYardsPerAttempt) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeRushingYardsPerAttempt); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-12 text-center\">\n          <hr />\n          <h5>Passing</h5>\n        </div>\n        <div class=\"columns small-6 text-right\">\n          <p>Pass completions: ";
+  if (helper = helpers.AwayPassCompletions) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPassCompletions); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Pass attempts: ";
+  if (helper = helpers.AwayPassAttempts) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPassAttempts); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Pass interceptions: ";
+  if (helper = helpers.AwayPassingInterceptions) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPassingInterceptions); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Passing yards: ";
+  if (helper = helpers.AwayPassingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPassingYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Yards per catch: ";
+  if (helper = helpers.AwayYardsPerCatch) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayYardsPerCatch); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-6\">\n          <p>Pass completions: ";
+  if (helper = helpers.HomePassCompletions) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePassCompletions); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Pass attempts: ";
+  if (helper = helpers.HomePassAttempts) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePassAttempts); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Pass interceptions: ";
+  if (helper = helpers.HomePassingInterceptions) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePassingInterceptions); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Passing yards: ";
+  if (helper = helpers.HomePassingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePassingYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Yards per catch: ";
+  if (helper = helpers.HomeYardsPerCatch) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeYardsPerCatch); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div><div class=\"columns small-12 text-center\">\n          <hr />\n          <h5>Fumbles</h5>\n        </div>\n        <div class=\"columns small-6 text-right\">\n          <p>Fumbles: ";
+  if (helper = helpers.AwayFumbles) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFumbles); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Fumbles lost: ";
+  if (helper = helpers.AwayFumblesLost) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFumblesLost); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-6\">\n          <p>Fumbles: ";
+  if (helper = helpers.HomeFumbles) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFumbles); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Fumbles lost: ";
+  if (helper = helpers.HomeFumblesLost) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFumblesLost); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-12 text-center\">\n          <hr />\n          <h5>Punting</h5>\n        </div>\n        <div class=\"columns small-6 text-right\">\n          <p>Punts: ";
+  if (helper = helpers.AwayPunts) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPunts); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Punting average: ";
+  if (helper = helpers.AwayPuntingAverage) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPuntingAverage); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Punting yards: ";
+  if (helper = helpers.AwayPuntingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPuntingYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-6\">\n          <p>Punts: ";
+  if (helper = helpers.HomePunts) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePunts); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Punting average: ";
+  if (helper = helpers.HomePuntingAverage) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePuntingAverage); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Punting yards: ";
+  if (helper = helpers.HomePuntingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePuntingYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-12 text-center\">\n          <hr />\n          <h5>Penalties</h5>\n        </div>\n        <div class=\"columns small-6 text-right\">\n          <p>Penalties: ";
+  if (helper = helpers.AwayPenalties) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPenalties); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Penalty Yards: ";
+  if (helper = helpers.AwayPenaltyYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPenaltyYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n        <div class=\"columns small-6\">\n          <p>Penalties: ";
+  if (helper = helpers.HomePenalties) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePenalties); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Penalty Yards: ";
+  if (helper = helpers.HomePenaltyYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePenaltyYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"columns medium-4\">\n    <h4>Box score</h4>\n    <table class=\"box-score\">\n      <tbody>\n        <tr>\n          <td></td>\n          <td>1st</td>\n          <td>2nd</td>\n          <td>3rd</td>\n          <td>4th</td>\n          <td>OT</td>\n          <td>Final</td>\n        </tr>\n        <tr>\n          <td>";
+  if (helper = helpers.AwayTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.AwayFirstQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFirstQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.AwaySecondQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwaySecondQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.AwayThirdQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayThirdQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.AwayFourthQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFourthQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.AwayOvertimePoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayOvertimePoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.AwayTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        </tr>\n        <tr>\n          <td>";
+  if (helper = helpers.HomeTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.HomeFirstQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFirstQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.HomeSecondQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeSecondQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.HomeThirdQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeThirdQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.HomeFourthQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFourthQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.HomeOvertimePoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeOvertimePoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n          <td>";
+  if (helper = helpers.HomeTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n";
   return buffer;
   });
 

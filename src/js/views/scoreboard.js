@@ -20,6 +20,10 @@ define(['backbone', 'views/gameboard', 'Templates'], function(Backbone, Gameboar
       }, this);
     },
 
+    tagName: 'ul',
+    id: 'scores',
+    className: 'small-block-grid-1 medium-block-grid-3 large-block-grid-5',
+
     renderSingle: function(game) {
       if(game.get('hidden') !== true) { // Only render items that aren't hidden
         var gameboard = new Gameboard({model: game});
@@ -28,8 +32,9 @@ define(['backbone', 'views/gameboard', 'Templates'], function(Backbone, Gameboar
     },
 
     render: function() {
-      this.$el.html('');
+      this.$el.empty();
       this.collection.forEach(this.renderSingle, this);
+      this.$el.appendTo('#main');
       return this;
     }
   });

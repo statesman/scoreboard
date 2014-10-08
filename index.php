@@ -113,7 +113,7 @@
       <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.statesman.com/sports/high-school-sports-score-alerts/">Sign up at statesman.com</a>.
     </div>
 
-    <ul id="scores" class="small-block-grid-1 medium-block-grid-3 large-block-grid-5"></ul>
+    <div id="main"></div>
 
     <div id="stories"></div>
 

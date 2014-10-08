@@ -116,6 +116,25 @@ The production version of the app draws from the Web template `TickerJSON` and t
 <VAR $sqlSportName = strtolower(convertForSQL($sportName))>
 <VAR $scoreField = $scoreFields[$sportName]>
 <QUERY name=GameJSON GAMEID=$form_id  SPORTNAME=$sqlSportName SCOREFIELD=$scoreField>
+<VAR $statType = "overall">
+<QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["HomeTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
+<?php $GameJSON_rows[0]['HomeOverallWins'] = $TeamSeasonStats_Win; ?>
+<?php $GameJSON_rows[0]['HomeOverallLosses'] = $TeamSeasonStats_Loss; ?>
+<VAR $statType = "overall">
+<VAR $TeamSeasonStats_query = "">
+<QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["AwayTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
+<?php $GameJSON_rows[0]['AwayOverallWins'] = $TeamSeasonStats_Win; ?>
+<?php $GameJSON_rows[0]['AwayOverallLosses'] = $TeamSeasonStats_Loss; ?>
+<VAR $statType = "conf">
+<VAR $TeamSeasonStats_query = "">
+<QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["HomeTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
+<?php $GameJSON_rows[0]['HomeConfWins'] = $TeamSeasonStats_Win; ?>
+<?php $GameJSON_rows[0]['HomeConfLosses'] = $TeamSeasonStats_Loss; ?>
+<VAR $statType = "conf">
+<VAR $TeamSeasonStats_query = "">
+<QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["AwayTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
+<?php $GameJSON_rows[0]['AwayConfWins'] = $TeamSeasonStats_Win; ?>
+<?php $GameJSON_rows[0]['AwayConfLosses'] = $TeamSeasonStats_Loss; ?>
 <?php header('Content-Type: application/json'); ?>
 <?php
   $json = json_encode($GameJSON_rows[0]);
@@ -173,7 +192,53 @@ SELECT q_game.GameID,
   homescore.{$SCOREFIELD} AS HomeTeamScore,
   away.TeamID AS AwayTeamID,
   home.TeamID AS HomeTeamID,
-  venue.SchoolName AS VenueName
+  venue.SchoolName AS VenueName,
+  awayscore.TotalYards AS AwayTotalYards,
+  homescore.TotalYards AS HomeTotalYards,
+  awayscore.FirstDowns AS AwayFirstDowns,
+  homescore.FirstDowns AS HomeFirstDowns,
+  awayscore.PassCompletions AS AwayPassCompletions,
+  homescore.PassCompletions AS HomePassCompletions,
+  awayscore.PassAttempts AS AwayPassAttempts,
+  homescore.PassAttempts AS HomePassAttempts,
+  awayscore.PassCompletionPercentage AS AwayPassCompletionPercentage,
+  homescore.PassCompletionPercentage AS HomePassCompletionPercentage,
+  awayscore.PassingYards AS AwayPassingYards,
+  homescore.PassingYards AS HomePassingYards,
+  awayscore.PassingInterceptions AS AwayPassingInterceptions,
+  homescore.PassingInterceptions AS HomePassingInterceptions,
+  awayscore.RushingAttempts AS AwayRushingAttempts,
+  homescore.RushingAttempts AS HomeRushingAttempts,
+  awayscore.RushingYards AS AwayRushingYards,
+  homescore.RushingYards AS HomeRushingYards,
+  awayscore.RushingYardsPerAttempt AS AwayRushingYardsPerAttempt,
+  homescore.RushingYardsPerAttempt AS HomeRushingYardsPerAttempt,
+  awayscore.FirstQuarterPoints AS AwayFirstQuarterPoints,
+  homescore.FirstQuarterPoints AS HomeFirstQuarterPoints,
+  awayscore.SecondQuarterPoints AS AwaySecondQuarterPoints,
+  homescore.SecondQuarterPoints AS HomeSecondQuarterPoints,
+  awayscore.ThirdQuarterPoints AS AwayThirdQuarterPoints,
+  homescore.ThirdQuarterPoints AS HomeThirdQuarterPoints,
+  awayscore.FourthQuarterPoints AS AwayFourthQuarterPoints,
+  homescore.FourthQuarterPoints AS HomeFourthQuarterPoints,
+  awayscore.OvertimePoints AS AwayOvertimePoints,
+  homescore.OvertimePoints AS HomeOvertimePoints,
+  awayscore.YardsPerCatch AS AwayYardsPerCatch,
+  homescore.YardsPerCatch AS HomeYardsPerCatch,
+  homescore.Punts AS HomePunts,
+  awayscore.Punts AS AwayPunts,
+  awayscore.PuntingYards AS AwayPuntingYards,
+  homescore.PuntingYards AS HomePuntingYards,
+  awayscore.PuntingAverage AS AwayPuntingAverage,
+  homescore.PuntingAverage AS HomePuntingAverage,
+  awayscore.Fumbles AS AwayFumbles,
+  homescore.Fumbles AS HomeFumbles,
+  awayscore.FumblesLost AS AwayFumblesLost,
+  homescore.Fumbles AS HomeFumblesLost,
+  awayscore.Penalties AS AwayPenalties,
+  homescore.Penalties AS HomePenalties,
+  awayscore.PenaltyYards AS AwayPenaltyYards,
+  homescore.PenaltyYards AS HomePenaltyYards
 FROM `q_game`
 LEFT JOIN game ON q_game.GameID = game.GameID
 LEFT JOIN team AS away ON away.TeamID = GameAwayTeamID
