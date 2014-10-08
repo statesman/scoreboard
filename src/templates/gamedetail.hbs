@@ -3,20 +3,28 @@
     <div class="row">
       <div class="inner clearfix">
         <div class="columns small-6 text-right">
-          <h3><i class="fa fa-star-o"></i> {{AwayTeamName}} {{AwayTeamNickname}}<br /><small>{{AwayOverallWins}} - {{AwayOverallLosses}}</small></h3>
+          <h3>{{AwayTeamName}}<br />{{favAway AwayTeamFav}} {{AwayTeamNickname}}<br /><small>{{AwayOverallWins}} - {{AwayOverallLosses}}</small></h3>
         </div>
         <div class="columns small-6">
-          <h3>{{HomeTeamName}} {{HomeTeamNickname}} <i class="fa fa-star-o"></i><br /><small>{{HomeOverallWins}} - {{HomeOverallLosses}}</small></h3>
+          <h3>{{HomeTeamName}}{{#if HomeTeamNickname}}<br />{{HomeTeamNickname}}{{/if}} {{favHome HomeTeamFav}}<br /><small>{{HomeOverallWins}} - {{HomeOverallLosses}}</small></h3>
         </div>
-        <div class="columns small-6 text-right">
-          <h1 class="score">{{AwayTeamScore}}</h1>
-          <p>Total yards: {{AwayTotalYards}}</p>
-          <p>First downs: {{AwayFirstDowns}}</p>
-        </div>
-        <div class="columns small-6">
-          <h1 class="score">{{HomeTeamScore}}</h1>
-          <p>Total yards: {{HomeTotalYards}}</p>
-          <p>First downs: {{HomeFirstDowns}}</p>
+        <div class="columns small-12 score">
+          <div class="row">
+            <div class="columns small-6 text-right">
+              <h1>{{AwayTeamScore}}</h1>
+              <h3>{{AwayTotalYards}}</h3>
+              <div class="field-label">total yards</div>
+              <h3>{{AwayFirstDowns}}</h3>
+              <div class="field-label">first downs</div>
+            </div>
+            <div class="columns small-6">
+              <h1>{{HomeTeamScore}}</h1>
+              <h3>{{HomeTotalYards}}</h3>
+              <div class="field-label">total yards</div>
+              <h3>{{HomeFirstDowns}}</h3>
+              <div class="field-label">first downs</div>
+            </div>
+          </div>
         </div>
         <div class="columns small-12 game-meta text-center">
           <div class="meta-item">
@@ -64,44 +72,6 @@
             {{bar "yards" AwayPassingYards HomePassingYards "home"}}
           </div>
         </div>
-        <div class="columns small-12 text-center">
-          <hr />
-          <h5>Fumbles</h5>
-        </div>
-        <div class="columns small-6 text-right">
-          <p>Fumbles: {{AwayFumbles}}</p>
-          <p>Fumbles lost: {{AwayFumblesLost}}</p>
-        </div>
-        <div class="columns small-6">
-          <p>Fumbles: {{HomeFumbles}}</p>
-          <p>Fumbles lost: {{HomeFumblesLost}}</p>
-        </div>
-        <div class="columns small-12 text-center">
-          <hr />
-          <h5>Punting</h5>
-        </div>
-        <div class="columns small-6 text-right">
-          <p>Punts: {{AwayPunts}}</p>
-          <p>Punting average: {{AwayPuntingAverage}}</p>
-          <p>Punting yards: {{AwayPuntingYards}}</p>
-        </div>
-        <div class="columns small-6">
-          <p>Punts: {{HomePunts}}</p>
-          <p>Punting average: {{HomePuntingAverage}}</p>
-          <p>Punting yards: {{HomePuntingYards}}</p>
-        </div>
-        <div class="columns small-12 text-center">
-          <hr />
-          <h5>Penalties</h5>
-        </div>
-        <div class="columns small-6 text-right">
-          <p>Penalties: {{AwayPenalties}}</p>
-          <p>Penalty Yards: {{AwayPenaltyYards}}</p>
-        </div>
-        <div class="columns small-6">
-          <p>Penalties: {{HomePenalties}}</p>
-          <p>Penalty Yards: {{HomePenaltyYards}}</p>
-        </div>
       </div>
     </div>
   </div>
@@ -109,32 +79,32 @@
     <h4>Box score</h4>
     <table class="box-score">
       <tbody>
-        <tr>
+        <tr class="header-row">
           <td></td>
-          <td>1st</td>
-          <td>2nd</td>
-          <td>3rd</td>
-          <td>4th</td>
-          <td>OT</td>
-          <td>Final</td>
+          <td class="text-center">1st</td>
+          <td class="text-center">2nd</td>
+          <td class="text-center">3rd</td>
+          <td class="text-center">4th</td>
+          <td class="text-center">OT</td>
+          <td class="text-center">Final</td>
         </tr>
         <tr>
-          <td>{{AwayTeamName}}</td>
-          <td>{{AwayFirstQuarterPoints}}</td>
-          <td>{{AwaySecondQuarterPoints}}</td>
-          <td>{{AwayThirdQuarterPoints}}</td>
-          <td>{{AwayFourthQuarterPoints}}</td>
-          <td>{{AwayOvertimePoints}}</td>
-          <td>{{AwayTeamScore}}</td>
+          <td class="text-right team-name"><strong>{{AwayTeamName}}</strong></td>
+          <td class="text-center">{{AwayFirstQuarterPoints}}</td>
+          <td class="text-center">{{AwaySecondQuarterPoints}}</td>
+          <td class="text-center">{{AwayThirdQuarterPoints}}</td>
+          <td class="text-center">{{AwayFourthQuarterPoints}}</td>
+          <td class="text-center">{{AwayOvertimePoints}}</td>
+          <td class="text-center"><strong>{{AwayTeamScore}}</strong></td>
         </tr>
         <tr>
-          <td>{{HomeTeamName}}</td>
-          <td>{{HomeFirstQuarterPoints}}</td>
-          <td>{{HomeSecondQuarterPoints}}</td>
-          <td>{{HomeThirdQuarterPoints}}</td>
-          <td>{{HomeFourthQuarterPoints}}</td>
-          <td>{{HomeOvertimePoints}}</td>
-          <td>{{HomeTeamScore}}</td>
+          <td class="text-right team-name"><strong>{{HomeTeamName}}</strong></td>
+          <td class="text-center">{{HomeFirstQuarterPoints}}</td>
+          <td class="text-center">{{HomeSecondQuarterPoints}}</td>
+          <td class="text-center">{{HomeThirdQuarterPoints}}</td>
+          <td class="text-center">{{HomeFourthQuarterPoints}}</td>
+          <td class="text-center">{{HomeOvertimePoints}}</td>
+          <td class="text-center"><strong>{{HomeTeamScore}}</strong></td>
         </tr>
       </tbody>
     </table>

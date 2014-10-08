@@ -85,7 +85,7 @@
 
   <div class="row small-12 medium-12 large-12 centered">
 
-    <h1>High school scoreboard</h1>
+    <h1 class="page-title">High school scoreboard</h1>
 
     <noscript>
       <div data-alert class="alert-box alert radius">

@@ -1,14 +1,18 @@
-define(['backbone', 'config'], function(Backbone, config) {
+define(['backbone', 'config', 'models/score'], function(Backbone, config, Score) {
 
-  var Game = Backbone.Model.extend({
+  var Game = Score.extend({
 
     initialize: function(options) {
       this.setId(options.id);
+      this.on('sync', function() {
+        this.checkFavs();
+      });
     },
 
     setId: function(id) {
       this.id = id;
       this.fetch({
+        dataType: 'jsonp',
         success: function(model) {
           console.log(model.toJSON());
         }

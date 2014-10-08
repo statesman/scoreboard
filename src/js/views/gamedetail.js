@@ -5,11 +5,31 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
       this.model.on('sync', function() {
         this.render();
       }, this);
+
+      this.model.on('fav', function() {
+        this.render();
+      }, this);
+    },
+
+    events: {
+      'click .fav-home': 'favHome',
+      'click .fav-away': 'favAway',
     },
 
     template: JST.gamedetail,
     tagName: 'div',
     className: 'row',
+
+    // Faving event handlers, which fire corresponding
+    // model methods
+    favHome: function(e) {
+      e.preventDefault();
+      this.model.fav('home', this.model.get('HomeTeamID'));
+    },
+    favAway: function(e) {
+      e.preventDefault();
+      this.model.fav('away', this.model.get('AwayTeamID'));
+    },
 
     render: function() {
       this.$el.empty();

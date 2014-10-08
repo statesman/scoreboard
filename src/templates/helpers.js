@@ -99,10 +99,8 @@ Handlebars.registerHelper('longDateTime', function(dateString, timeString) {
   dateString = Handlebars.Utils.escapeExpression(dateString);
   timeString = Handlebars.Utils.escapeExpression(timeString);
 
-  console.log(dateString);
-  console.log(timeString);
-
   var dateObj = moment(dateString + '' + timeString, "YYYY-MM-DD HH:mm:ss");
+
   // AP style times (omit minutes if we're on the hour)
   var timeFormat;
   if(dateObj.minutes() === 0) {
