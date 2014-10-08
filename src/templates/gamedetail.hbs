@@ -16,13 +16,10 @@
         </div>
         <div class="columns small-12 game-meta text-center">
           <div class="meta-item">
+            <i class="fa fa-calendar-o"></i> {{longDateTime GameDate GameTime}}
+          </div>
+          <div class="meta-item">
             <i class="fa fa-map-marker"></i> {{VenueName}}
-          </div>
-          <div class="meta-item">
-            <i class="fa fa-calendar-o"></i> {{GameDate}}
-          </div>
-          <div class="meta-item">
-            <i class="fa fa-clock-o"></i> {{GameTime}}
           </div>
         </div>
         <hr />
@@ -47,6 +44,7 @@
           <p>Pass completions: {{AwayPassCompletions}}</p>
           <p>Pass attempts: {{AwayPassAttempts}}</p>
           <p>Pass interceptions: {{AwayPassingInterceptions}}</p>
+          <p>Pass completion %: {{AwayPassCompletionPercentage}}</p>
           <p>Passing yards: {{AwayPassingYards}}</p>
           <p>Yards per catch: {{AwayYardsPerCatch}}</p>
         </div>
@@ -54,6 +52,7 @@
           <p>Pass completions: {{HomePassCompletions}}</p>
           <p>Pass attempts: {{HomePassAttempts}}</p>
           <p>Pass interceptions: {{HomePassingInterceptions}}</p>
+          <p>Pass completion %: {{HomePassCompletionPercentage}}</p>
           <p>Passing yards: {{HomePassingYards}}</p>
           <p>Yards per catch: {{HomeYardsPerCatch}}</p>
         </div><div class="columns small-12 text-center">

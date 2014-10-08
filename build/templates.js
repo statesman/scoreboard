@@ -142,7 +142,7 @@ function program11(depth0,data) {
 this["Templates"]["gamedetail"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, functionType="function", escapeExpression=this.escapeExpression;
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
   buffer += "<div class=\"game-detail\">\n  <div class=\"columns medium-8\">\n    <div class=\"row\">\n      <div class=\"inner clearfix\">\n        <div class=\"columns small-6 text-right\">\n          <h3><i class=\"fa fa-star-o\"></i> ";
@@ -201,17 +201,11 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.HomeFirstDowns) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.HomeFirstDowns); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</p>\n        </div>\n        <div class=\"columns small-12 game-meta text-center\">\n          <div class=\"meta-item\">\n            <i class=\"fa fa-map-marker\"></i> ";
+    + "</p>\n        </div>\n        <div class=\"columns small-12 game-meta text-center\">\n          <div class=\"meta-item\">\n            <i class=\"fa fa-calendar-o\"></i> "
+    + escapeExpression((helper = helpers.longDateTime || (depth0 && depth0.longDateTime),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.GameDate), (depth0 && depth0.GameTime), options) : helperMissing.call(depth0, "longDateTime", (depth0 && depth0.GameDate), (depth0 && depth0.GameTime), options)))
+    + "\n          </div>\n          <div class=\"meta-item\">\n            <i class=\"fa fa-map-marker\"></i> ";
   if (helper = helpers.VenueName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.VenueName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\n          </div>\n          <div class=\"meta-item\">\n            <i class=\"fa fa-calendar-o\"></i> ";
-  if (helper = helpers.GameDate) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.GameDate); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\n          </div>\n          <div class=\"meta-item\">\n            <i class=\"fa fa-clock-o\"></i> ";
-  if (helper = helpers.GameTime) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.GameTime); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "\n          </div>\n        </div>\n        <hr />\n        <div class=\"columns small-12 text-center\">\n          <h5>Rushing</h5>\n        </div>\n        <div class=\"columns small-6 text-right\">\n          <p>Rush attempts: ";
   if (helper = helpers.AwayRushingAttempts) { stack1 = helper.call(depth0, {hash:{},data:data}); }
@@ -249,6 +243,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   if (helper = helpers.AwayPassingInterceptions) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.AwayPassingInterceptions); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Pass completion %: ";
+  if (helper = helpers.AwayPassCompletionPercentage) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayPassCompletionPercentage); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
     + "</p>\n          <p>Passing yards: ";
   if (helper = helpers.AwayPassingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.AwayPassingYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
@@ -268,6 +266,10 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
     + "</p>\n          <p>Pass interceptions: ";
   if (helper = helpers.HomePassingInterceptions) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.HomePassingInterceptions); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\n          <p>Pass completion %: ";
+  if (helper = helpers.HomePassCompletionPercentage) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomePassCompletionPercentage); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
     + "</p>\n          <p>Passing yards: ";
   if (helper = helpers.HomePassingYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }

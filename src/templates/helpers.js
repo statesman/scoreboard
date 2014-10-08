@@ -91,3 +91,28 @@ Handlebars.registerHelper('nextDisabled', function(currentWeek, weekCount) {
     return new Handlebars.SafeString(' disabled');
   }
 });
+
+
+/* Usage: {{longDateTime dateString timeString}} turns a UNIX timestamp into h:mm dddd, MMM D */
+
+Handlebars.registerHelper('longDateTime', function(dateString, timeString) {
+  dateString = Handlebars.Utils.escapeExpression(dateString);
+  timeString = Handlebars.Utils.escapeExpression(timeString);
+
+  console.log(dateString);
+  console.log(timeString);
+
+  var dateObj = moment(dateString + '' + timeString, "YYYY-MM-DD HH:mm:ss");
+  // AP style times (omit minutes if we're on the hour)
+  var timeFormat;
+  if(dateObj.minutes() === 0) {
+    timeFormat = "ha";
+  }
+  else {
+    timeFormat = "h:mma";
+  }
+
+  var timeString = dateObj.format(timeFormat) + ' ' + dateObj.format("dddd, MMM D");
+
+  return new Handlebars.SafeString(timeString);
+});
