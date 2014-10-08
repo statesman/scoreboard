@@ -116,3 +116,34 @@ Handlebars.registerHelper('longDateTime', function(dateString, timeString) {
 
   return new Handlebars.SafeString(timeString);
 });
+
+
+/* Usage: {{barWidth AwayRusingAttempts HomeRushingAttempts "home"}} */
+var barWidth = function(away, home, team) {
+  away = parseInt(away, 10);
+  home = parseInt(home, 10);
+  var percent;
+  if(team === "home") {
+    percent = home / (away + home);
+  }
+  else {
+    percent = away / (away + home);
+  }
+  return percent * 92;
+};
+
+/* Usage {{bar unit label away home team}} */
+Handlebars.registerHelper('bar', function(unit, away, home, team) {
+  if(team === "away") {
+    label = away;
+  }
+  else {
+    label = home;
+  }
+  var bar = '<div class="bar-wrapper">' +
+    '<div class="bar" style="width:' + barWidth(away, home, team) + '%;"></div>' +
+    '<div class="bar-label">' + label + '</div>' +
+    '<div class="field-label">' + unit + '</div>' +
+  '</div>';
+  return new Handlebars.SafeString(bar);
+});
