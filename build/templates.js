@@ -142,7 +142,7 @@ function program11(depth0,data) {
 this["Templates"]["gamedetail"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, self=this, helperMissing=helpers.helperMissing;
 
 function program1(depth0,data) {
   
@@ -151,6 +151,183 @@ function program1(depth0,data) {
   if (helper = helpers.HomeTeamNickname) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.HomeTeamNickname); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1);
+  return buffer;
+  }
+
+function program3(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n          <div class=\"columns small-12 score\">\n            <div class=\"row\">\n              <div class=\"columns small-6 text-right\">\n                <h1>";
+  if (helper = helpers.AwayTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n                ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameStats), {hash:{},inverse:self.noop,fn:self.program(4, program4, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n              </div>\n              <div class=\"columns small-6\">\n                <h1>";
+  if (helper = helpers.HomeTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h1>\n                ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameStats), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n              </div>\n            </div>\n          </div>\n        ";
+  return buffer;
+  }
+function program4(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n                  <h3>";
+  if (helper = helpers.AwayTotalYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTotalYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n                  <div class=\"field-label\">total yards</div>\n                  <h3>";
+  if (helper = helpers.AwayFirstDowns) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFirstDowns); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n                  <div class=\"field-label\">first downs</div>\n                ";
+  return buffer;
+  }
+
+function program6(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n                  <h3>";
+  if (helper = helpers.HomeTotalYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTotalYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n                  <div class=\"field-label\">total yards</div>\n                  <h3>";
+  if (helper = helpers.HomeFirstDowns) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFirstDowns); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\n                  <div class=\"field-label\">first downs</div>\n                ";
+  return buffer;
+  }
+
+function program8(depth0,data) {
+  
+  var buffer = "", stack1;
+  buffer += "\n          ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameStats), {hash:{},inverse:self.program(11, program11, data),fn:self.program(9, program9, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        ";
+  return buffer;
+  }
+function program9(depth0,data) {
+  
+  var buffer = "", helper, options;
+  buffer += "\n            <hr />\n            <div class=\"rushing\">\n              <div class=\"columns small-12 text-center\">\n                <h5>Rushing</h5>\n              </div>\n              <div class=\"columns small-6 text-right\">\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "away", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "away", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "away", options) : helperMissing.call(depth0, "bar", "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "away", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "away", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "away", options)))
+    + "\n              </div>\n              <div class=\"columns small-6\">\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "home", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "home", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "home", options) : helperMissing.call(depth0, "bar", "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "home", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "home", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "home", options)))
+    + "\n              </div>\n            </div>\n            <div class=\"passing\">\n              <div class=\"columns small-12 text-center\">\n                <hr />\n                <h5>Passing</h5>\n              </div>\n              <div class=\"columns small-6 text-right\">\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "away", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "away", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "away", options) : helperMissing.call(depth0, "bar", "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "away", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "away", options) : helperMissing.call(depth0, "bar", "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "away", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "away", options) : helperMissing.call(depth0, "bar", "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "away", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "away", options) : helperMissing.call(depth0, "bar", "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "away", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "away", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "away", options)))
+    + "\n              </div>\n              <div class=\"columns small-6\">\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "home", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "home", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "home", options) : helperMissing.call(depth0, "bar", "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "home", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "home", options) : helperMissing.call(depth0, "bar", "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "home", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "home", options) : helperMissing.call(depth0, "bar", "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "home", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "home", options) : helperMissing.call(depth0, "bar", "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "home", options)))
+    + "\n                "
+    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "home", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "home", options)))
+    + "\n              </div>\n            </div>\n          ";
+  return buffer;
+  }
+
+function program11(depth0,data) {
+  
+  
+  return "\n          No stats yet.\n          ";
+  }
+
+function program13(depth0,data) {
+  
+  
+  return "\n        Game hasn't been played yet.\n        ";
+  }
+
+function program15(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "\n      <h4>Box score</h4>\n      <table class=\"box-score\">\n        <tbody>\n          <tr class=\"header-row\">\n            <td></td>\n            <td class=\"text-center\">1st</td>\n            <td class=\"text-center\">2nd</td>\n            <td class=\"text-center\">3rd</td>\n            <td class=\"text-center\">4th</td>\n            <td class=\"text-center\">OT</td>\n            <td class=\"text-center\">Final</td>\n          </tr>\n          <tr>\n            <td class=\"text-right team-name\"><strong>";
+  if (helper = helpers.AwayTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</strong></td>\n            <td class=\"text-center\">";
+  if (helper = helpers.AwayFirstQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFirstQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.AwaySecondQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwaySecondQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.AwayThirdQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayThirdQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.AwayFourthQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayFourthQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.AwayOvertimePoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayOvertimePoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\"><strong>";
+  if (helper = helpers.AwayTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.AwayTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</strong></td>\n          </tr>\n          <tr>\n            <td class=\"text-right team-name\"><strong>";
+  if (helper = helpers.HomeTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</strong></td>\n            <td class=\"text-center\">";
+  if (helper = helpers.HomeFirstQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFirstQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.HomeSecondQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeSecondQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.HomeThirdQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeThirdQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.HomeFourthQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeFourthQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\">";
+  if (helper = helpers.HomeOvertimePoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeOvertimePoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</td>\n            <td class=\"text-center\"><strong>";
+  if (helper = helpers.HomeTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.HomeTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</strong></td>\n          </tr>\n        </tbody>\n      </table>\n    ";
   return buffer;
   }
 
@@ -188,129 +365,22 @@ function program1(depth0,data) {
   if (helper = helpers.HomeOverallLosses) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.HomeOverallLosses); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</small></h3>\n        </div>\n        <div class=\"columns small-12 score\">\n          <div class=\"row\">\n            <div class=\"columns small-6 text-right\">\n              <h1>";
-  if (helper = helpers.AwayTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</h1>\n              <h3>";
-  if (helper = helpers.AwayTotalYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayTotalYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</h3>\n              <div class=\"field-label\">total yards</div>\n              <h3>";
-  if (helper = helpers.AwayFirstDowns) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayFirstDowns); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</h3>\n              <div class=\"field-label\">first downs</div>\n            </div>\n            <div class=\"columns small-6\">\n              <h1>";
-  if (helper = helpers.HomeTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</h1>\n              <h3>";
-  if (helper = helpers.HomeTotalYards) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeTotalYards); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</h3>\n              <div class=\"field-label\">total yards</div>\n              <h3>";
-  if (helper = helpers.HomeFirstDowns) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeFirstDowns); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</h3>\n              <div class=\"field-label\">first downs</div>\n            </div>\n          </div>\n        </div>\n        <div class=\"columns small-12 game-meta text-center\">\n          <div class=\"meta-item\">\n            <i class=\"fa fa-calendar-o\"></i> "
+    + "</small></h3>\n        </div>\n        ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.noop,fn:self.program(3, program3, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n        <div class=\"columns small-12 game-meta text-center\">\n          <div class=\"meta-item\">\n            <i class=\"fa fa-calendar-o\"></i> "
     + escapeExpression((helper = helpers.longDateTime || (depth0 && depth0.longDateTime),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.GameDate), (depth0 && depth0.GameTime), options) : helperMissing.call(depth0, "longDateTime", (depth0 && depth0.GameDate), (depth0 && depth0.GameTime), options)))
     + "\n          </div>\n          <div class=\"meta-item\">\n            <i class=\"fa fa-map-marker\"></i> ";
   if (helper = helpers.VenueName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.VenueName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\n          </div>\n        </div>\n        <hr />\n        <div class=\"rushing\">\n          <div class=\"columns small-12 text-center\">\n            <h5>Rushing</h5>\n          </div>\n          <div class=\"columns small-6 text-right\">\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "away", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "away", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "away", options) : helperMissing.call(depth0, "bar", "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "away", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "away", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "away", options)))
-    + "\n          </div>\n          <div class=\"columns small-6\">\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "home", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayRushingAttempts), (depth0 && depth0.HomeRushingAttempts), "home", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "home", options) : helperMissing.call(depth0, "bar", "yards per attempt", (depth0 && depth0.AwayRushingYardsPerAttempt), (depth0 && depth0.HomeRushingYardsPerAttempt), "home", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "home", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayRushingYards), (depth0 && depth0.HomeRushingYards), "home", options)))
-    + "\n          </div>\n        </div>\n        <div class=\"passing\">\n          <div class=\"columns small-12 text-center\">\n            <hr />\n            <h5>Passing</h5>\n          </div>\n          <div class=\"columns small-6 text-right\">\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "away", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "away", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "away", options) : helperMissing.call(depth0, "bar", "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "away", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "away", options) : helperMissing.call(depth0, "bar", "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "away", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "away", options) : helperMissing.call(depth0, "bar", "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "away", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "away", options) : helperMissing.call(depth0, "bar", "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "away", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "away", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "away", options)))
-    + "\n          </div>\n          <div class=\"columns small-6\">\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "home", options) : helperMissing.call(depth0, "bar", "attempts", (depth0 && depth0.AwayPassAttempts), (depth0 && depth0.HomePassAttempts), "home", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "home", options) : helperMissing.call(depth0, "bar", "completions", (depth0 && depth0.AwayPassCompletions), (depth0 && depth0.HomePassCompletions), "home", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "home", options) : helperMissing.call(depth0, "bar", "interception(s)", (depth0 && depth0.AwayPassingInterceptions), (depth0 && depth0.HomePassingInterceptions), "home", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "home", options) : helperMissing.call(depth0, "bar", "completion rate", (depth0 && depth0.AwayPassCompletionPercentage), (depth0 && depth0.HomePassCompletionPercentage), "home", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "home", options) : helperMissing.call(depth0, "bar", "yards per catch", (depth0 && depth0.AwayYardsPerCatch), (depth0 && depth0.HomeYardsPerCatch), "home", options)))
-    + "\n            "
-    + escapeExpression((helper = helpers.bar || (depth0 && depth0.bar),options={hash:{},data:data},helper ? helper.call(depth0, "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "home", options) : helperMissing.call(depth0, "bar", "yards", (depth0 && depth0.AwayPassingYards), (depth0 && depth0.HomePassingYards), "home", options)))
-    + "\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"columns medium-4\">\n    <h4>Box score</h4>\n    <table class=\"box-score\">\n      <tbody>\n        <tr class=\"header-row\">\n          <td></td>\n          <td class=\"text-center\">1st</td>\n          <td class=\"text-center\">2nd</td>\n          <td class=\"text-center\">3rd</td>\n          <td class=\"text-center\">4th</td>\n          <td class=\"text-center\">OT</td>\n          <td class=\"text-center\">Final</td>\n        </tr>\n        <tr>\n          <td class=\"text-right team-name\"><strong>";
-  if (helper = helpers.AwayTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</strong></td>\n          <td class=\"text-center\">";
-  if (helper = helpers.AwayFirstQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayFirstQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.AwaySecondQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwaySecondQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.AwayThirdQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayThirdQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.AwayFourthQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayFourthQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.AwayOvertimePoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayOvertimePoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\"><strong>";
-  if (helper = helpers.AwayTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.AwayTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</strong></td>\n        </tr>\n        <tr>\n          <td class=\"text-right team-name\"><strong>";
-  if (helper = helpers.HomeTeamName) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeTeamName); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</strong></td>\n          <td class=\"text-center\">";
-  if (helper = helpers.HomeFirstQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeFirstQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.HomeSecondQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeSecondQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.HomeThirdQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeThirdQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.HomeFourthQuarterPoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeFourthQuarterPoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\">";
-  if (helper = helpers.HomeOvertimePoints) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeOvertimePoints); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</td>\n          <td class=\"text-center\"><strong>";
-  if (helper = helpers.HomeTeamScore) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.HomeTeamScore); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "</strong></td>\n        </tr>\n      </tbody>\n    </table>\n  </div>\n</div>\n";
+    + "\n          </div>\n        </div>\n        ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.program(13, program13, data),fn:self.program(8, program8, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n      </div>\n    </div>\n  </div>\n  <div class=\"columns medium-4\">\n    ";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameStats), {hash:{},inverse:self.noop,fn:self.program(15, program15, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "\n  </div>\n</div>\n";
   return buffer;
   });
 

@@ -293,7 +293,6 @@ body {
         background: #B8B85B;
       }
       .score {
-        padding-bottom: 20px;
         h1 {
           font-size: 65px;
         }
@@ -305,6 +304,7 @@ body {
         background: $primary-color;
         color: white;
         padding: 10px 8px;
+        margin-top: 20px;
         .meta-item {
           display: inline-block;
           padding: 0 10px;

@@ -135,6 +135,21 @@ The production version of the app draws from the Web template `TickerJSON` and t
 <QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["AwayTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
 <?php $GameJSON_rows[0]['AwayConfWins'] = $TeamSeasonStats_Win; ?>
 <?php $GameJSON_rows[0]['AwayConfLosses'] = $TeamSeasonStats_Loss; ?>
+<?php if($GameJSON_rows[0]['GameScoreIsFinal'] == "1") {
+  $GameJSON_rows[0]['GameScoreIsFinal'] = true;
+}
+else {
+  $GameJSON_rows[0]['GameScoreIsFinal'] = false;
+} ?>
+<?php if($GameJSON_rows[0]['AwayTotalYards'] == "0" && $GameJSON_rows[0]['HomeTotalYards'] == "0") {
+  $GameJSON_rows[0]['GameStats'] = false;
+}
+elseif($GameJSON_rows[0]['AwayTotalYards'] == null && $GameJSON_rows[0]['HomeTotalYards'] == null) {
+  $GameJSON_rows[0]['GameStats'] = false;
+}
+else {
+  $GameJSON_rows[0]['GameStats'] = true;
+} ?>
 <?php header('Content-Type: application/json'); ?>
 <?php
   $json = json_encode($GameJSON_rows[0]);
