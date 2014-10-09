@@ -11,6 +11,12 @@ define(['backbone'], function(Backbone) {
       this.collection.on('sync', this.doSearch, this);
     },
 
+    close: function() {
+      this.remove();
+      this.off();
+      this.collection.off('sync', this.doSearch, this);
+    },
+
     // Listen for interactions with the search box and
     // fire appropriate methods
     events: {

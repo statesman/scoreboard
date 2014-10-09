@@ -17,14 +17,10 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
     model: Score,
 
     initialize: function(options) {
-      // Set the inital date, so we can build a URL
-      this.setWeek(options.week);
+			this.setWeek(options.week);
 
       // When something is faved, trigger a sort
       this.on('fav', this.sort);
-
-			// Starts the overlay on first run of the app
-			this.overlayOn();
 
 			// When a request starts, throw up a loading spinner
       this.on('request', this.overlayOn);
@@ -52,9 +48,6 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
     setWeek: function(week) {
 			this.week = parseInt(week, 10);
       this.date = moment(config.weeks[week - 1].date, "YYYY-MM-DD");
-			this.fetch({
-				dataType: 'jsonp'
-			});
     },
 
 		getWeek: function(week) {
@@ -102,24 +95,26 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
     // to all models in the collection that don't contain the passed
     // string
     search: function(needle) {
-      needle = needle.toLowerCase();
-      var resultCount = 0;
-      this.each(function(game) {
-        if(game.get('Searchable').indexOf(needle) === -1) {
-          game.set('hidden', true);
-        }
-        else {
-          game.unset('hidden');
-          resultCount++;
-        }
-      });
-      this.trigger('filtered');
+			if(typeof needle !== "undefined") {
+	      needle = needle.toLowerCase();
+	      var resultCount = 0;
+	      this.each(function(game) {
+	        if(game.get('Searchable').indexOf(needle) === -1) {
+	          game.set('hidden', true);
+	        }
+	        else {
+	          game.unset('hidden');
+	          resultCount++;
+	        }
+	      });
+	      this.trigger('filtered');
 
-      // Send an empty event if there are no results found, which will
-      // allow us to show the user a no results box
-      if(resultCount === 0) {
-        this.trigger('noResults', needle);
-      }
+	      // Send an empty event if there are no results found, which will
+	      // allow us to show the user a no results box
+	      if(resultCount === 0) {
+	        this.trigger('noResults', needle);
+	      }
+			}
     },
 
     // Undoes the search method by removing the hidden attribute

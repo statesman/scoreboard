@@ -9,12 +9,6 @@ define(['backbone', 'config', 'models/score'], function(Backbone, config, Score)
 
     setId: function(id) {
       this.id = id;
-      this.fetch({
-        dataType: 'jsonp',
-        success: function(model) {
-          console.log(model.toJSON());
-        }
-      });
     },
 
     url: function() {

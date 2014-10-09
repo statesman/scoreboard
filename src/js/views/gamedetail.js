@@ -1,9 +1,15 @@
 define(['backbone', 'Templates'], function(Backbone, JST) {
 
-  var Gameboard = Backbone.View.extend({
+  var Gamedetail = Backbone.View.extend({
     initialize: function() {
-      this.model.on('sync', this.render, this);
       this.model.on('fav', this.render, this);
+    },
+
+    close: function() {
+      this.remove();
+      this.off();
+      this.model.off('fav', this.render, this);
+      console.log('closing the game detail view');
     },
 
     events: {
@@ -34,6 +40,6 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
     }
   });
 
-  return Gameboard;
+  return Gamedetail;
 
 });
