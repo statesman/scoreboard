@@ -127,7 +127,7 @@ var barWidth = function(away, home, team) {
   else {
     percent = away / (away + home);
   }
-  return percent * 92;
+  return percent * 90;
 };
 
 // Round our fake float (it's actually a string) to
