@@ -1,5 +1,12 @@
 define(['store', 'moment', 'handlebars'], function(store, moment, Handlebars) {
 
+/* Usage: {{formatDate dateString inputFormat outputFormat}} */
+Handlebars.registerHelper('formatDate', function(dateString, inputFormat, outputFormat) {
+  var dateObj = moment(dateString, inputFormat);
+  var dateOut = dateObj.format(outputFormat);
+  return new Handlebars.SafeString(dateOut);
+});
+
 /* Usage: {{date dateString}} turns 2014-01-02 into 1/2 */
 
 Handlebars.registerHelper('date', function(timeStamp) {

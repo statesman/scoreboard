@@ -89,7 +89,7 @@
       </div>
     </div>
   </div>
-  <div class="columns medium-4">
+  <div class="columns medium-4 sidebar">
     {{#if GameStats}}
       <h4>Box score</h4>
       <table class="box-score">
@@ -104,7 +104,7 @@
             <td class="text-center">Final</td>
           </tr>
           <tr>
-            <td class="text-right team-name"><strong>{{AwayTeamName}}</strong></td>
+            <td class="text-right header-col"><strong>{{AwayTeamName}}</strong></td>
             <td class="text-center">{{AwayFirstQuarterPoints}}</td>
             <td class="text-center">{{AwaySecondQuarterPoints}}</td>
             <td class="text-center">{{AwayThirdQuarterPoints}}</td>
@@ -113,7 +113,7 @@
             <td class="text-center"><strong>{{AwayTeamScore}}</strong></td>
           </tr>
           <tr>
-            <td class="text-right team-name"><strong>{{HomeTeamName}}</strong></td>
+            <td class="text-right header-col"><strong>{{HomeTeamName}}</strong></td>
             <td class="text-center">{{HomeFirstQuarterPoints}}</td>
             <td class="text-center">{{HomeSecondQuarterPoints}}</td>
             <td class="text-center">{{HomeThirdQuarterPoints}}</td>
@@ -123,6 +123,25 @@
           </tr>
         </tbody>
       </table>
+      {{#if History}}
+        <h4>Recent series history</h4>
+        <table class="team-history">
+          <tbody>
+            <tr class="header-row">
+              <td width="30%"></td>
+              <td width="35%" class="text-center">{{AwayTeamName}}</td>
+              <td width="35%" class="text-center">{{HomeTeamName}}</td>
+            </tr>
+            {{#each History}}
+              <tr>
+                <td class="text-right header-col"><strong>{{formatDate GameDate "YYYY-MM-DD" "M/D/YY"}}</strong></td>
+                <td class="text-center">{{AwayPoints}}</td>
+                <td class="text-center">{{HomePoints}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{/if}}
     {{/if}}
   </div>
 </div>

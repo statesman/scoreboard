@@ -116,6 +116,7 @@ The production version of the app draws from the Web template `TickerJSON` and t
 <VAR $sqlSportName = strtolower(convertForSQL($sportName))>
 <VAR $scoreField = $scoreFields[$sportName]>
 <QUERY name=GameJSON GAMEID=$form_id  SPORTNAME=$sqlSportName SCOREFIELD=$scoreField>
+<?php /* Get team records via some existing TeamPlayer queries */ ?>
 <VAR $statType = "overall">
 <QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["HomeTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
 <?php $GameJSON_rows[0]['HomeOverallWins'] = $TeamSeasonStats_Win; ?>
@@ -125,16 +126,36 @@ The production version of the app draws from the Web template `TickerJSON` and t
 <QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["AwayTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
 <?php $GameJSON_rows[0]['AwayOverallWins'] = $TeamSeasonStats_Win; ?>
 <?php $GameJSON_rows[0]['AwayOverallLosses'] = $TeamSeasonStats_Loss; ?>
-<VAR $statType = "conf">
-<VAR $TeamSeasonStats_query = "">
-<QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["HomeTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
-<?php $GameJSON_rows[0]['HomeConfWins'] = $TeamSeasonStats_Win; ?>
-<?php $GameJSON_rows[0]['HomeConfLosses'] = $TeamSeasonStats_Loss; ?>
-<VAR $statType = "conf">
-<VAR $TeamSeasonStats_query = "">
-<QUERY name=TeamSeasonStats ID=$GameJSON_rows[0]["AwayTeamID"] SPORTNAME=$sqlSportName CATEGORY=$statType SEASON=$form_Season>
-<?php $GameJSON_rows[0]['AwayConfWins'] = $TeamSeasonStats_Win; ?>
-<?php $GameJSON_rows[0]['AwayConfLosses'] = $TeamSeasonStats_Loss; ?>
+<?php /* Get each team's history by team IDs */ ?>
+<VAR $awayTeamID = $GameJSON_rows[0]['AwayTeamID']>
+<VAR $homeTeamID = $GameJSON_rows[0]['HomeTeamID']>
+<QUERY name=HistoryJSON AWAYID=$awayTeamID HOMEID=$homeTeamID>
+<?php /* Run each game through the below queries to get scores */ ?>
+<?php $historyList = array(); ?>
+<?php foreach($HistoryJSON_rows as $history): ?>
+<VAR $archiveTag = "z_">
+<VAR $gameId = $history["GameID"]>
+<VAR $season = $history["GameSeason"]>
+<QUERY name=Game ID=$gameId ARCHIVETAG=$archiveTag SEASON=$season>
+<VAR $sportName = $Game_SportName>
+<VAR $sportType = $Game_SportType>
+<VAR $sqlSportName = strtolower(convertForSQL($sportName))>
+<VAR $awayTeamID = $Game_GameAwayTeamID>
+<VAR $homeTeamID = $Game_GameHomeTeamID>
+<QUERY name=GameTeamStats GAMEID=$gameId SPORTNAME=$sqlSportName TEAMID=$awayTeamID prefix=Away ARCHIVETAG=$archiveTag SEASON=$season>
+<QUERY name=GameTeamStats GAMEID=$gameId SPORTNAME=$sqlSportName TEAMID=$homeTeamID prefix=Home ARCHIVETAG=$archiveTag SEASON=$season>
+<?php /* Generate an array with all of the results */ ?>
+<?php $historyList[$history["GameSeason"]] = array(
+  'HomeTeamName' => $Home_TeamName,
+  'HomePoints' => $Home_TotalPoints,
+  'AwayTeamName' => $Away_TeamName,
+  'AwayPoints' => $Away_TotalPoints,
+  'GameDate' => $history["GameDate"]
+);?>
+<?php endforeach; ?>
+<?php krsort($historyList); ?>
+<?php $GameJSON_rows[0]['history'] = $historyList; ?>
+<?php /* Convert some values to boolean for easier templating */ ?>
 <?php if($GameJSON_rows[0]['GameScoreIsFinal'] == "1") {
   $GameJSON_rows[0]['GameScoreIsFinal'] = true;
 }
@@ -150,6 +171,7 @@ elseif($GameJSON_rows[0]['AwayTotalYards'] == null && $GameJSON_rows[0]['HomeTot
 else {
   $GameJSON_rows[0]['GameStats'] = true;
 } ?>
+<?php /* Send a JSON response, with a JSONP wrapper if necessary */ ?>
 <?php header('Content-Type: application/json'); ?>
 <?php
   $json = json_encode($GameJSON_rows[0]);
@@ -160,39 +182,6 @@ else {
   echo $json;
 ?>
 ```
-
-##### `HistoryJSON`
-```php
-<QUERY name=Sport SPORTID=$form_Sport>
-<?php
-  $scoreFields = array(
-    "Football" => "TotalPoints",
-    "Baseball" => "Runs",
-    "Boys Basketball" => "TotalPoints",
-    "Girls Basketball" => "TotalPoints",
-    "Boys Hockey" => "TotalGoals",
-    "Girls Hockey" => "TotalGoals",
-    "Boys Soccer" => "TotalGoals",
-    "Girls Soccer" => "TotalGoals",
-    "Boys Volleyball" => "FinalScore",
-    "Girls Volleyball" => "FinalScore",
-    "Field Hockey" => "TotalGoals",
-    "Softball" => "Runs",
-    "Boys Lacrosse" => "TotalGoals",
-    "Girls Lacrosse" => "TotalGoals"
-  );
-?>
-<VAR $sportName = $Sport_SportName>
-<VAR $sqlSportName = strtolower(convertForSQL($sportName))>
-<VAR $scoreField = $scoreFields[$sportName]>
-<QUERY name=HistoryJSON AWAYID=$form_id1 HOMEID=$form_id2>
-<?php $firstQuery = $HistoryJSON_rows; ?>
-<VAR $HistoryJSON_query = "">
-<QUERY name=HistoryJSON AWAYID=$form_id2 HOMEID=$form_id1 SPORTNAME=$sqlSportName SCOREFIELD=$scoreField>
-<?php $results = array_merge($firstQuery, $HistoryJSON_rows); ?>
-<?php echo json_encode($results); ?>
-```
-
 
 #### Query template
 
@@ -299,15 +288,6 @@ WHERE q_game.GameID = {$GAMEID}
 
 ##### `HistoryJSON`
 ```sql
-SELECT z_game.GameDate AS GameDate,
-away.TeamName AS AwayTeamName,
-home.TeamName AS HomeTeamName,
-awayscore.{$SCOREFIELD} AS AwayTeamScore,
-homescore.{$SCOREFIELD} AS HomeTeamScore,
-FROM `z_game`
-LEFT JOIN team AS away ON away.TeamID=z_game.GameAwayTeamID
-LEFT JOIN team AS home ON home.TeamID=z_game.GameHomeTeamID
-LEFT JOIN gameteam{$SPORTNAME} as awayscore ON awayscore.GameTeamTeamID = z_game.GameAwayTeamID AND awayscore.GameTeamGameID = z_game.GameID
-LEFT JOIN gameteam{$SPORTNAME} as homescore ON homescore.GameTeamTeamID = z_game.GameHomeTeamID AND homescore.GameTeamGameID = z_game.GameID
-WHERE z_game.GameAwayTeamID={$AWAYID} AND z_game.GameHomeTeamID={$HOMEID}
+SELECT GameID, GameSeason, GameDate FROM `z_game`
+WHERE (GameAwayTeamID={$AWAYID} AND GameHomeTeamID={$HOMEID}) OR (GameAwayTeamID={$HOMEID} AND GameHomeTeamID={$AWAYID})
 ```
