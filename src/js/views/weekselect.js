@@ -6,9 +6,7 @@ define(['backbone', 'jquery', 'Templates', 'config'], function(Backbone, $, JST,
     // previous button and the current selection along with a
     // count of the total number of options
     initialize: function() {
-      this.collection.on('sync', function() {
-        this.render();
-      }, this);
+      this.collection.on('sync', this.render, this);
     },
 
     // Bind selector changes and setup the previous/next week

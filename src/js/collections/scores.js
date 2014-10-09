@@ -21,23 +21,16 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
       this.setWeek(options.week);
 
       // When something is faved, trigger a sort
-      this.on('fav', function() {
-        this.sort();
-      });
+      this.on('fav', this.sort);
 
 			// Starts the overlay on first run of the app
 			this.overlayOn();
 
 			// When a request starts, throw up a loading spinner
-      this.on('request', function() {
-				this.overlayOn();
-      });
+      this.on('request', this.overlayOn);
 
 			// When the API request finishes, get rid of the spinner
-      this.on('sync', function() {
-				this.overlayOff();
-				console.log(this.toJSON());
-      });
+      this.on('sync', this.overlayOff);
     },
 
 		// Turn on the overlay

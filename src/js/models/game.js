@@ -4,9 +4,7 @@ define(['backbone', 'config', 'models/score'], function(Backbone, config, Score)
 
     initialize: function(options) {
       this.setId(options.id);
-      this.on('sync', function() {
-        this.checkFavs();
-      });
+      this.on('sync', this.checkFavs);
     },
 
     setId: function(id) {

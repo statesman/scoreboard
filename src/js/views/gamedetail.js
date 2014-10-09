@@ -2,13 +2,8 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
 
   var Gameboard = Backbone.View.extend({
     initialize: function() {
-      this.model.on('sync', function() {
-        this.render();
-      }, this);
-
-      this.model.on('fav', function() {
-        this.render();
-      }, this);
+      this.model.on('sync', this.render, this);
+      this.model.on('fav', this.render, this);
     },
 
     events: {

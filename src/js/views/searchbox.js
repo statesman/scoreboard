@@ -8,9 +8,7 @@ define(['backbone'], function(Backbone) {
 
       // When the collection is updated, run the search on the
       // new models
-      this.collection.on('sync', function() {
-        this.doSearch();
-      }, this);
+      this.collection.on('sync', this.doSearch, this);
     },
 
     // Listen for interactions with the search box and
