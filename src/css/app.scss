@@ -269,6 +269,12 @@ body {
           background: $primary-color;
           margin-right: 6px;
           margin-top: 3px;
+          &.empty {
+            margin-right: 0;
+          }
+        }
+        .bar-label {
+          font-weight: 600;
         }
         .field-label {
           font-size: 12px;
@@ -283,6 +289,9 @@ body {
             margin-left: 6px;
             margin-right: 0;
             float: right;
+            &.empty {
+              margin-left: 0;
+            }
           }
         }
       }

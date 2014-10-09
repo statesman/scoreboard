@@ -130,17 +130,45 @@ var barWidth = function(away, home, team) {
   return percent * 92;
 };
 
+// Round our fake float (it's actually a string) to
+// one decimal point
+var roundDecimal = function(value) {
+  if(value.indexOf('.') !== -1) {
+    var parts = value.split('.', 2);
+    var decimal = parts[1].substring(0, 1);
+    if(decimal === "0") {
+      return parts[0];
+    }
+    else {
+      return parts[0] + '.' + parts[1].substring(0, 1);
+    }
+  }
+  else {
+    return value;
+  }
+}
+
 /* Usage {{bar unit label away home team}} */
-Handlebars.registerHelper('bar', function(unit, away, home, team) {
+Handlebars.registerHelper('bar', function(unit, away, home, team, suffix) {
+  // Get the label value
   if(team === "away") {
     label = away;
   }
   else {
     label = home;
   }
+  // Check if we should add the empty class
+  var empty = '';
+  if((team === "away" && away === "0") || (team === "home" && home === "0")) {
+    empty = ' empty';
+  }
+  if(typeof suffix === "object") {
+    suffix = '';
+  }
+
   var bar = '<div class="bar-wrapper">' +
-    '<div class="bar" style="width:' + barWidth(away, home, team) + '%;"></div>' +
-    '<div class="bar-label">' + label + '</div>' +
+    '<div class="bar' + empty + '" style="width:' + barWidth(away, home, team) + '%;"></div>' +
+    '<div class="bar-label">' + roundDecimal(label) + suffix + '</div>' +
     '<div class="field-label">' + unit + '</div>' +
   '</div>';
   return new Handlebars.SafeString(bar);

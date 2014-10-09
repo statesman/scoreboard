@@ -161,6 +161,39 @@ else {
 ?>
 ```
 
+##### `HistoryJSON`
+```php
+<QUERY name=Sport SPORTID=$form_Sport>
+<?php
+  $scoreFields = array(
+    "Football" => "TotalPoints",
+    "Baseball" => "Runs",
+    "Boys Basketball" => "TotalPoints",
+    "Girls Basketball" => "TotalPoints",
+    "Boys Hockey" => "TotalGoals",
+    "Girls Hockey" => "TotalGoals",
+    "Boys Soccer" => "TotalGoals",
+    "Girls Soccer" => "TotalGoals",
+    "Boys Volleyball" => "FinalScore",
+    "Girls Volleyball" => "FinalScore",
+    "Field Hockey" => "TotalGoals",
+    "Softball" => "Runs",
+    "Boys Lacrosse" => "TotalGoals",
+    "Girls Lacrosse" => "TotalGoals"
+  );
+?>
+<VAR $sportName = $Sport_SportName>
+<VAR $sqlSportName = strtolower(convertForSQL($sportName))>
+<VAR $scoreField = $scoreFields[$sportName]>
+<QUERY name=HistoryJSON AWAYID=$form_id1 HOMEID=$form_id2>
+<?php $firstQuery = $HistoryJSON_rows; ?>
+<VAR $HistoryJSON_query = "">
+<QUERY name=HistoryJSON AWAYID=$form_id2 HOMEID=$form_id1 SPORTNAME=$sqlSportName SCOREFIELD=$scoreField>
+<?php $results = array_merge($firstQuery, $HistoryJSON_rows); ?>
+<?php echo json_encode($results); ?>
+```
+
+
 #### Query template
 
 ##### `TickerClone`
@@ -262,4 +295,19 @@ LEFT JOIN school AS venue ON game.GameLocation = venue.SchoolID
 LEFT JOIN gameteam{$SPORTNAME} as awayscore ON awayscore.GameTeamTeamID = GameAwayTeamID AND awayscore.GameTeamGameID = q_game.GameID
 LEFT JOIN gameteam{$SPORTNAME} as homescore ON homescore.GameTeamTeamID = GameHomeTeamID AND homescore.GameTeamGameID = q_game.GameID
 WHERE q_game.GameID = {$GAMEID}
+```
+
+##### `HistoryJSON`
+```sql
+SELECT z_game.GameDate AS GameDate,
+away.TeamName AS AwayTeamName,
+home.TeamName AS HomeTeamName,
+awayscore.{$SCOREFIELD} AS AwayTeamScore,
+homescore.{$SCOREFIELD} AS HomeTeamScore,
+FROM `z_game`
+LEFT JOIN team AS away ON away.TeamID=z_game.GameAwayTeamID
+LEFT JOIN team AS home ON home.TeamID=z_game.GameHomeTeamID
+LEFT JOIN gameteam{$SPORTNAME} as awayscore ON awayscore.GameTeamTeamID = z_game.GameAwayTeamID AND awayscore.GameTeamGameID = z_game.GameID
+LEFT JOIN gameteam{$SPORTNAME} as homescore ON homescore.GameTeamTeamID = z_game.GameHomeTeamID AND homescore.GameTeamGameID = z_game.GameID
+WHERE z_game.GameAwayTeamID={$AWAYID} AND z_game.GameHomeTeamID={$HOMEID}
 ```
