@@ -125,8 +125,8 @@ Handlebars.registerHelper('longDateTime', function(dateString, timeString) {
 
 /* Usage: {{barWidth AwayRusingAttempts HomeRushingAttempts "home"}} */
 var barWidth = function(away, home, team) {
-  away = parseInt(away, 10);
-  home = parseInt(home, 10);
+  away = Math.abs(parseInt(away, 10));
+  home = Math.abs(parseInt(home, 10));
   var percent;
   if(team === "home") {
     percent = home / (away + home);
@@ -164,6 +164,10 @@ Handlebars.registerHelper('bar', function(unit, away, home, team, suffix) {
   else {
     label = home;
   }
+  var negative = '';
+  if(label.indexOf('-') === 0) {
+    negative = ' negative';
+  }
   // Check if we should add the empty class
   var empty = '';
   if((team === "away" && away === "0") || (team === "home" && home === "0")) {
@@ -174,7 +178,7 @@ Handlebars.registerHelper('bar', function(unit, away, home, team, suffix) {
   }
 
   var bar = '<div class="bar-wrapper">' +
-    '<div class="bar' + empty + '" style="width:' + barWidth(away, home, team) + '%;"></div>' +
+    '<div class="bar' + empty + negative + '" style="width:' + barWidth(away, home, team) + '%;"></div>' +
     '<div class="bar-label">' + roundDecimal(label) + suffix + '</div>' +
     '<div class="field-label">' + unit + '</div>' +
   '</div>';

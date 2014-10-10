@@ -287,6 +287,9 @@ body {
           &.empty {
             margin-right: 0;
           }
+          &.negative {
+            background: #C93333;
+          }
         }
         .bar-label {
           font-weight: 600;
