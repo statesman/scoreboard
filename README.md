@@ -74,6 +74,11 @@ The production version of the app draws from the Web template `TickerJSON` and t
       }
     }
 
+    // Set the boolean for game stats to true if they're marked complete
+    if($row['GameStatStatus'] === "3") {
+      $TickerClone_rows[$key]['GameStatStatus'] = TRUE;
+    }
+
     // Return the gametime as a UNIX timestamp for easier client-side parsing
     $timeStamp = strtotime($row['GameTime'] . ' ' . $row['GameDate']) + 3600;
     $TickerClone_rows[$key]['GameTimestamp'] = $timeStamp;
@@ -194,6 +199,7 @@ SELECT q_game.GameID,
   GameTime,
   GameScoreIsFinal,
   GameLocation,
+  GameStatStatus,
   away.TeamName AS AwayTeamName,
   home.TeamName AS HomeTeamName,
   away.TeamNickname AS AwayTeamNickname,
@@ -275,7 +281,8 @@ SELECT q_game.GameID,
   awayscore.Penalties AS AwayPenalties,
   homescore.Penalties AS HomePenalties,
   awayscore.PenaltyYards AS AwayPenaltyYards,
-  homescore.PenaltyYards AS HomePenaltyYards
+  homescore.PenaltyYards AS HomePenaltyYards,
+  game.GameStatsFinal AS GameStatsFinal
 FROM `q_game`
 LEFT JOIN game ON q_game.GameID = game.GameID
 LEFT JOIN team AS away ON away.TeamID = GameAwayTeamID

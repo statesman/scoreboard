@@ -66,11 +66,10 @@ function program7(depth0,data) {
   buffer += escapeExpression(stack1)
     + "\r\n      </div>\r\n    </div>\r\n    <div class=\"row\">\r\n      <div class=\"small-12 columns game-meta\">\r\n        <hr class=\"show-for-medium-up\" />\r\n        "
     + escapeExpression((helper = helpers.date || (depth0 && depth0.date),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.GameTimestamp), options) : helperMissing.call(depth0, "date", (depth0 && depth0.GameTimestamp), options)))
-    + " <span class=\"right\"><a href=\"#/game/";
-  if (helper = helpers.GameID) { stack1 = helper.call(depth0, {hash:{},data:data}); }
-  else { helper = (depth0 && depth0.GameID); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
-  buffer += escapeExpression(stack1)
-    + "\">Final</a></span>\r\n      </div>\r\n    </div>\r\n  ";
+    + " <span class=\"right\">";
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameStatStatus), {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
+  if(stack1 || stack1 === 0) { buffer += stack1; }
+  buffer += "</span>\r\n      </div>\r\n    </div>\r\n  ";
   return buffer;
   }
 function program8(depth0,data) {
@@ -80,6 +79,17 @@ function program8(depth0,data) {
   }
 
 function program10(depth0,data) {
+  
+  var buffer = "", stack1, helper;
+  buffer += "<a href=\"#/game/";
+  if (helper = helpers.GameID) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.GameID); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\"><i class=\"fa fa-angle-double-right\"></i> Stats</a>";
+  return buffer;
+  }
+
+function program12(depth0,data) {
   
   var buffer = "", stack1, helper, options;
   buffer += "\r\n    <div class=\"row\">\r\n      <div class=\"small-8 columns\">\r\n        <div class=\"team away-team";
@@ -111,12 +121,12 @@ function program10(depth0,data) {
     + "</div>\r\n        </div>\r\n      </div>\r\n      <div class=\"small-4 columns text-right game-time\">"
     + escapeExpression((helper = helpers.dateTime || (depth0 && depth0.dateTime),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.GameTimestamp), options) : helperMissing.call(depth0, "dateTime", (depth0 && depth0.GameTimestamp), options)))
     + "</div>\r\n    </div>\r\n    ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.VenueName), {hash:{},inverse:self.noop,fn:self.program(11, program11, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.VenueName), {hash:{},inverse:self.noop,fn:self.program(13, program13, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n  ";
   return buffer;
   }
-function program11(depth0,data) {
+function program13(depth0,data) {
   
   var buffer = "", stack1, helper;
   buffer += "\r\n      <div class=\"row\">\r\n        <div class=\"small-12 columns game-meta\">\r\n          <hr class=\"show-for-medium-up\" />\r\n          <i class=\"fa fa-map-marker\"></i> <span class=\"venue\">";
@@ -133,7 +143,7 @@ function program11(depth0,data) {
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.noop,fn:self.program(5, program5, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\">\r\n  ";
-  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.program(10, program10, data),fn:self.program(7, program7, data),data:data});
+  stack1 = helpers['if'].call(depth0, (depth0 && depth0.GameScoreIsFinal), {hash:{},inverse:self.program(12, program12, data),fn:self.program(7, program7, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\r\n</div>\r\n";
   return buffer;
@@ -258,14 +268,16 @@ function program9(depth0,data) {
 
 function program11(depth0,data) {
   
-  
-  return "\n          No stats yet.\n          ";
+  var buffer = "";
+  buffer += "\n            \n          ";
+  return buffer;
   }
 
 function program13(depth0,data) {
   
-  
-  return "\n        Game hasn't been played yet.\n        ";
+  var buffer = "";
+  buffer += "\n          \n        ";
+  return buffer;
   }
 
 function program15(depth0,data) {
