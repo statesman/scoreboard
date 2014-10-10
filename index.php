@@ -95,18 +95,7 @@
 
     <div class="form row">
       <div id="week" class="medium-6 columns"></div>
-      <div id="team-search" class="medium-6 columns">
-        <div class="row collapse postfix-radius">
-          <div class="small-11 columns">
-            <input type="text" placeholder="Team" />
-          </div>
-          <div class="small-1 columns">
-            <a href="#" class="clear">
-              <span class="postfix"><i class="fa fa-times"></i></span>
-            </a>
-          </div>
-        </div>
-      </div>
+      <div id="team-search" class="medium-6 columns"></div>
     </div>
 
     <div data-alert class="alert-box secondary text-alert show-for-large-up">

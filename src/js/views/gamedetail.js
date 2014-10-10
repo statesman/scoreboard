@@ -9,7 +9,6 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
       this.remove();
       this.off();
       this.model.off('fav', this.render, this);
-      console.log('closing the game detail view');
     },
 
     events: {

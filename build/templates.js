@@ -434,6 +434,15 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return buffer;
   });
 
+this["Templates"]["searchbox"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  
+
+
+  return "<div class=\"row collapse postfix-radius\">\r\n  <div class=\"small-11 columns\">\r\n    <input type=\"text\" placeholder=\"Team\" />\r\n  </div>\r\n  <div class=\"small-1 columns\">\r\n    <a href=\"#\" class=\"clear\">\r\n      <span class=\"postfix\"><i class=\"fa fa-times\"></i></span>\r\n    </a>\r\n  </div>\r\n</div>\r\n";
+  });
+
 this["Templates"]["stories"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};

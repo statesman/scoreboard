@@ -22,7 +22,7 @@ define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox',
   var App = Backbone.Router.extend({
 
     initialize: function() {
-      this.appview = appview;
+      Backbone.history.start();
     },
 
     routes: {
@@ -43,8 +43,8 @@ define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox',
       scores.fetch({
         success: function() {
           appview.show(new Scoreboard({collection: scores}), true);
-          appview.show(new Searchbox({collection: scores, el: '#team-search'}));
-          appview.show(new Weekselect({collection: scores, el: '#week'}));
+          appview.show(new Searchbox({collection: scores}));
+          appview.show(new Weekselect({collection: scores}));
         }
       });
     },

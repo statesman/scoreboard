@@ -3,8 +3,8 @@ define(['backbone', 'jquery', 'Templates', 'config'], function(Backbone, $, JST,
   var Weekselect = Backbone.View.extend({
 
     close: function() {
+      this.remove();
       this.off();
-      this.$el.empty();
     },
 
     // Bind selector changes and setup the previous/next week
@@ -23,7 +23,7 @@ define(['backbone', 'jquery', 'Templates', 'config'], function(Backbone, $, JST,
         currentWeek: this.collection.getWeek(),
         numWeeks: config.weeks.length
       };
-      this.$el.html(this.template(data));
+      this.$el.html(this.template(data)).appendTo('#week');
       return this;
     },
 
