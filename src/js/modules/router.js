@@ -1,30 +1,64 @@
-define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect', 'config'], function(Backbone, Scores, Scoreboard, Searchbox, Weekselect, config) {
+define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect', 'models/game', 'views/gamedetail', 'config'], function(Backbone, Scores, Scoreboard, Searchbox, Weekselect, Game, Gamedetail, config) {
+
+  // A class that can handle view-swapping
+  var AppView = function(){
+    this.views = [];
+    this.show = function(currentView, reset) {
+      if (this.views.length > 0 && reset === true) {
+        _.each(this.views, function(view) {
+          if(view.close) {
+            view.close();
+          }
+        }, this);
+        this.views.length = 0;
+      }
+      this.views.push(currentView);
+      currentView.render();
+    };
+  };
+
+  var appview = new AppView();
 
   var App = Backbone.Router.extend({
 
+    initialize: function() {
+      Backbone.history.start();
+    },
+
     routes: {
       "": "default",
-      "week/:week": "weekScores"
+      "week/:week": "showScores",
+      "game/:id": "showGame"
     },
 
     // Default route to call when someone hits the app's root
     default: function() {
-      this.weekScores(config.currentWeek);
+      this.showScores(config.currentWeek);
     },
 
     // Controller for the route that shows week-by-week scores
-    weekScores: function(week) {
+    showScores: function(week) {
       // Setup and store instances of all our Backbone objects if this is the first run
-      if(typeof this.scores === "undefined") {
-        this.scores = new Scores({week: parseInt(week, 10)});
-        this.scoreboard = new Scoreboard({collection: this.scores, el: '#scores'});
-        this.searchbox = new Searchbox({collection: this.scores, el: '#team-search'});
-        this.weekselect = new Weekselect({collection: this.scores, el: '#week'});
-      }
-      // Otherwise, just change the week
-      else {
-        this.scores.setWeek(week);
-      }
+      var scores = new Scores({week: parseInt(week, 10)});
+      scores.fetch({
+        dataType: 'jsonp',
+        success: function() {
+          appview.show(new Scoreboard({collection: scores}), true);
+          appview.show(new Searchbox({collection: scores}));
+          appview.show(new Weekselect({collection: scores}));
+        }
+      });
+    },
+
+    // Controller for the route that shows individual game details
+    showGame: function(id) {
+      var game = new Game({id: parseInt(id, 10)});
+      game.fetch({
+        dataType: 'jsonp',
+        success: function() {
+          appview.show(new Gamedetail({model: game}), true);
+        }
+      });
     }
 
   });

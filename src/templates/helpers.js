@@ -1,5 +1,12 @@
 define(['store', 'moment', 'handlebars'], function(store, moment, Handlebars) {
 
+/* Usage: {{formatDate dateString inputFormat outputFormat}} */
+Handlebars.registerHelper('formatDate', function(dateString, inputFormat, outputFormat) {
+  var dateObj = moment(dateString, inputFormat);
+  var dateOut = dateObj.format(outputFormat);
+  return new Handlebars.SafeString(dateOut);
+});
+
 /* Usage: {{date dateString}} turns 2014-01-02 into 1/2 */
 
 Handlebars.registerHelper('date', function(timeStamp) {
@@ -90,4 +97,90 @@ Handlebars.registerHelper('nextDisabled', function(currentWeek, weekCount) {
   if(parseInt(currentWeek, 10) === parseInt(weekCount, 10)) {
     return new Handlebars.SafeString(' disabled');
   }
+});
+
+
+/* Usage: {{longDateTime dateString timeString}} turns a UNIX timestamp into h:mm dddd, MMM D */
+
+Handlebars.registerHelper('longDateTime', function(dateString, timeString) {
+  dateString = Handlebars.Utils.escapeExpression(dateString);
+  timeString = Handlebars.Utils.escapeExpression(timeString);
+
+  var dateObj = moment(dateString + '' + timeString, "YYYY-MM-DD HH:mm:ss");
+
+  // AP style times (omit minutes if we're on the hour)
+  var timeFormat;
+  if(dateObj.minutes() === 0) {
+    timeFormat = "ha";
+  }
+  else {
+    timeFormat = "h:mma";
+  }
+
+  var timeString = dateObj.format(timeFormat) + ' ' + dateObj.format("dddd, MMM D");
+
+  return new Handlebars.SafeString(timeString);
+});
+
+
+/* Usage: {{barWidth AwayRusingAttempts HomeRushingAttempts "home"}} */
+var barWidth = function(away, home, team) {
+  away = Math.abs(parseInt(away, 10));
+  home = Math.abs(parseInt(home, 10));
+  var percent;
+  if(team === "home") {
+    percent = home / (away + home);
+  }
+  else {
+    percent = away / (away + home);
+  }
+  return percent * 85;
+};
+
+// Round our fake float (it's actually a string) to
+// one decimal point
+var roundDecimal = function(value) {
+  if(value.indexOf('.') !== -1) {
+    var parts = value.split('.', 2);
+    var decimal = parts[1].substring(0, 1);
+    if(decimal === "0") {
+      return parts[0];
+    }
+    else {
+      return parts[0] + '.' + parts[1].substring(0, 1);
+    }
+  }
+  else {
+    return value;
+  }
+}
+
+/* Usage {{bar unit label away home team}} */
+Handlebars.registerHelper('bar', function(unit, away, home, team, suffix) {
+  // Get the label value
+  if(team === "away") {
+    label = away;
+  }
+  else {
+    label = home;
+  }
+  var negative = '';
+  if(label.indexOf('-') === 0) {
+    negative = ' negative';
+  }
+  // Check if we should add the empty class
+  var empty = '';
+  if((team === "away" && away === "0") || (team === "home" && home === "0")) {
+    empty = ' empty';
+  }
+  if(typeof suffix === "object") {
+    suffix = '';
+  }
+
+  var bar = '<div class="bar-wrapper">' +
+    '<div class="bar' + empty + negative + '" style="width:' + barWidth(away, home, team) + '%;"></div>' +
+    '<div class="bar-label">' + roundDecimal(label) + suffix + '</div>' +
+    '<div class="field-label">' + unit + '</div>' +
+  '</div>';
+  return new Handlebars.SafeString(bar);
 });

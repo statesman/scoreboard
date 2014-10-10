@@ -4,17 +4,7 @@ define(['backbone', 'modules/favs'], function(Backbone, Favs) {
 
   var Score = Backbone.Model.extend({
     initialize: function() {
-
-      // Check localstorage to see if teams are favs and store a boolean
-      // on their model if they are
-      if(this.has('HomeTeamID') && this.has('AwayTeamID')) {
-        if(favs.isFav(this.get('HomeTeamID'))) {
-          this.set('HomeTeamFav', true);
-        }
-        if(favs.isFav(this.get('AwayTeamID'))) {
-          this.set('AwayTeamFav', true);
-        }
-      }
+      this.checkFavs();
 
       // Store a lowercase version of each team name and mascot for searching
       if(this.has('HomeTeamName') && this.has('AwayTeamName')) {
@@ -28,6 +18,19 @@ define(['backbone', 'modules/favs'], function(Backbone, Favs) {
         this.set('Searchable', searchable.join(' '));
       };
 
+    },
+
+    checkFavs: function() {
+      // Check localstorage to see if teams are favs and store a boolean
+      // on their model if they are
+      if(this.has('HomeTeamID') && this.has('AwayTeamID')) {
+        if(favs.isFav(this.get('HomeTeamID'))) {
+          this.set('HomeTeamFav', true);
+        }
+        if(favs.isFav(this.get('AwayTeamID'))) {
+          this.set('AwayTeamFav', true);
+        }
+      }
     },
 
     // Method that handles faving functionality by storing
@@ -55,7 +58,12 @@ define(['backbone', 'modules/favs'], function(Backbone, Favs) {
         }
       }
       // Fire a custom fav event, which will trigger a resort/render
-      this.collection.trigger('fav');
+      if(typeof this.collection !== "undefined") {
+        this.collection.trigger('fav');
+      }
+      else {
+        this.trigger('fav');
+      }
     }
   });
 

@@ -4,9 +4,7 @@ define(['backbone', 'views/gameboard', 'Templates'], function(Backbone, Gameboar
     initialize: function() {
       // Listen for the filtered event, which indicates that a search has
       // completed or been cleared, then rerender the view
-      this.collection.on('filtered', function() {
-        this.render();
-      }, this);
+      this.collection.on('filtered', this.render, this);
 
       // If a search turns up no results, say so
       this.collection.on('noResults', function(search) {
@@ -15,10 +13,19 @@ define(['backbone', 'views/gameboard', 'Templates'], function(Backbone, Gameboar
 
       // Listen for the fav event, which is fired after a favorite
       // is added, and rerender the view
-      this.collection.on('fav', function() {
-        this.render();
-      }, this);
+      this.collection.on('fav', this.render, this);
     },
+
+    close: function() {
+      this.remove();
+      this.off();
+      this.collection.off('noResults', null, this);
+      this.collection.off('fav', this.render, this);
+    },
+
+    tagName: 'ul',
+    id: 'scores',
+    className: 'small-block-grid-1 medium-block-grid-3 large-block-grid-5',
 
     renderSingle: function(game) {
       if(game.get('hidden') !== true) { // Only render items that aren't hidden
@@ -28,8 +35,9 @@ define(['backbone', 'views/gameboard', 'Templates'], function(Backbone, Gameboar
     },
 
     render: function() {
-      this.$el.html('');
+      this.$el.empty();
       this.collection.forEach(this.renderSingle, this);
+      this.$el.appendTo('#main');
       return this;
     }
   });

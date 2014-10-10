@@ -5,7 +5,7 @@
 @import '../../bower_components/bourbon/dist/bourbon';
 @import 'settings';
 
-h1, .form {
+h1.page-title, .form {
   @media #{$small-only} {
     padding: 0 12px;
   }
@@ -28,19 +28,34 @@ body {
   display: inline-block;
 }
 
-.text-alert .fa-mobile{
-  font-size: 25px;
-  top: 4px;
-  position: relative;
-  line-height: 12px;
-  margin-right: 4px;
-  @media (max-width: 450px) {
-    top: 0;
-    font-size: 40px;
+.text-alert {
+  p {
+    font-size: 0.8125rem;
+    margin-bottom: 0.25rem;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+  .score-link {
+    background: white;
+    border-radius: 4px;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+  }
+  .fa-mobile{
+    font-size: 25px;
+    top: 4px;
     position: relative;
-    line-height: 40px;
-    margin-right: 8px;
-    float: left;
+    line-height: 12px;
+    margin-right: 4px;
+    @media (max-width: 450px) {
+      top: 0;
+      font-size: 40px;
+      position: relative;
+      line-height: 40px;
+      margin-right: 8px;
+      float: left;
+    }
   }
 }
 
@@ -129,19 +144,6 @@ body {
       box-shadow: 0 0 8px rgba(0,0,0,0.05);
       .team {
         line-height: 15px;
-        .fav-home, .fav-away {
-          margin-left: 3px;
-          opacity: .35;
-          @media #{$medium-up} {
-            &:hover {
-              opacity: 1;
-            }
-          }
-          &.faved {
-            opacity: 1;
-            color: #FFDD4D;
-          }
-        }
       }
       .team-name {
         text-transform: uppercase;
@@ -157,7 +159,7 @@ body {
           border-color: #efefef;
           margin: 3px 0;
         }
-        .fa {
+        .fa-map-marker {
           margin-right: 2px;
           color: #ccc;
         }
@@ -203,6 +205,25 @@ body {
   }
 }
 
+
+/*
+ * Fave stars
+ */
+.fav-home, .fav-away {
+  margin-left: 3px;
+  opacity: .35;
+  @media #{$medium-up} {
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &.faved {
+    opacity: 1;
+    color: #FFDD4D;
+  }
+}
+
+
 /*
  * News
  */
@@ -218,7 +239,7 @@ body {
     font-size: 14px;
   }
   @media #{$small-only} {
-    padding: 15px;
+    padding: 12px;
     [class*="block-grid-"] {
       font-size: 13px;
       margin: 0 0 0 1.25rem;
@@ -238,6 +259,126 @@ body {
       }
     }
   }
+}
+
+
+/*
+ * Game detail pages
+ */
+.game-detail {
+  > .columns > .row {
+    padding: 10px 12px;
+    .inner {
+      padding: 20px 0;
+      border: 1px solid #ccc;
+      background: #fcfcfc;
+      box-shadow: 0 0 8px rgba(0,0,0,0.05);
+      .bar-wrapper {
+        width: 95%;
+        @media #{$medium-up} {
+          width: 60%;
+        }
+        .bar {
+          height: 12px;
+          float: left;
+          background: $primary-color;
+          margin-right: 6px;
+          margin-top: 3px;
+          &.empty {
+            margin-right: 0;
+          }
+          &.negative {
+            background: #C93333;
+          }
+        }
+        .bar-label {
+          font-weight: 600;
+        }
+        .field-label {
+          font-size: 12px;
+          margin-top: -2px;
+          margin-bottom: 6px;
+        }
+      }
+      .text-right {
+        .bar-wrapper {
+          float: right;
+          .bar {
+            margin-left: 6px;
+            margin-right: 0;
+            float: right;
+            &.empty {
+              margin-left: 0;
+            }
+          }
+        }
+      }
+      .rushing .bar {
+        background: #397161;
+      }
+      .passing .bar {
+        background: #B8B85B;
+      }
+      .score {
+        h1 {
+          font-size: 65px;
+        }
+        .field-label {
+          margin-top: -9px;
+        }
+      }
+      .game-meta {
+        background: $primary-color;
+        color: white;
+        padding: 10px 8px;
+        margin-top: 20px;
+        .meta-item {
+          display: inline-block;
+          padding: 0 10px;
+          .fa {
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+  }
+}
+.sidebar {
+  > h4 {
+    @media #{$small-only} {
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+  }
+  > h4 > small {
+    font-size: 65%;
+    font-weight: normal;
+  }
+  table {
+    width: 100%;
+    border: 1px solid #ccc;
+    @media #{$small-only} {
+      border-left: none;
+      border-right: none;
+    }
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    tr {
+      background: #fcfcfc;
+    }
+    .header-row {
+      border-bottom: 1px solid #ccc;
+      font-weight: bold;
+      background: #F9F9F9;
+    }
+    .header-col {
+      border-right: 1px solid #ccc;
+      background: #F9F9F9;
+    }
+  }
+}
+
+#main {
+  margin-bottom: 15px;
 }
 
 /*

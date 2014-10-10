@@ -12,7 +12,7 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
       this.model.on('change', this.render, this);
     },
 
-    template: JST.game,
+    template: JST.gameboard,
     tagName: 'li',
 
     render: function() {

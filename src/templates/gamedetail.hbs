@@ -1,0 +1,147 @@
+<div class="game-detail">
+  <div class="columns medium-8">
+    <div class="row">
+      <div class="inner clearfix">
+        <div class="columns small-6 text-right">
+          <h3>{{AwayTeamName}}<br />{{favAway AwayTeamFav}} {{AwayTeamNickname}}<br /><small>{{AwayOverallWins}} - {{AwayOverallLosses}}</small></h3>
+        </div>
+        <div class="columns small-6">
+          <h3>{{HomeTeamName}}{{#if HomeTeamNickname}}<br />{{HomeTeamNickname}}{{/if}} {{favHome HomeTeamFav}}<br /><small>{{HomeOverallWins}} - {{HomeOverallLosses}}</small></h3>
+        </div>
+        {{#if GameScoreIsFinal}}
+          <div class="columns small-12 score">
+            <div class="row">
+              <div class="columns small-6 text-right">
+                <h1>{{AwayTeamScore}}</h1>
+                {{#if GameStats}}
+                  <h3>{{AwayTotalYards}}</h3>
+                  <div class="field-label">total yards</div>
+                  <h3>{{AwayFirstDowns}}</h3>
+                  <div class="field-label">first downs</div>
+                {{/if}}
+              </div>
+              <div class="columns small-6">
+                <h1>{{HomeTeamScore}}</h1>
+                {{#if GameStats}}
+                  <h3>{{HomeTotalYards}}</h3>
+                  <div class="field-label">total yards</div>
+                  <h3>{{HomeFirstDowns}}</h3>
+                  <div class="field-label">first downs</div>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+        {{/if}}
+        <div class="columns small-12 game-meta text-center">
+          <div class="meta-item">
+            <i class="fa fa-calendar-o"></i> {{longDateTime GameDate GameTime}}
+          </div>
+          <div class="meta-item">
+            <i class="fa fa-map-marker"></i> {{VenueName}}
+          </div>
+        </div>
+        {{#if GameScoreIsFinal}}
+          {{#if GameStats}}
+            <hr />
+            <div class="rushing">
+              <div class="columns small-12 text-center">
+                <h5>Rushing</h5>
+              </div>
+              <div class="columns small-6 text-right">
+                {{bar "attempts" AwayRushingAttempts HomeRushingAttempts "away"}}
+                {{bar "yards per attempt" AwayRushingYardsPerAttempt HomeRushingYardsPerAttempt "away"}}
+                {{bar "yards" AwayRushingYards HomeRushingYards "away"}}
+              </div>
+              <div class="columns small-6">
+                {{bar "attempts" AwayRushingAttempts HomeRushingAttempts "home"}}
+                {{bar "yards per attempt" AwayRushingYardsPerAttempt HomeRushingYardsPerAttempt "home"}}
+                {{bar "yards" AwayRushingYards HomeRushingYards "home"}}
+              </div>
+            </div>
+            <div class="passing">
+              <div class="columns small-12 text-center">
+                <hr />
+                <h5>Passing</h5>
+              </div>
+              <div class="columns small-6 text-right">
+                {{bar "attempts" AwayPassAttempts HomePassAttempts "away"}}
+                {{bar "completions" AwayPassCompletions HomePassCompletions "away"}}
+                {{bar "interception(s)" AwayPassingInterceptions HomePassingInterceptions "away"}}
+                {{bar "completion rate" AwayPassCompletionPercentage HomePassCompletionPercentage "away" "%"}}
+                {{bar "yards per catch" AwayYardsPerCatch HomeYardsPerCatch "away"}}
+                {{bar "yards" AwayPassingYards HomePassingYards "away"}}
+              </div>
+              <div class="columns small-6">
+                {{bar "attempts" AwayPassAttempts HomePassAttempts "home"}}
+                {{bar "completions" AwayPassCompletions HomePassCompletions "home"}}
+                {{bar "interception(s)" AwayPassingInterceptions HomePassingInterceptions "home"}}
+                {{bar "completion rate" AwayPassCompletionPercentage HomePassCompletionPercentage "home" "%"}}
+                {{bar "yards per catch" AwayYardsPerCatch HomeYardsPerCatch "home"}}
+                {{bar "yards" AwayPassingYards HomePassingYards "home"}}
+              </div>
+            </div>
+          {{else}}
+            {{!-- No stats yet. --}}
+          {{/if}}
+        {{else}}
+          {{!-- Game score isn't final --}}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+  <div class="columns medium-4 sidebar">
+    {{#if GameStats}}
+      <h4>Box score</h4>
+      <table class="box-score">
+        <tbody>
+          <tr class="header-row">
+            <td></td>
+            <td class="text-center">1st</td>
+            <td class="text-center">2nd</td>
+            <td class="text-center">3rd</td>
+            <td class="text-center">4th</td>
+            <td class="text-center">OT</td>
+            <td class="text-center">Final</td>
+          </tr>
+          <tr>
+            <td class="text-right header-col"><strong>{{AwayTeamName}}</strong></td>
+            <td class="text-center">{{AwayFirstQuarterPoints}}</td>
+            <td class="text-center">{{AwaySecondQuarterPoints}}</td>
+            <td class="text-center">{{AwayThirdQuarterPoints}}</td>
+            <td class="text-center">{{AwayFourthQuarterPoints}}</td>
+            <td class="text-center">{{AwayOvertimePoints}}</td>
+            <td class="text-center"><strong>{{AwayTeamScore}}</strong></td>
+          </tr>
+          <tr>
+            <td class="text-right header-col"><strong>{{HomeTeamName}}</strong></td>
+            <td class="text-center">{{HomeFirstQuarterPoints}}</td>
+            <td class="text-center">{{HomeSecondQuarterPoints}}</td>
+            <td class="text-center">{{HomeThirdQuarterPoints}}</td>
+            <td class="text-center">{{HomeFourthQuarterPoints}}</td>
+            <td class="text-center">{{HomeOvertimePoints}}</td>
+            <td class="text-center"><strong>{{HomeTeamScore}}</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      {{#if History}}
+        <h4>Recent series history</h4>
+        <table class="team-history">
+          <tbody>
+            <tr class="header-row">
+              <td width="30%"></td>
+              <td width="35%" class="text-center">{{AwayTeamName}}</td>
+              <td width="35%" class="text-center">{{HomeTeamName}}</td>
+            </tr>
+            {{#each History}}
+              <tr>
+                <td class="text-right header-col"><strong>{{formatDate GameDate "YYYY-MM-DD" "M/D/YY"}}</strong></td>
+                <td class="text-center">{{AwayPoints}}</td>
+                <td class="text-center">{{HomePoints}}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{/if}}
+    {{/if}}
+  </div>
+</div>

@@ -59,8 +59,6 @@
 </head>
 <body>
 
-  <div style="overflow-x:hidden;">
-
   <?php
     /* Generate sharing URLs */
     $url = urlencode("http://projects.statesman.com/sports/scores/");
@@ -85,7 +83,11 @@
 
   <div class="row small-12 medium-12 large-12 centered">
 
-    <h1>High school scoreboard</h1>
+    <h1 class="page-title">High school scoreboard</h1>
+
+    <div data-alert class="alert-box secondary text-alert">
+      <p><strong>New this week:</strong> Get game stats if we have them. Click the <span class="score-link"><i class="fa fa-angle-double-right"></i> Stats</span> link under completed games.  <strong>Have feedback?</strong> Want to see a new feature? E-mail <a href="mailto:interactives@statesman.com">interactives@statesman.com</a>.</p>
+    </div>
 
     <noscript>
       <div data-alert class="alert-box alert radius">
@@ -95,25 +97,14 @@
 
     <div class="form row">
       <div id="week" class="medium-6 columns"></div>
-      <div id="team-search" class="medium-6 columns">
-        <div class="row collapse postfix-radius">
-          <div class="small-11 columns">
-            <input type="text" placeholder="Team" />
-          </div>
-          <div class="small-1 columns">
-            <a href="#" class="clear">
-              <span class="postfix"><i class="fa fa-times"></i></span>
-            </a>
-          </div>
-        </div>
-      </div>
+      <div id="team-search" class="medium-6 columns"></div>
     </div>
+
+    <div id="main"></div>
 
     <div data-alert class="alert-box secondary text-alert show-for-large-up">
       <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.statesman.com/sports/high-school-sports-score-alerts/">Sign up at statesman.com</a>.
     </div>
-
-    <ul id="scores" class="small-block-grid-1 medium-block-grid-3 large-block-grid-5"></ul>
 
     <div id="stories"></div>
 

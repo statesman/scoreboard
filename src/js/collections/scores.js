@@ -1,66 +1,25 @@
-define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'underscore', 'config'], function(Backbone, Score, moment, iosOverlay, Spinner, _, config) {
-
-  // Setup a spin.js spinner to use on the overlay
-	var opts = {
-		length: 11,
-		width: 5,
-		radius: 17,
-		color: '#FFF',
-		hwaccel: true,
-		top: 'auto',
-		left: 'auto'
-	};
-  var target = document.createElement("div");
-  var spinner = new Spinner(opts).spin(target);
+define(['backbone', 'models/score', 'moment', 'underscore', 'modules/loader', 'config'], function(Backbone, Score, moment, _, loader, config) {
 
   var Scores = Backbone.Collection.extend({
     model: Score,
 
     initialize: function(options) {
-      // Set the inital date, so we can build a URL
-      this.setWeek(options.week);
+			this.setWeek(options.week);
 
       // When something is faved, trigger a sort
-      this.on('fav', function() {
-        this.sort();
-      });
-
-			// Starts the overlay on first run of the app
-			this.overlayOn();
+      this.on('fav', this.sort);
 
 			// When a request starts, throw up a loading spinner
-      this.on('request', function() {
-				this.overlayOn();
-      });
+      this.on('request', loader.on);
 
 			// When the API request finishes, get rid of the spinner
-      this.on('sync', function() {
-				this.overlayOff();
-      });
+      this.on('sync', loader.off);
     },
-
-		// Turn on the overlay
-		overlayOn: function() {
-			this.overlay = iosOverlay({
-				text: "Loading",
-				spinner: spinner
-			});
-		},
-
-		// Turn off the overlay
-		overlayOff: function() {
-			if(typeof this.overlay !== "undefined") {
-				this.overlay.hide();
-			}
-		},
 
     // A method to set the date for the TeamPlayer query
     setWeek: function(week) {
 			this.week = parseInt(week, 10);
       this.date = moment(config.weeks[week - 1].date, "YYYY-MM-DD");
-			this.fetch({
-				dataType: 'jsonp'
-			});
     },
 
 		getWeek: function(week) {
@@ -85,7 +44,7 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
     // Returns the URL for a TeamPlayer query that will return
     // three days of score results, centered on our stored date property
     url: function() {
-      var urlBase = "http://teamplayer.statesman.com/web/gateway.php?site=default&tpl=TickerJSON_clone&Sport=1",
+      var urlBase = config.urlBase + "/web/gateway.php?site=default&tpl=TickerJSON&Sport=" + config.sportId,
           StartDate = this.date.subtract(1, 'days').format('YYYY-MM-DD'),
           EndDate = this.date.add(2, 'days').format('YYYY-MM-DD');
 
@@ -108,24 +67,26 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
     // to all models in the collection that don't contain the passed
     // string
     search: function(needle) {
-      needle = needle.toLowerCase();
-      var resultCount = 0;
-      this.each(function(game) {
-        if(game.get('Searchable').indexOf(needle) === -1) {
-          game.set('hidden', true);
-        }
-        else {
-          game.unset('hidden');
-          resultCount++;
-        }
-      });
-      this.trigger('filtered');
+			if(typeof needle !== "undefined") {
+	      needle = needle.toLowerCase();
+	      var resultCount = 0;
+	      this.each(function(game) {
+	        if(game.get('Searchable').indexOf(needle) === -1) {
+	          game.set('hidden', true);
+	        }
+	        else {
+	          game.unset('hidden');
+	          resultCount++;
+	        }
+	      });
+	      this.trigger('filtered');
 
-      // Send an empty event if there are no results found, which will
-      // allow us to show the user a no results box
-      if(resultCount === 0) {
-        this.trigger('noResults', needle);
-      }
+	      // Send an empty event if there are no results found, which will
+	      // allow us to show the user a no results box
+	      if(resultCount === 0) {
+	        this.trigger('noResults', needle);
+	      }
+			}
     },
 
     // Undoes the search method by removing the hidden attribute

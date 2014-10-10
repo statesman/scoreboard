@@ -1,16 +1,10 @@
-define(['backbone'], function(Backbone) {
+define(['backbone', 'Templates'], function(Backbone, JST) {
 
   var Searchbox = Backbone.View.extend({
 
-    initialize: function() {
-      // Store the search box element for easy access later
-      this.$searchBox = this.$el.find('input');
-
-      // When the collection is updated, run the search on the
-      // new models
-      this.collection.on('sync', function() {
-        this.doSearch();
-      }, this);
+    close: function() {
+      this.remove();
+      this.off();
     },
 
     // Listen for interactions with the search box and
@@ -22,12 +16,12 @@ define(['backbone'], function(Backbone) {
 
     // Method to get the contents of the search box
     getSearch: function() {
-      return this.$searchBox.val();
+      return this.$('input').val();
     },
 
     // Method to set the search box contents
     setSearch: function(search) {
-      this.$searchBox.val(search);
+      this.$('input').val(search);
     },
 
     // Method to actually run the search
@@ -40,6 +34,12 @@ define(['backbone'], function(Backbone) {
       e.preventDefault();
       this.setSearch('');
       this.doSearch();
+    },
+
+    template: JST.searchbox,
+
+    render: function() {
+      this.$el.html(this.template()).appendTo('#team-search');
     }
 
   });

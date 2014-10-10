@@ -2,13 +2,9 @@ define(['backbone', 'jquery', 'Templates', 'config'], function(Backbone, $, JST,
 
   var Weekselect = Backbone.View.extend({
 
-    // Constructor that stores the select box, next button,
-    // previous button and the current selection along with a
-    // count of the total number of options
-    initialize: function() {
-      this.collection.on('sync', function() {
-        this.render();
-      }, this);
+    close: function() {
+      this.remove();
+      this.off();
     },
 
     // Bind selector changes and setup the previous/next week
@@ -27,7 +23,7 @@ define(['backbone', 'jquery', 'Templates', 'config'], function(Backbone, $, JST,
         currentWeek: this.collection.getWeek(),
         numWeeks: config.weeks.length
       };
-      this.$el.html(this.template(data));
+      this.$el.html(this.template(data)).appendTo('#week');
       return this;
     },
 
