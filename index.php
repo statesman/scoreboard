@@ -58,9 +58,7 @@
   </script>
 </head>
 <body>
-
-  <div style="overflow-x:hidden;">
-
+  
   <?php
     /* Generate sharing URLs */
     $url = urlencode("http://projects.statesman.com/sports/scores/");
