@@ -1,17 +1,4 @@
-define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'underscore', 'config'], function(Backbone, Score, moment, iosOverlay, Spinner, _, config) {
-
-  // Setup a spin.js spinner to use on the overlay
-	var opts = {
-		length: 11,
-		width: 5,
-		radius: 17,
-		color: '#FFF',
-		hwaccel: true,
-		top: 'auto',
-		left: 'auto'
-	};
-  var target = document.createElement("div");
-  var spinner = new Spinner(opts).spin(target);
+define(['backbone', 'models/score', 'moment', 'underscore', 'modules/loader', 'config'], function(Backbone, Score, moment, _, loader, config) {
 
   var Scores = Backbone.Collection.extend({
     model: Score,
@@ -23,26 +10,11 @@ define(['backbone', 'models/score', 'moment', 'iosOverlay', 'Spinner', 'undersco
       this.on('fav', this.sort);
 
 			// When a request starts, throw up a loading spinner
-      this.on('request', this.overlayOn);
+      this.on('request', loader.on);
 
 			// When the API request finishes, get rid of the spinner
-      this.on('sync', this.overlayOff);
+      this.on('sync', loader.off);
     },
-
-		// Turn on the overlay
-		overlayOn: function() {
-			this.overlay = iosOverlay({
-				text: "Loading",
-				spinner: spinner
-			});
-		},
-
-		// Turn off the overlay
-		overlayOff: function() {
-			if(typeof this.overlay !== "undefined") {
-				this.overlay.hide();
-			}
-		},
 
     // A method to set the date for the TeamPlayer query
     setWeek: function(week) {
