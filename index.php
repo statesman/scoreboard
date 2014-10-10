@@ -58,7 +58,7 @@
   </script>
 </head>
 <body>
-  
+
   <?php
     /* Generate sharing URLs */
     $url = urlencode("http://projects.statesman.com/sports/scores/");
@@ -96,11 +96,15 @@
       <div id="team-search" class="medium-6 columns"></div>
     </div>
 
-    <div data-alert class="alert-box secondary text-alert show-for-large-up">
-      <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.statesman.com/sports/high-school-sports-score-alerts/">Sign up at statesman.com</a>.
+    <div data-alert class="alert-box secondary text-alert">
+      <p><strong>New this week:</strong> Get game stats if we have them. Click the <span class="score-link"><i class="fa fa-angle-double-right"></i> Stats</span> link under completed games.</p><p><strong>Have feedback?</strong> Want to see a new feature? E-mail <a href="mailto:interactives@statesman.com">interactives@statesman.com</a>.</p>
     </div>
 
     <div id="main"></div>
+
+    <div data-alert class="alert-box secondary text-alert show-for-large-up">
+      <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.statesman.com/sports/high-school-sports-score-alerts/">Sign up at statesman.com</a>.
+    </div>
 
     <div id="stories"></div>
 

@@ -28,19 +28,31 @@ body {
   display: inline-block;
 }
 
-.text-alert .fa-mobile{
-  font-size: 25px;
-  top: 4px;
-  position: relative;
-  line-height: 12px;
-  margin-right: 4px;
-  @media (max-width: 450px) {
-    top: 0;
-    font-size: 40px;
+.text-alert {
+  p {
+    font-size: 0.8125rem;
+    margin-bottom: 0.25rem;
+  }
+  .score-link {
+    background: white;
+    border-radius: 4px;
+    padding: 0 5px;
+    border: 1px solid #ccc;
+  }
+  .fa-mobile{
+    font-size: 25px;
+    top: 4px;
     position: relative;
-    line-height: 40px;
-    margin-right: 8px;
-    float: left;
+    line-height: 12px;
+    margin-right: 4px;
+    @media (max-width: 450px) {
+      top: 0;
+      font-size: 40px;
+      position: relative;
+      line-height: 40px;
+      margin-right: 8px;
+      float: left;
+    }
   }
 }
 
@@ -357,6 +369,10 @@ body {
       background: #F9F9F9;
     }
   }
+}
+
+#main {
+  margin-bottom: 15px;
 }
 
 /*
