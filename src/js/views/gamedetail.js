@@ -13,7 +13,7 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
 
     events: {
       'click .fav-home': 'favHome',
-      'click .fav-away': 'favAway',
+      'click .fav-away': 'favAway'
     },
 
     template: JST.gamedetail,
@@ -32,7 +32,9 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
     },
 
     render: function() {
+      // Evalaute a couple of templating variables
       this.model.checkFavs();
+      // Now it's safe to render
       this.$el.empty();
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.appendTo('#main');

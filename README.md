@@ -21,7 +21,7 @@ The production version of the app draws from the Web template `TickerJSON` and t
 
 #### Web templates
 
-##### `TickerJSON_clone`
+##### `TickerJSON`
 ```php
 <QUERY name=Sport SPORTID=$form_Sport>
 <VAR $market = "">
@@ -49,45 +49,55 @@ The production version of the app draws from the Web template `TickerJSON` and t
 <VAR $sportName = $Sport_SportName>
 <VAR $sqlSportName = strtolower(convertForSQL($sportName))>
 <VAR $scoreField = $scoreFields[$sportName]>
-<QUERY name=TickerClone SPORTID=$form_Sport SPORTNAME=$sqlSportName SCOREFIELD=$scoreField STARTDATE=$form_StartDate ENDDATE=$form_EndDate MARKET=$market>
+<QUERY name=Ticker SPORTID=$form_Sport SPORTNAME=$sqlSportName SCOREFIELD=$scoreField STARTDATE=$form_StartDate ENDDATE=$form_EndDate MARKET=$market>
 <?php header('Content-Type: application/json'); ?>
 <?php
 
   // Loop through each of the data rows and set some custom fields
-  foreach($TickerClone_rows as $key => $row) {
+  foreach($Ticker_rows as $key => $row) {
 
     // Make GameScoreIsFinal a boolean for easier templating
     if($row['GameScoreIsFinal'] === "1") {
-      $TickerClone_rows[$key]['GameScoreIsFinal'] = TRUE;
+      $Ticker_rows[$key]['GameScoreIsFinal'] = TRUE;
     }
     else {
-      $TickerClone_rows[$key]['GameScoreIsFinal'] = FALSE;
+      $Ticker_rows[$key]['GameScoreIsFinal'] = FALSE;
     }
 
     // Set a boolean for the winner that can be used during templating
-    if($TickerClone_rows[$key]['GameScoreIsFinal']) {
+    if($Ticker_rows[$key]['GameScoreIsFinal']) {
       if(intval($row['AwayTeamScore']) > intval($row['HomeTeamScore'])) {
-        $TickerClone_rows[$key]['AwayTeamWon'] = TRUE;
+        $Ticker_rows[$key]['AwayTeamWon'] = TRUE;
       }
       else {
-        $TickerClone_rows[$key]['HomeTeamWon'] = TRUE;
+        $Ticker_rows[$key]['HomeTeamWon'] = TRUE;
       }
     }
 
     // Set the boolean for game stats to true if they're marked complete
     if($row['GameStatStatus'] === "3") {
-      $TickerClone_rows[$key]['GameStatStatus'] = TRUE;
+      $Ticker_rows[$key]['GameStatStatus'] = TRUE;
     }
 
     // Return the gametime as a UNIX timestamp for easier client-side parsing
     $timeStamp = strtotime($row['GameTime'] . ' ' . $row['GameDate']) + 3600;
-    $TickerClone_rows[$key]['GameTimestamp'] = $timeStamp;
-    unset($TickerClone_rows[$key]['GameTime']);
-    unset($TickerClone_rows[$key]['GameDate']);
+    $Ticker_rows[$key]['GameTimestamp'] = $timeStamp;
+    unset($Ticker_rows[$key]['GameTime']);
+    unset($Ticker_rows[$key]['GameDate']);
+
+    if($row['AwayTotalYards'] == "0" && $row['HomeTotalYards'] == "0") {
+      $Ticker_rows[$key]['GameStats'] = false;
+    }
+    elseif($row['AwayTotalYards'] == null && $row['HomeTotalYards'] == null) {
+      $Ticker_rows[$key]['GameStats'] = false;
+    }
+    else {
+      $Ticker_rows[$key]['GameStats'] = true;
+    }
 
   }
 
-  $json = json_encode($TickerClone_rows);
+  $json = json_encode($Ticker_rows);
   if(array_key_exists('callback', $_GET)){
       $callback = $_GET['callback'];
       $json = $callback . '(' . $json . ');';
@@ -167,7 +177,7 @@ The production version of the app draws from the Web template `TickerJSON` and t
 else {
   $GameJSON_rows[0]['GameScoreIsFinal'] = false;
 } ?>
-<?php if($GameJSON_rows[0]['AwayTotalYards'] == "0" && $GameJSON_rows[0]['HomeTotalYards'] == "0") {
+if($GameJSON_rows[0]['AwayTotalYards'] == "0" && $GameJSON_rows[0]['HomeTotalYards'] == "0") {
   $GameJSON_rows[0]['GameStats'] = false;
 }
 elseif($GameJSON_rows[0]['AwayTotalYards'] == null && $GameJSON_rows[0]['HomeTotalYards'] == null) {
@@ -190,7 +200,7 @@ else {
 
 #### Query template
 
-##### `TickerClone`
+##### `Ticker`
 ```sql
 SELECT q_game.GameID,
   GameAwayTeamID,
@@ -206,6 +216,8 @@ SELECT q_game.GameID,
   home.TeamNickname AS HomeTeamNickname,
   awayscore.{$SCOREFIELD} AS AwayTeamScore,
   homescore.{$SCOREFIELD} AS HomeTeamScore,
+  awayscore.TotalYards AS AwayTotalYards,
+  homescore.TotalYards AS HomeTotalYards,
   away.TeamID AS AwayTeamID,
   home.TeamID AS HomeTeamID,
   venue.SchoolName AS VenueName
