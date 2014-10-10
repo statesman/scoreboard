@@ -85,6 +85,10 @@
 
     <h1 class="page-title">High school scoreboard</h1>
 
+    <div data-alert class="alert-box secondary text-alert">
+      <p><strong>New this week:</strong> Get game stats if we have them. Click the <span class="score-link"><i class="fa fa-angle-double-right"></i> Stats</span> link under completed games.  <strong>Have feedback?</strong> Want to see a new feature? E-mail <a href="mailto:interactives@statesman.com">interactives@statesman.com</a>.</p>
+    </div>
+
     <noscript>
       <div data-alert class="alert-box alert radius">
         This app requires JavaScript. To view scores, enable JavaScript in your Web browser and reload this page.
@@ -94,10 +98,6 @@
     <div class="form row">
       <div id="week" class="medium-6 columns"></div>
       <div id="team-search" class="medium-6 columns"></div>
-    </div>
-
-    <div data-alert class="alert-box secondary text-alert">
-      <p><strong>New this week:</strong> Get game stats if we have them. Click the <span class="score-link"><i class="fa fa-angle-double-right"></i> Stats</span> link under completed games.</p><p><strong>Have feedback?</strong> Want to see a new feature? E-mail <a href="mailto:interactives@statesman.com">interactives@statesman.com</a>.</p>
     </div>
 
     <div id="main"></div>

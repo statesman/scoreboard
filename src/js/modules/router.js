@@ -41,6 +41,7 @@ define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox',
       // Setup and store instances of all our Backbone objects if this is the first run
       var scores = new Scores({week: parseInt(week, 10)});
       scores.fetch({
+        dataType: 'jsonp',
         success: function() {
           appview.show(new Scoreboard({collection: scores}), true);
           appview.show(new Searchbox({collection: scores}));
@@ -53,6 +54,7 @@ define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox',
     showGame: function(id) {
       var game = new Game({id: parseInt(id, 10)});
       game.fetch({
+        dataType: 'jsonp',
         success: function() {
           appview.show(new Gamedetail({model: game}), true);
         }
