@@ -4,7 +4,6 @@ define(['backbone', 'config', 'models/score', 'modules/loader'], function(Backbo
 
     initialize: function(options) {
       this.setId(options.id);
-      this.on('sync', this.checkFavs);
 
       // When a request starts, throw up a loading spinner
       this.on('request', loader.on);

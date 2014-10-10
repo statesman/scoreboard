@@ -32,6 +32,7 @@ define(['backbone', 'Templates'], function(Backbone, JST) {
     },
 
     render: function() {
+      this.model.checkFavs();
       this.$el.empty();
       this.$el.html(this.template(this.model.toJSON()));
       this.$el.appendTo('#main');
