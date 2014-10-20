@@ -69,6 +69,8 @@ define(['backbone', 'models/score', 'moment', 'underscore', 'modules/loader', 'c
       else {
         c = c + "1";
       }
+      console.log(model.get('HomeTeamName'));
+      console.log(model.toJSON());
       // Then by game time and team name
       c = c + model.get('GameTimestamp') + model.get('HomeTeamName');
       return c;

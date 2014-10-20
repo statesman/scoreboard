@@ -268,9 +268,8 @@ function program9(depth0,data) {
 
 function program11(depth0,data) {
   
-  var buffer = "";
-  buffer += "\r\n            \r\n          ";
-  return buffer;
+  
+  return "\r\n            <div class=\"columns small-12\">\r\n              <p class=\"no-stats\">We don’t have stats yet for this game, but we’d be happy to post them here if we did. We suggest you encourage your school to report game results and stats to our sports department by phone (<a href=\"tel:+15124453677\">512-445-3677</a>) or email (<a href=\"mailto:sportsdesk@statesman.com\">sportsdesk@statesman.com</a>). Thanks for helping out.</p>\r\n            </div>\r\n          ";
   }
 
 function program13(depth0,data) {
