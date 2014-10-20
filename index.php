@@ -95,6 +95,8 @@
       </div>
     </noscript>
 
+    <div id="top"></div>
+
     <div class="form row">
       <div id="week" class="medium-6 columns"></div>
       <div id="team-search" class="medium-6 columns"></div>

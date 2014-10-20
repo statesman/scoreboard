@@ -1,4 +1,4 @@
-define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect', 'models/game', 'views/gamedetail', 'config'], function(Backbone, Scores, Scoreboard, Searchbox, Weekselect, Game, Gamedetail, config) {
+define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox', 'views/weekselect', 'models/game', 'views/gamedetail', 'scrollto', 'config'], function(Backbone, Scores, Scoreboard, Searchbox, Weekselect, Game, Gamedetail, ScrollTo, config) {
 
   // A class that can handle view-swapping
   var AppView = function(){
@@ -23,6 +23,12 @@ define(['backbone', 'collections/scores', 'views/scoreboard', 'views/searchbox',
 
     initialize: function() {
       Backbone.history.start();
+
+      this.on('route', function(route) {
+        if(route === 'showGame') {
+          $('#top').ScrollTo();
+        }
+      });
     },
 
     routes: {

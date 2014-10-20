@@ -24,7 +24,8 @@ require.config({
     store: '../../bower_components/store/store',
     'add-to-home-screen': '../../bower_components/add-to-homescreen/src/addtohomescreen',
     Spinner: '../../bower_components/spin.js/spin',
-    iosOverlay: '../../bower_components/iOS-Overlay/js/iosOverlay'
+    iosOverlay: '../../bower_components/iOS-Overlay/js/iosOverlay',
+    scrollto: '../../bower_components/jquery-scrollto/lib/jquery-scrollto'
   },
   config: {
     moment: {
