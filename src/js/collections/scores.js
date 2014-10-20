@@ -51,15 +51,26 @@ define(['backbone', 'models/score', 'moment', 'underscore', 'modules/loader', 'c
       return urlBase + '&StartDate=' + StartDate + '&EndDate=' + EndDate;
     },
 
-    // Rewrite the comparator to sort first by fav status,
+    // Rewrite the comparator to sort first by fav status, then by score status,
     // then by timestamp, then by home team
     comparator: function(model) {
+      var c = "";
+      // Weight by fav status
       if(model.get('HomeTeamFav') === true || model.get('AwayTeamFav') === true) {
-        c = "0" + model.get('GameTimestamp') + model.get('HomeTeamName');
+        c = c + "0";
       }
       else {
-        c = "1" + model.get('GameTimestamp') + model.get('HomeTeamName');
+        c = c + "1";
       }
+      // Then by whether the game score is available
+      if(model.get('GameScoreIsFinal') === true) {
+        c = c + "0";
+      }
+      else {
+        c = c + "1";
+      }
+      // Then by game time and team name
+      c = c + model.get('GameTimestamp') + model.get('HomeTeamName');
       return c;
     },
 
