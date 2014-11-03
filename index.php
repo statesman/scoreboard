@@ -86,7 +86,7 @@
     <h1 class="page-title">High school scoreboard</h1>
 
     <div data-alert class="alert-box secondary text-alert">
-      <p><strong>New this week:</strong> Get game stats if we have them. Click the <span class="score-link"><i class="fa fa-angle-double-right"></i> Stats</span> link under completed games.  <strong>Have feedback?</strong> Want to see a new feature? E-mail <a href="mailto:interactives@statesman.com">interactives@statesman.com</a>.</p>
+      <p><strong>Have feedback?</strong> Want to see a new feature? E-mail <a href="mailto:interactives@statesman.com">interactives@statesman.com</a>.</p>
     </div>
 
     <noscript>
