@@ -20,13 +20,19 @@ define(['moment'], function(moment) {
       title: 'Week ' + i,
       date: firstFriday.add(1, 'weeks').format('YYYY-MM-DD')
     });
+  }
+  weeks.push({
+    title: 'Playoffs: Week 1',
+    date: '2014-11-14'
+  });
 
-    // Figure out if it's Thursday of the given week yet; if
-    // it is, set the currentWeek variable accordingly
+  // Figure out if it's Thursday of the given week yet; if
+  // it is, set the currentWeek variable accordingly
+  for(var w = 2; w <= numWeeks; w++) {
     var friday = firstFriday.clone();
     if(typeof currentWeek === "undefined") {
       if(friday.subtract(1, 'days') > today) {
-        currentWeek = (i - 1);
+        currentWeek = (w - 1);
       }
     }
   }
@@ -35,6 +41,7 @@ define(['moment'], function(moment) {
   if(typeof currentWeek === "undefined") {
     currentWeek = weeks.length;
   }
+
 
   // Return the calculated config
   return {
