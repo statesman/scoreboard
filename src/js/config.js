@@ -42,7 +42,7 @@ define(['moment'], function(moment) {
     date: '2014-12-12'
   });
   weeks.push({
-    title: 'Playoffs: Week 5',
+    title: 'Playoffs: Week 6',
     date: '2014-12-19'
   });
 
