@@ -25,21 +25,41 @@ define(['moment'], function(moment) {
     title: 'Playoffs: Week 1',
     date: '2014-11-14'
   });
+  weeks.push({
+    title: 'Playoffs: Week 2',
+    date: '2014-11-21'
+  });
+  weeks.push({
+    title: 'Playoffs: Week 3',
+    date: '2014-11-28'
+  });
+  weeks.push({
+    title: 'Playoffs: Week 4',
+    date: '2014-12-5'
+  });
+  weeks.push({
+    title: 'Playoffs: Week 5',
+    date: '2014-12-12'
+  });
+  weeks.push({
+    title: 'Playoffs: Week 5',
+    date: '2014-12-19'
+  });
 
   // Figure out if it's Thursday of the given week yet; if
   // it is, set the currentWeek variable accordingly
-  for(var w = 2; w <= numWeeks; w++) {
-    var friday = firstFriday.clone();
+  for(var w = 0; w < weeks.length; w++) {
+    var friday = moment(weeks[w].date, 'YYYY-MM-DD');
     if(typeof currentWeek === "undefined") {
       if(friday.subtract(1, 'days') > today) {
-        currentWeek = (w - 1);
+        currentWeek = w;
       }
     }
   }
   // If we didn't get a hit above, set the currentWeek to the
   // last week available
   if(typeof currentWeek === "undefined") {
-    currentWeek = weeks.length;
+    currentWeek = (weeks.length - 1);
   }
 
 
