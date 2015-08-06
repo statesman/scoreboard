@@ -1,3 +1,21 @@
+### Node
+
+This project Node.js for package management. Once you clone, you'll need to update:
+
+* `npm install` to install packages
+* `bower install` to installs client-side packages
+* `grunt build` will build the current files for publishing
+
+### Publishing
+
+Until we rework with ftpush, publish the following files and folders:
+
+* `assets` folder
+* `dist` folder
+* `fonts` folder
+* `index.php`
+* `list.php`
+
 ### Configuration
 
 All configuration settings are stored in [`src/js/config.js`](src/js/config.js).
