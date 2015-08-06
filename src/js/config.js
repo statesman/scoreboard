@@ -5,13 +5,14 @@ define(['moment'], function(moment) {
   var firstFriday = moment('2015-08-28', 'YYYY-MM-DD');
   var urlBase = 'http://teamplayer.statesman.com';
   var sportId = '1';
+  var selectBoxFormat = 'MMM Do';
 
   /* ~ STOP EDITING HERE ~ */
 
 
   // Generate array with weeks and labels
   var weeks = [{
-    title: 'Week 1: ' + firstFriday.clone().subtract(1, 'days').format('MMM D') + ' to ' + firstFriday.clone().add(1, 'days').format('MMM D'),
+    title: 'Week 1: ' + firstFriday.clone().subtract(1, 'days').format(selectBoxFormat) + ' to ' + firstFriday.clone().add(1, 'days').format(selectBoxFormat),
     date: firstFriday.format('YYYY-MM-DD')
   }];
   var today = moment();
@@ -19,7 +20,7 @@ define(['moment'], function(moment) {
   for(var i = 2; i <= numWeeks; i++) {
     firstFriday.add(1, 'weeks');
     weeks.push({
-      title: 'Week ' + i + ': ' + firstFriday.clone().subtract(1, 'days').format('MMM D') + ' to ' + firstFriday.clone().add(1, 'days').format('MMM D'),
+      title: 'Week ' + i + ': ' + firstFriday.clone().subtract(1, 'days').format(selectBoxFormat) + ' to ' + firstFriday.clone().add(1, 'days').format(selectBoxFormat),
       date: firstFriday.format('YYYY-MM-DD')
     });
   }
