@@ -1,7 +1,8 @@
 define(['moment'], function(moment) {
 
+// numWeeks was 11 when I started
   var numWeeks = 11;
-  var firstFriday = moment('2014-08-29', 'YYYY-MM-DD');
+  var firstFriday = moment('2015-07-30', 'YYYY-MM-DD');
   var urlBase = 'http://teamplayer.statesman.com';
   var sportId = '1';
 
@@ -21,30 +22,32 @@ define(['moment'], function(moment) {
       date: firstFriday.add(1, 'weeks').format('YYYY-MM-DD')
     });
   }
+/*
   weeks.push({
     title: 'Playoffs: Week 1',
-    date: '2014-11-14'
+    date: '2015-11-14'
   });
   weeks.push({
     title: 'Playoffs: Week 2',
-    date: '2014-11-21'
+    date: '2015-11-21'
   });
   weeks.push({
     title: 'Playoffs: Week 3',
-    date: '2014-11-28'
+    date: '2015-11-28'
   });
   weeks.push({
     title: 'Playoffs: Week 4',
-    date: '2014-12-5'
+    date: '2015-12-5'
   });
   weeks.push({
     title: 'Playoffs: Week 5',
-    date: '2014-12-12'
+    date: '2015-12-12'
   });
   weeks.push({
     title: 'Playoffs: Week 6',
-    date: '2014-12-19'
+    date: '2015-12-19'
   });
+*/
 
   // Figure out if it's Thursday of the given week yet; if
   // it is, set the currentWeek variable accordingly
