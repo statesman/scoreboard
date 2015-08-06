@@ -11,15 +11,16 @@ define(['moment'], function(moment) {
 
   // Generate array with weeks and labels
   var weeks = [{
-    title: 'Week 1',
+    title: 'Week 1: ' + firstFriday.clone().subtract(1, 'days').format('MMM D') + ' to ' + firstFriday.clone().add(1, 'days').format('MMM D'),
     date: firstFriday.format('YYYY-MM-DD')
   }];
   var today = moment();
   var currentWeek;
   for(var i = 2; i <= numWeeks; i++) {
+    firstFriday.add(1, 'weeks');
     weeks.push({
-      title: 'Week ' + i,
-      date: firstFriday.add(1, 'weeks').format('YYYY-MM-DD')
+      title: 'Week ' + i + ': ' + firstFriday.clone().subtract(1, 'days').format('MMM D') + ' to ' + firstFriday.clone().add(1, 'days').format('MMM D'),
+      date: firstFriday.format('YYYY-MM-DD')
     });
   }
 
