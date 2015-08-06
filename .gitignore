@@ -54,3 +54,7 @@ node_modules
 
 ### Sass ###
 .sass-cache
+
+# Project build and dist files
+dist
+build
