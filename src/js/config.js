@@ -2,7 +2,7 @@ define(['moment'], function(moment) {
 
 // numWeeks was 11 when I started
   var numWeeks = 11;
-  var firstFriday = moment('2015-07-30', 'YYYY-MM-DD');
+  var firstFriday = moment('2015-08-28', 'YYYY-MM-DD');
   var urlBase = 'http://teamplayer.statesman.com';
   var sportId = '1';
 
@@ -22,30 +22,12 @@ define(['moment'], function(moment) {
       date: firstFriday.add(1, 'weeks').format('YYYY-MM-DD')
     });
   }
+
+  // Add arrays like these for each playoff week
 /*
   weeks.push({
     title: 'Playoffs: Week 1',
     date: '2015-11-14'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 2',
-    date: '2015-11-21'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 3',
-    date: '2015-11-28'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 4',
-    date: '2015-12-5'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 5',
-    date: '2015-12-12'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 6',
-    date: '2015-12-19'
   });
 */
 
@@ -59,6 +41,12 @@ define(['moment'], function(moment) {
       }
     }
   }
+
+  // This makes it so if the curent week is before the first week of the season, it will take you to the first week.
+  if (currentWeek === 0) {
+    currentWeek = 1;
+  }
+
   // If we didn't get a hit above, set the currentWeek to the
   // last week available
   if(typeof currentWeek === "undefined") {
