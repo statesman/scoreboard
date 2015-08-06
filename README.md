@@ -1,6 +1,6 @@
 ### Node
 
-This project Node.js for package management. Once you clone, you'll need to update:
+This project uses Node.js for package management. Once you clone, you'll need to update:
 
 * `npm install` to install packages
 * `bower install` to installs client-side packages
