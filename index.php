@@ -104,10 +104,11 @@
 
     <div id="main"></div>
 
+<!--
     <div data-alert class="alert-box secondary text-alert show-for-large-up">
       <i class="fa fa-mobile"></i> Want high school text alerts on your phone? <a target="_blank" href="http://www.statesman.com/sports/high-school-sports-score-alerts/">Sign up at statesman.com</a>.
     </div>
-
+-->
     <div id="stories"></div>
 
     <hr />
