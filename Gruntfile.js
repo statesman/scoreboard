@@ -121,6 +121,35 @@ module.exports = function(grunt) {
         files: ['src/css/**.scss'],
         tasks: ['clean:css', 'copy:iosoverlay', 'copy:aths', 'sass']
       }
+    },
+
+    // stage path needs to be set
+    ftpush: {
+      stage: {
+        auth: {
+          host: 'host.coxmediagroup.com',
+          port: 21,
+          authKey: 'cmg'
+        },
+        src: 'public',
+        dest: '/stage_aas/projects/sports/scores/',
+        exclusions: ['dist/tmp','Thumbs.db','.DS_Store'],
+        simple: false,
+        useList: false
+      },
+      // prod path will need to change
+      prod: {
+        auth: {
+          host: 'host.coxmediagroup.com',
+          port: 21,
+          authKey: 'cmg'
+        },
+        src: 'public',
+        dest: '/stage_aas/projects/sports/scores/',
+        exclusions: ['dist/tmp','Thumbs.db','.DS_Store'],
+        simple: false,
+        useList: false
+      }
     }
 
   });
@@ -133,7 +162,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-ftpush');
+  grunt.loadNpmTasks('grunt-slack-hook');
 
   grunt.registerTask('build', ['clean', 'copy', 'sass', 'handlebars', 'jshint', 'requirejs']);
+  grunt.registerTask('stage', ['build','ftpush:stage']);
+  grunt.registerTask('prod', ['build','ftpush:prod']);
 
 };
