@@ -1,3 +1,5 @@
+var fs = require("fs");
+
 module.exports = function(grunt) {
   'use strict';
 
@@ -150,6 +152,22 @@ module.exports = function(grunt) {
         simple: false,
         useList: false
       }
+    },
+
+    // be sure to set publishing paths
+    slack: {
+        options: {
+          endpoint: fs.readFileSync('.slack', {encoding: 'utf8'}),
+          channel: '#bakery',
+          username: 'gruntbot',
+          icon_url: 'http://vermilion1.github.io/presentations/grunt/images/grunt-logo.png'
+        },
+        stage: {
+          text: 'Project published to stage: http://stage.host.coxmediagroup.com/aas/projects/sports/scores/ {{message}}'
+        },
+        prod: {
+          text: 'Project published to prod: http://projects.statesman.com/sports/scores/ {{message}}'
+        }
     }
 
   });
@@ -166,7 +184,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-slack-hook');
 
   grunt.registerTask('build', ['clean', 'copy', 'sass', 'handlebars', 'jshint', 'requirejs']);
-  grunt.registerTask('stage', ['build','ftpush:stage']);
-  grunt.registerTask('prod', ['build','ftpush:prod']);
+  grunt.registerTask('stage', ['build','ftpush:stage','slack:stage']);
+  grunt.registerTask('prod', ['build','ftpush:prod','slack:prod']);
 
 };
