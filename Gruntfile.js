@@ -1,3 +1,5 @@
+var fs = require("fs");
+
 module.exports = function(grunt) {
   'use strict';
 
@@ -6,8 +8,8 @@ module.exports = function(grunt) {
 
     // Empty directories before build process
     clean: {
-      css: ["dist/*.css", "dist/*.css.map", "build/*.scss"],
-      js: ["build/*.js", "dist/*.js", "dist/*.js.map"]
+      css: ["public/dist/*.css", "public/dist/*.css.map", "build/*.scss"],
+      js: ["build/*.js", "public/dist/*.js", "public/dist/*.js.map"]
     },
 
     // Transpile SASS
@@ -18,7 +20,7 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          'dist/styles.css': 'src/css/style.scss'
+          'public/dist/styles.css': 'src/css/style.scss'
         }
       }
     },
@@ -32,7 +34,7 @@ module.exports = function(grunt) {
             'bower_components/font-awesome/fonts/*',
             'src/fontcustom/fonts/*'
           ],
-          dest: 'fonts/',
+          dest: 'public/fonts/',
           flatten: true
         }]
       },
@@ -92,7 +94,7 @@ module.exports = function(grunt) {
         options: {
           baseUrl: 'src/js',
           mainConfigFile: 'src/js/main.js',
-          out: 'dist/scripts.js',
+          out: 'public/dist/scripts.js',
           optimize: 'uglify2',
           include: [
             'app'
@@ -111,7 +113,7 @@ module.exports = function(grunt) {
         livereload: 35729,
       },
       markup: {
-        files: ['index.php']
+        files: ['public/index.php']
       },
       scripts: {
         files: ['src/js/**.js', 'src/js/**/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers.js'],
@@ -121,6 +123,51 @@ module.exports = function(grunt) {
         files: ['src/css/**.scss'],
         tasks: ['clean:css', 'copy:iosoverlay', 'copy:aths', 'sass']
       }
+    },
+
+    // stage path needs to be set
+    ftpush: {
+      stage: {
+        auth: {
+          host: 'host.coxmediagroup.com',
+          port: 21,
+          authKey: 'cmg'
+        },
+        src: 'public',
+        dest: '/stage_aas/projects/sports/scores/',
+        exclusions: ['dist/tmp','Thumbs.db','.DS_Store'],
+        simple: false,
+        useList: false
+      },
+      // prod path will need to change
+      prod: {
+        auth: {
+          host: 'host.coxmediagroup.com',
+          port: 21,
+          authKey: 'cmg'
+        },
+        src: 'public',
+        dest: '/stage_aas/projects/sports/scores/',
+        exclusions: ['dist/tmp','Thumbs.db','.DS_Store'],
+        simple: false,
+        useList: false
+      }
+    },
+
+    // be sure to set publishing paths
+    slack: {
+        options: {
+          endpoint: fs.readFileSync('.slack', {encoding: 'utf8'}),
+          channel: '#bakery',
+          username: 'gruntbot',
+          icon_url: 'http://vermilion1.github.io/presentations/grunt/images/grunt-logo.png'
+        },
+        stage: {
+          text: 'Project published to stage: http://stage.host.coxmediagroup.com/aas/projects/sports/scores/ {{message}}'
+        },
+        prod: {
+          text: 'Project published to prod: http://projects.statesman.com/sports/scores/ {{message}}'
+        }
     }
 
   });
@@ -133,7 +180,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
+  grunt.loadNpmTasks('grunt-ftpush');
+  grunt.loadNpmTasks('grunt-slack-hook');
 
   grunt.registerTask('build', ['clean', 'copy', 'sass', 'handlebars', 'jshint', 'requirejs']);
+  grunt.registerTask('stage', ['build','ftpush:stage','slack:stage']);
+  grunt.registerTask('prod', ['build','ftpush:prod','slack:prod']);
 
 };
