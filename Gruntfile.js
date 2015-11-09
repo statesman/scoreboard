@@ -6,8 +6,8 @@ module.exports = function(grunt) {
 
     // Empty directories before build process
     clean: {
-      css: ["dist/*.css", "dist/*.css.map", "build/*.scss"],
-      js: ["build/*.js", "dist/*.js", "dist/*.js.map"]
+      css: ["public/dist/*.css", "public/dist/*.css.map", "build/*.scss"],
+      js: ["build/*.js", "public/dist/*.js", "public/dist/*.js.map"]
     },
 
     // Transpile SASS
@@ -18,7 +18,7 @@ module.exports = function(grunt) {
           style: 'compressed'
         },
         files: {
-          'dist/styles.css': 'src/css/style.scss'
+          'public/dist/styles.css': 'src/css/style.scss'
         }
       }
     },
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             'bower_components/font-awesome/fonts/*',
             'src/fontcustom/fonts/*'
           ],
-          dest: 'fonts/',
+          dest: 'public/fonts/',
           flatten: true
         }]
       },
@@ -92,7 +92,7 @@ module.exports = function(grunt) {
         options: {
           baseUrl: 'src/js',
           mainConfigFile: 'src/js/main.js',
-          out: 'dist/scripts.js',
+          out: 'public/dist/scripts.js',
           optimize: 'uglify2',
           include: [
             'app'
@@ -111,7 +111,7 @@ module.exports = function(grunt) {
         livereload: 35729,
       },
       markup: {
-        files: ['index.php']
+        files: ['public/index.php']
       },
       scripts: {
         files: ['src/js/**.js', 'src/js/**/**.js', 'src/templates/**/*.hbs', 'src/templates/helpers.js'],
