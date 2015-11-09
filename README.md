@@ -5,10 +5,12 @@ This project uses Node.js for package management. Once you clone, you'll need to
 * `npm install` to install packages
 * `bower install` to installs client-side packages
 * `grunt build` will build the current files for publishing
+* `grunt stage` will ftpush to the staging site
+* `grunt prod` will ftpush to production 
 
 ### Publishing
 
-Until we rework with ftpush, publish the following files and folders:
+Configured to use grunt-ftpush task, which pushes all items in the `public` folder.
 
 * `assets` folder
 * `dist` folder
@@ -29,6 +31,15 @@ var numWeeks = 11;
 var firstFriday = moment('2014-08-29', 'YYYY-MM-DD');
 var urlBase = 'http://teamplayer.statesman.com';
 var sportId = '1';
+```
+
+When you want to add a playoff week, go into [`src/js/config.js`](src/js/config.js) and add them where it says to:
+
+```javascript
+  weeks.push({
+    title: 'Playoffs: Week 1',
+    date: '2015-11-12'
+  });
 ```
 
 ### Teamplayer integration
