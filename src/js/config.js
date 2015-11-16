@@ -1,6 +1,6 @@
 define(['moment'], function(moment) {
 
-// numWeeks was 11 for regulat season
+// numWeeks was 11 for regular season
   var numWeeks = 11;
   var firstFriday = moment('2015-08-28', 'YYYY-MM-DD');
   var urlBase = 'http://teamplayer.statesman.com';
@@ -56,7 +56,7 @@ define(['moment'], function(moment) {
   // If we didn't get a hit above, set the currentWeek to the
   // last week available
   if(typeof currentWeek === "undefined") {
-    currentWeek = (weeks.length - 1);
+    currentWeek = (weeks.length);
   }
 
 
