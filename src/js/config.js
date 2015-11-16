@@ -1,14 +1,14 @@
 define(['moment'], function(moment) {
 
-// numWeeks was 11 when I started
+// numWeeks was 11 for regulat season
   var numWeeks = 11;
   var firstFriday = moment('2015-08-28', 'YYYY-MM-DD');
   var urlBase = 'http://teamplayer.statesman.com';
   var sportId = '1';
   var selectBoxFormat = 'MMM Do';
 
-  /* ~ STOP EDITING HERE ~ */
-
+  /* ~ STOP EDITING HERE ~ 
+  /* except for adding playoff weeks? */
 
   // Generate array with weeks and labels
   var weeks = [{
