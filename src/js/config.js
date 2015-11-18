@@ -36,6 +36,10 @@ define(['moment'], function(moment) {
     title: 'Playoffs: Week 1',
     date: '2015-11-12'
   });
+  weeks.push({
+    title: 'Playoffs: Week 2',
+    date: '2015-11-19'
+  });
 
   // Figure out if it's Thursday of the given week yet; if
   // it is, set the currentWeek variable accordingly
