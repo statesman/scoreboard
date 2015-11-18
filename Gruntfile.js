@@ -183,7 +183,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ftpush');
   grunt.loadNpmTasks('grunt-slack-hook');
 
-  grunt.registerTask('build', ['clean', 'copy', 'sass', 'handlebars', 'jshint']);
+  grunt.registerTask('build', ['clean', 'copy', 'sass', 'handlebars', 'jshint', 'requirejs']);
   grunt.registerTask('stage', ['build','ftpush:stage','slack:stage']);
   grunt.registerTask('prod', ['build','ftpush:prod','slack:prod']);
 
