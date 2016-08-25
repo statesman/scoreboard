@@ -2,7 +2,7 @@ define(['moment'], function(moment) {
 
 // numWeeks was 11 for regular season
   var numWeeks = 11;
-  var firstFriday = moment('2015-08-28', 'YYYY-MM-DD');
+  var firstFriday = moment('2016-08-26', 'YYYY-MM-DD');
   var urlBase = 'http://teamplayer.statesman.com';
   var sportId = '1';
   var selectBoxFormat = 'MMM Do';
@@ -32,30 +32,7 @@ define(['moment'], function(moment) {
     date: '2015-11-12'
   });
 */
-  weeks.push({
-    title: 'Playoffs: Week 1',
-    date: '2015-11-12'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 2',
-    date: '2015-11-19'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 3',
-    date: '2015-11-26'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 4',
-    date: '2015-12-03'
-  });
-  weeks.push({
-    title: 'Playoffs: Week 5',
-    date: '2015-12-10'
-  });
-  weeks.push({
-    title: 'Championships: Week 6',
-    date: '2015-12-17'
-  });
+
 
   // Figure out if it's Thursday of the given week yet; if
   // it is, set the currentWeek variable accordingly
