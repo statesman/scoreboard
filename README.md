@@ -1,3 +1,14 @@
+# Scoreboard is archived
+
+Improvements (debateable) to Teamplayer templates have made this project obsolete (debatable). We wont be updating it.
+
+## Redirected
+The index page has been redirected to the [Teamplayer page](http://teamplayer.statesman.com/web/home.php?site=default&tpl=new_schedule&SearchType=Schedules&mkt=&mode=2&tab=tab1&Sport=1#tab1.
+
+----------
+
+## Scoreboard
+
 ### Node
 
 This project uses Node.js for package management. Once you clone, you'll need to update:
